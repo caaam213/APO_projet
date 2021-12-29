@@ -1,1 +1,1 @@
-memberSearchIndex = [{"p":"parametres","c":"Personne","l":"Personne(Axe[])","u":"%3Cinit%3E(parametres.Axe[])"},{"p":"parametres","c":"Personne","l":"Personne(Axe[], float[])","u":"%3Cinit%3E(parametres.Axe[],float[])"}];updateSearchResults();
+memberSearchIndex = [{"p":"parametres","c":"Electeur","l":"Electeur(Axe[], float[], String)","u":"%3Cinit%3E(parametres.Axe[],float[],java.lang.String)"},{"p":"parametres","c":"Electeur","l":"Electeur(Axe[], String)","u":"%3Cinit%3E(parametres.Axe[],java.lang.String)"}];updateSearchResults();
