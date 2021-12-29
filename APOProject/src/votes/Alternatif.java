@@ -1,4 +1,4 @@
-package fr.NabilCameliaHouria.APOProject;
+package votes;
 
 public class Alternatif extends Scrutin{
 

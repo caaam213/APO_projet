@@ -1,4 +1,4 @@
-package fr.NabilCameliaHouria.APOProject;
+package parametres;
 
 public class Electeur extends Personne{
 
