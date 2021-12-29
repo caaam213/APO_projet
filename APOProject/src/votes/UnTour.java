@@ -13,21 +13,28 @@ public class UnTour extends Scrutin{
 
 	@Override
 	public void simulation() {
-		float[] valAxes;
-		float[] normeAxes = new float[electeurs.length];
-		float normeAxe=0;
-		
-		int k=0;
-		for(Electeur electeur: electeurs)
+		//for electeur pour un candidat
+		float[][] diffaxes;
+		float[][] diffnormes = new float[candidats.length][];
+		int i=0;
+		for(Candidat candidat: candidats)
 		{
-			valAxes = electeur.getValAxes();
-			for(int i=0;i<electeur.getValAxes().length;i++)
-			{
-				normeAxe += valAxes[i]*valAxes[i];
-			}
-			normeAxes[k] = (float) Math.sqrt(normeAxe);
-			k++;
+			//Calcul des différences
+			diffaxes = getDifferencefloat(candidat, electeurs);
+			//Calcul de la norme
+			diffnormes[i] = getNormes(diffaxes);
+			i++;
 		}
+		
+		
+		//Calcul de la normes des candidats
+		//float[] normescandidats = getNormes(candidats);
+		//Calcul de la normes des électeurs
+		//float[] normeselecteurs = getNormes(electeurs);
+		//Calcul de la différence
+		//float[] normesdifference = getDifferenceNorme(normeselecteurs, normescandidats);
+		
+		
 	}
 
 	@Override
