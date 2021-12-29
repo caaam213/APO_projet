@@ -46,6 +46,16 @@ public abstract class Personne {
 	}
 
 
+	public Axe[] getAxes() {
+		return axes;
+	}
+
+
+	public float[] getValAxes() {
+		return valAxes;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Personne [axes=" + Arrays.toString(axes) + ", valAxes=" + Arrays.toString(valAxes) + "]";
