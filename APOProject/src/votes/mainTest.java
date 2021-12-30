@@ -8,12 +8,12 @@ public class mainTest {
 		// TODO Auto-generated method stub
 		/*Axe a1 = new Axe("Environnement");
 		Axe a2 = new Axe("Ecologie");
-		Axe a3 = new Axe("Ecologie");
+		//Axe a3 = new Axe("Ecologie");
 		Axe[] axes = {a1,a2};
 		
 		double[] fe0 = {(double) 0,1};
 		double[] fe1 = {(double) 0.25,(double) 0.75};
-		double[] fe2 = {(double) 0.5,(double) 0.5};
+		double[] fe2 = {(double) 0.25,(double) 0.74};
 		double[] fe3 = {(double) 0.5,(double) 0.5};
 		double[] fe4 = {(double) 0.4,(double) 0.5};
 		double[] fe5 = {(double) 0.5,(double) 0.5};
@@ -37,13 +37,24 @@ public class mainTest {
 		
 		UnTour untour = new UnTour(cand,elec);
 		
-		double[] normes = untour.getNormes(elec);
+		//double[] normes = untour.getNormes(elec);
 		
 		
 		/*for(int i=0;i<normes.length;i++)
 		{
 			System.out.println(normes[i]);
 		}*/
+<<<<<<< HEAD
+=======
+		System.out.println("----------------1er Tour-----------------");
+		untour.simulation();
+		System.out.println("----------------Sondage:-----------------");
+		untour.sondage((double)0.2);
+		
+		System.out.println("-----------------2e Tour-----------------");
+		DeuxTours deuxtours = new DeuxTours(cand,elec);
+		deuxtours.scrutinDeuxTours(cand, elec, 3);
+>>>>>>> 6560d343adf6fbb01eb54be337468b0690bf1705
 	}
 }
 		
