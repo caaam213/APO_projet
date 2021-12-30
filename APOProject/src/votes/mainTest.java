@@ -29,10 +29,10 @@ public class mainTest {
 		double[] f5 = {(double) 0.25,(double) 0.74};
 		double[] f6 = {(double) 0.5,(double) 0.5};
 		double[] f7 = {(double) 0.25,(double) 0.75};
-		Candidat c0 = new Candidat(axes, f4,"s");
-		Candidat c1 = new Candidat(axes, f5,"s");
-		Candidat c2 = new Candidat(axes, f6,"s");
-		Candidat c3 = new Candidat(axes, f7,"s");
+		Candidat c0 = new Candidat(axes, f4,"Marine le pen");
+		Candidat c1 = new Candidat(axes, f5,"Zemmour");
+		Candidat c2 = new Candidat(axes, f6,"Macron");
+		Candidat c3 = new Candidat(axes, f7,"Melenchon");
 		Candidat[] cand = {c0,c1,c2,c3};
 		
 		UnTour untour = new UnTour(cand,elec);
@@ -44,9 +44,7 @@ public class mainTest {
 		{
 			System.out.println(normes[i]);
 		}*/
-		/*untour.simulation();*/
 	}
-
 }
 		
 

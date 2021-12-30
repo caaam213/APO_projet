@@ -24,10 +24,14 @@ public class Electeur extends Personne{
 	public Electeur(Axe[] axes, double[] valAxes, String positionGeographique) {
 		super(axes, valAxes);
 		this.positionGeographique = positionGeographique;
-		this.nbElecteurs++;
 		this.idElecteur = nbElecteurs;
+		this.nbElecteurs++;
 	}
 	
+	public int getIdElecteur() {
+		return idElecteur;
+	}
+
 	/**
 	 * Instantiates a new electeur.
 	 *
