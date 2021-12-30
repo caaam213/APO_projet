@@ -14,7 +14,7 @@ public abstract class Scrutin {
 
 	public abstract void simulation();
 	
-	public abstract void sondage( double pourcentpop );
+	public abstract void sondage( double pourcentElecteurs );
 	/*-----------------------------------------------------------------------------*/
 	/*---------Méthodes ajoutés pour le bon fonctionnement du programme------------*/
 	/*-----------------------------------------------------------------------------*/
@@ -73,7 +73,61 @@ public abstract class Scrutin {
 		return normes;
 	}
 	
+<<<<<<< HEAD
 	public void evoluerParDiscussion()
+=======
+	public Electeur[] recupElecteurAlea(double pourcentElecteurs)
+	{
+		//Nombre de personnes à qui on fera le Sondage
+		int nb_sondage = (int) (pourcentElecteurs*electeurs.length);
+		Electeur[] leselecteurs = new Electeur[nb_sondage];
+		//Variable pour la sélection aléatoire
+		int id_electeur = 0;
+		//Boucle pour remplir le tableau electeurs
+		int i=0;
+		boolean b;
+		while(leselecteurs[nb_sondage-1] == null)
+		{
+			b = true;
+			double alea = Math.random();
+			if(alea != 1)//Empecher que id_electeur depassa la limite du tableau
+			{
+				id_electeur = (int) ((electeurs.length)*alea);
+			}
+			//Empecher les doublons
+			for(Electeur electeur: leselecteurs)
+			{
+				if(electeur != null)
+				{
+					if(electeur.getIdElecteur() == id_electeur)
+					{
+						b = false;
+					}
+				}
+			}
+			if(b == true)
+			{
+				leselecteurs[i] = electeurs[id_electeur];
+				i++;
+			}
+		}
+		
+		return leselecteurs;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public double[] getNormes(Personne[] personnes)
+>>>>>>> 6fcbe0c8a7b6473ddb70108886348824e80c3e84
 	{
 		
 	}
