@@ -18,10 +18,14 @@ public class Candidat extends Personne{
 	public Candidat(Axe[] axes, double[] valAxes, String nomPrenom) {
 		super(axes,valAxes);
 		this.nomPrenom = nomPrenom;
-		nbCandidat++;
 		idCandidat = nbCandidat;
+		nbCandidat++;
 	}
 	
+	public String getNomPrenom() {
+		return nomPrenom;
+	}
+
 	/**
 	 * Instantiates a new candidat.
 	 *

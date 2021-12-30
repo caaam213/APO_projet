@@ -8,7 +8,7 @@ import votes.*;
 public class UnTourTest{
 
 	@Test
-	public void testGetDifferenceFloat ()
+	public void testCalculDifferenceAxes ()
 	{
 		Axe[] axes = new Axe[3];
 	    axes[0] = new Axe("e");
@@ -31,7 +31,7 @@ public class UnTourTest{
 	    
 	    tabe[1] = e2;
 	    UnTour unTour = new UnTour(tabc, tabe);
-	    double[][] tabTest = unTour.getDifferencefloat(c1, tabe); 
+	    double[][] tabTest = unTour.CalculDifferenceAxes(c1, tabe); 
 	    double[][] resultatAttendu = {{(float)1,(float)1,(float)0.5},{(float)0,(float)0,(float)0.5}};
 	    assertEquals(resultatAttendu,tabTest);
 	    

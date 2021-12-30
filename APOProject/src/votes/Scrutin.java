@@ -4,8 +4,8 @@ import parametres.*;
 
 public abstract class Scrutin {
 	
-	Candidat[] candidats;
-	Electeur[] electeurs;
+	protected Candidat[] candidats;
+	protected Electeur[] electeurs;
 
 	public Scrutin(Candidat[] candidats, Electeur[] electeurs) {
 		this.candidats = candidats;
@@ -14,30 +14,46 @@ public abstract class Scrutin {
 
 	public abstract void simulation();
 	
-	public abstract void sondage( float pourcentpop );
-	
+	public abstract void sondage( double pourcentpop );
+	/*-----------------------------------------------------------------------------*/
 	/*---------Méthodes ajoutés pour le bon fonctionnement du programme------------*/
-	public double[][] getDifferencefloat(Candidat candidat, Electeur[] electeurs)
+	/*-----------------------------------------------------------------------------*/
+	
+	public double[][] CalculDifferenceAxes(Candidat candidat, Electeur[] electeurs)
 	{
 		double[] valaxes_candidats = candidat.getValAxes();
 		
 		double[][] valaxes_diff = new double[electeurs.length][valaxes_candidats.length];
 		int i=0;
-		System.out.println("ICI1:");
 		for(Electeur electeur: electeurs)
 		{
-			System.out.println("ICI2:");
 			for(int j=0;j<valaxes_candidats.length;j++)
 			{
 				valaxes_diff[i][j] = Math.abs(valaxes_candidats[j]  - electeur.getValAxes()[j]);
-				
-				System.out.println(valaxes_diff[i][j] +"=" +valaxes_candidats[j] + "-" + electeur.getValAxes()[j]);
 			}
 			i++;
 		}
 		
 		return valaxes_diff;
 	}
+	
+	public double[][] CalculDiffNormes(Candidat[] candidats, Electeur[] electeurs)
+	{
+		double[][] diffaxes = new double[electeurs.length][];
+		double[][] diffnormes = new double[candidats.length][];//[Candidat][electeur]
+		int i=0;
+		for(Candidat candidat: candidats)
+		{
+			//Calcul des différences
+			diffaxes = CalculDifferenceAxes(candidat, electeurs);
+			//Calcul de la norme
+			diffnormes[i] = getNormes(diffaxes);
+			i++;
+		}
+		
+		return diffnormes;
+	}
+	
 	
 	public double[] getNormes(double[][] vecteurs)
 	{
