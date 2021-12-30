@@ -28,11 +28,11 @@ public class UnTourTest{
 	    
 	    Electeur[] tabe = new Electeur[2];
 	    tabe[0] = e1;
-	    
+	   
 	    tabe[1] = e2;
 	    UnTour unTour = new UnTour(tabc, tabe);
 	    double[][] tabTest = unTour.getDifferencefloat(c1, tabe); 
-	    double[][] resultatAttendu = {{(float)1,(float)1,(float)0.5},{(float)0,(float)0,(float)0.5}};
+	    double[][] resultatAttendu = {{1,1,0.5},{0,0,0.5}};
 	    assertEquals(resultatAttendu,tabTest);
 	    
 	}

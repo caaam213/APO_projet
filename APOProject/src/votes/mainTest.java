@@ -6,7 +6,7 @@ public class mainTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Axe a1 = new Axe("Environnement");
+		/*Axe a1 = new Axe("Environnement");
 		Axe a2 = new Axe("Ecologie");
 		Axe a3 = new Axe("Ecologie");
 		Axe[] axes = {a1,a2};
@@ -44,10 +44,11 @@ public class mainTest {
 		{
 			System.out.println(normes[i]);
 		}*/
-		untour.simulation();
+		/*untour.simulation();*/
 	}
 
 }
+		
 
 
 

@@ -12,10 +12,10 @@ import java.util.Arrays;
 public abstract class Personne {
 	
 	/** The axes. */
-	private Axe[] axes;
+	protected Axe[] axes;
 	
 	/** The val axes. */
-	private double[] valAxes;
+	protected double[] valAxes;
 	
 	/**
 	 * Instancie une nouvelle personne si on ne génère pas des valeurs de façon aléatoire

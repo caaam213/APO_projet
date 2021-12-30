@@ -4,8 +4,8 @@ import parametres.*;
 
 public abstract class Scrutin {
 	
-	Candidat[] candidats;
-	Electeur[] electeurs;
+	protected Candidat[] candidats;
+	protected Electeur[] electeurs;
 
 	public Scrutin(Candidat[] candidats, Electeur[] electeurs) {
 		this.candidats = candidats;
@@ -58,51 +58,7 @@ public abstract class Scrutin {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public double[] getNormes(Personne[] personnes)
-	{
-		double[] valAxes;
-		double[] normeAxes = new double[personnes.length];
-		double normeAxe=0;
-		
-		int k=0;
-		for(Personne personne: personnes)
-		{
-			valAxes = personne.getValAxes();
-			for(int i=0;i<personne.getValAxes().length;i++)
-			{
-				normeAxe += valAxes[i]*valAxes[i];
-			}
-			normeAxes[k] = (float) Math.sqrt(normeAxe);
-			normeAxe=0;
-			k++;
-		}
-		
-		return normeAxes;
-	}
-	
-	public float[] getDifferenceNorme(float[] normes1, float normes2)
-	{
-		float[] normesdiff = new float[normes1.length];
-		
-		for(int i=0;i<normes1.length;i++)
-		{
-			normesdiff[i] = Math.abs(normes1[i] - normes2);
-		}
-		
-		return normesdiff;
-	}
+
 	
 	
 	
