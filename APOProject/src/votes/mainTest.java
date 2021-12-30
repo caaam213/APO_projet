@@ -6,7 +6,7 @@ public class mainTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		/*Axe a1 = new Axe("Environnement");
+		Axe a1 = new Axe("Environnement");
 		Axe a2 = new Axe("Ecologie");
 		//Axe a3 = new Axe("Ecologie");
 		Axe[] axes = {a1,a2};
@@ -44,8 +44,7 @@ public class mainTest {
 		{
 			System.out.println(normes[i]);
 		}*/
-<<<<<<< HEAD
-=======
+
 		System.out.println("----------------1er Tour-----------------");
 		untour.simulation();
 		System.out.println("----------------Sondage:-----------------");
@@ -54,7 +53,7 @@ public class mainTest {
 		System.out.println("-----------------2e Tour-----------------");
 		DeuxTours deuxtours = new DeuxTours(cand,elec);
 		deuxtours.scrutinDeuxTours(cand, elec, 3);
->>>>>>> 6560d343adf6fbb01eb54be337468b0690bf1705
+
 	}
 }
 		

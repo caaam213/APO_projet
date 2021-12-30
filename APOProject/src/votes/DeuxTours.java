@@ -16,10 +16,7 @@ public class DeuxTours extends Scrutin{
 	public void simulation() {
 		
 	}
-<<<<<<< HEAD
 
-
-=======
 	public HashMap<Candidat,Double> scrutinDeuxTours(Candidat[] candidats, Electeur[] electeurs, int nb_sectour)
 	{
 		//-------------1er Tour------------
@@ -76,7 +73,7 @@ public class DeuxTours extends Scrutin{
 		
 		return null;
 	}
->>>>>>> 6560d343adf6fbb01eb54be337468b0690bf1705
+
 	@Override
 	public void sondage(double pourcentpop) {
 		// TODO Auto-generated method stub
