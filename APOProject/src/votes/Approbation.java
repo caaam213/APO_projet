@@ -16,8 +16,10 @@ public class Approbation extends Scrutin{
 		
 	}
 
+	
+
 	@Override
-	public void sondage(float pourcentpop) {
+	public void sondage(double pourcentpop) {
 		// TODO Auto-generated method stub
 		
 	}

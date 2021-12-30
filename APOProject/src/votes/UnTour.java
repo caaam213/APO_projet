@@ -16,7 +16,7 @@ public class UnTour extends Scrutin{
 	{
 		scrutinUnTour(candidats,electeurs);
 	}
-	
+
 	@Override
 	public void sondage(double pourcentElecteurs) 
 	{

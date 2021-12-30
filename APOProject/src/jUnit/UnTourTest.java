@@ -1,6 +1,8 @@
 package jUnit;
 import parametres.*;
+import static org.junit.Assert.*;
 import votes.*;
+import org.junit.Test;
 public class UnTourTest{
 
 	@Test
@@ -27,9 +29,13 @@ public class UnTourTest{
 	   
 	    tabe[1] = e2;
 	    UnTour unTour = new UnTour(tabc, tabe);
-
+	    double[][] tabTest = unTour.CalculDifferenceAxes(c1, tabe);
+	    double[][] resultatAttendu = {{1,1,0.5},{0,0,0.5}};
 	    assertEquals(resultatAttendu,tabTest);
 	    
 	}
+	
+	
+
 
 }

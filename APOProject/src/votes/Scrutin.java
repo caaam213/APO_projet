@@ -73,7 +73,25 @@ public abstract class Scrutin {
 		return normes;
 	}
 	
+	public void evoluerParDiscussion()
+	{
+		
+	}
 	
+	public void evoluerParIdee()
+	{
+		
+	}
+	
+	public void evoluerParCote()
+	{
+		
+	}
+	
+	public void evoluerParMoyenne()
+	{
+		
+	}
 
 	
 	

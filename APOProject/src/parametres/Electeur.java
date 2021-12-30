@@ -3,6 +3,10 @@
  */
 package parametres;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.*;
+import java.lang.*;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Electeur.
@@ -42,7 +46,70 @@ public class Electeur extends Personne{
 		super(axes);
 		this.positionGeographique = positionGeographique;
 	}
+	 
+	public void evoluer(Personne p,String action)
+	{
+		for(int i=0;i<axes.length;i++)
+		{
+			if(action=="eloigner")
+				valAxes[i] = valAxes[i] - ((p.getValAxes()[i] - valAxes[i])/2);
+			else
+				valAxes[i] = valAxes[i] + ((p.getValAxes()[i] - valAxes[i])/2);
+			if(valAxes[i]<0 || valAxes[i]>1)
+			{
+				if(valAxes[i]>1)
+					valAxes[i] = 1;
+				else if(valAxes[i]<0)
+					valAxes[i] = 0;
+			}		
+		}
+	}
 	
+	public void RapprocherParUtilite(Personne p,Double utilite)
+	{
+		for(int i=0;i<axes.length;i++)
+		{
+			
+			valAxes[i] = valAxes[i] + utilite*((p.getValAxes()[i] - valAxes[i])/2);
+			if(valAxes[i]<0 || valAxes[i]>1)
+			{
+				if(valAxes[i]>1)
+					valAxes[i] = 1;
+				else if(valAxes[i]<0)
+					valAxes[i] = 0;
+			}		
+		}
+	}
+	
+	private ArrayList<Integer> trierNcandidats( int n , HashMap<Candidat, Double> sondage )
+    {
+        double pourcent_vote;
+        double pourcent_vote_max = 0;
+        int id_candidat_max = 0;
+
+        ArrayList<Integer> nCandidats = new ArrayList<Integer>();
+        List<Candidat> candidats = new ArrayList<>(sondage.keySet()); 
+        for(int k=0;k<n;k++)
+        {
+            for(int i=0;i<candidats.size();i++)
+            {
+                pourcent_vote = sondage.get(candidats.get(i));
+
+                if( (pourcent_vote >= pourcent_vote_max) && !nCandidats.contains(i))
+                {
+                    pourcent_vote_max = pourcent_vote;
+                    id_candidat_max = i;
+                }
+            }
+            if(!nCandidats.contains(id_candidat_max))
+            {
+            	nCandidats.add(id_candidat_max);
+                pourcent_vote_max = 0;
+            }
+        }
+
+        return nCandidats;
+    }
 	
 	//Diagramme de séquence à faire
 	public void modifierOpinionParDiscussion(Personne p)
@@ -50,39 +117,76 @@ public class Electeur extends Personne{
 		double[] difference = this.calculDifference(p);
 		double norme = this.getNorme(difference);
 		
-		//On s'éloigne de la valeur en lui retirant la moyenne des 2
+		//On s'éloigne d
 		if(norme>1)
 		{
-			for(int i=0;i<axes.length;i++)
-			{
-				
-				valAxes[i] = valAxes[i] - ((p.getValAxes()[i] - valAxes[i])/2);
-				if(valAxes[i]<0 || valAxes[i]>1)
-				{
-					if(valAxes[i]>1)
-						valAxes[i] = 1;
-					else if(valAxes[i]<0)
-						valAxes[i] = 0;
-				}
-					
-					
-			}
+			evoluer(p,"eloigner");
+
 		}
-		//On rapproche de la valeur en lui ajoutant la moyenne des 2
+		//On se rapproche
 		else if(norme<0.5)
 		{
-			for(int i=0;i<axes.length;i++)
+			evoluer(p,"rapprocher");
+		}
+	}
+	
+	
+	
+	public void evoluerOpinionsParIdee(HashMap<Candidat,Double> sondage, Candidat[] candidats,int N)
+	{
+		
+		ArrayList<Integer> nPremierCandidats = trierNcandidats(N,sondage);
+		double normeMin = 999999999;
+		Candidat candidat = null;
+		for(int idCandidat : nPremierCandidats)
+		{
+			double[] difference = this.calculDifference(candidats[idCandidat]);
+			double norme = this.getNorme(difference);
+			if(normeMin>norme)
 			{
-				if(valAxes[i]>0 && valAxes[i]<1)
-					valAxes[i] = valAxes[i] + ((p.getValAxes()[i] - valAxes[i])/2);
-				else
-					if(valAxes[i]>1)
-						valAxes[i] = 1;
-					else if(valAxes[i]<0)
-						valAxes[i] = 0;
-						
+				normeMin = norme;
+				candidat = candidats[idCandidat];
 			}
 		}
+		this.evoluer(candidat, "rapprocher");
+	}
+	
+	public void evoluerOpinionsParCote(HashMap<Candidat,Double> sondage)
+	{
+		double utiliteMax = -9999;
+		double utilite;
+		Candidat candidatUtilitePlusElevee = null;
+		for(Map.Entry<Candidat,Double> unResultat : sondage.entrySet()) {
+			Candidat cle = unResultat.getKey();
+			Double valeur = unResultat.getValue();
+			double[] difference = this.calculDifference(cle);
+			double norme = this.getNorme(difference);
+			
+		    utilite = (1/norme)*valeur;
+		    if(utiliteMax<utilite)
+		    {
+		    	utiliteMax = utilite;
+		    	candidatUtilitePlusElevee = cle;
+		    }
+		}
+		this.evoluer(candidatUtilitePlusElevee, "rapprocher");
+		
+	}
+	
+	public void evoluerOpinionsParMoyenne(HashMap<Candidat,Double> sondage)
+	{
+		double utilite;
+		for(Map.Entry<Candidat,Double> unResultat : sondage.entrySet()) {
+			Candidat cle = unResultat.getKey();
+			Double valeur = unResultat.getValue();
+			double[] difference = this.calculDifference(cle);
+			double norme = this.getNorme(difference);
+			
+		    utilite = (1/norme)*valeur;
+		    RapprocherParUtilite(cle,utilite);
+		}
+		
+		
 	}
 	
 	public double[] calculDifference(Personne p)
