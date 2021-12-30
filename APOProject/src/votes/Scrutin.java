@@ -17,35 +17,40 @@ public abstract class Scrutin {
 	public abstract void sondage( float pourcentpop );
 	
 	/*---------Méthodes ajoutés pour le bon fonctionnement du programme------------*/
-	public float[][] getDifferencefloat(Candidat candidat, Electeur[] electeurs)
+	public double[][] getDifferencefloat(Candidat candidat, Electeur[] electeurs)
 	{
-		float[] valaxes_candidats = candidat.getValAxes();
+		double[] valaxes_candidats = candidat.getValAxes();
 		
-		float[][] valaxes_diff = new float[electeurs.length][valaxes_candidats.length];
+		double[][] valaxes_diff = new double[electeurs.length][valaxes_candidats.length];
 		int i=0;
+		System.out.println("ICI1:");
 		for(Electeur electeur: electeurs)
 		{
+			System.out.println("ICI2:");
 			for(int j=0;j<valaxes_candidats.length;j++)
 			{
 				valaxes_diff[i][j] = Math.abs(valaxes_candidats[j]  - electeur.getValAxes()[j]);
+				
+				System.out.println(valaxes_diff[i][j] +"=" +valaxes_candidats[j] + "-" + electeur.getValAxes()[j]);
 			}
+			i++;
 		}
 		
 		return valaxes_diff;
 	}
 	
-	public float[] getNormes(float[][] vecteurs)
+	public double[] getNormes(double[][] vecteurs)
 	{
-		float[] normes = new float[vecteurs.length];
+		double[] normes = new double[vecteurs.length];
 		
 		int i=0;
-		for(float[] vecteur: vecteurs)
+		for(double[] vecteur: vecteurs)
 		{
 			for(int j=0;j<vecteur.length;j++)
 			{
 				normes[i] += vecteur[j]*vecteur[j];
 			}
-			normes[i] = (float) Math.sqrt(normes[i]);
+			normes[i] =  Math.sqrt(normes[i]);
 			i++;
 		}
 		
@@ -65,11 +70,11 @@ public abstract class Scrutin {
 	
 	
 	
-	public float[] getNormes(Personne[] personnes)
+	public double[] getNormes(Personne[] personnes)
 	{
-		float[] valAxes;
-		float[] normeAxes = new float[personnes.length];
-		float normeAxe=0;
+		double[] valAxes;
+		double[] normeAxes = new double[personnes.length];
+		double normeAxe=0;
 		
 		int k=0;
 		for(Personne personne: personnes)

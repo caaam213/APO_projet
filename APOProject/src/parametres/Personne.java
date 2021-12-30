@@ -15,7 +15,7 @@ public abstract class Personne {
 	private Axe[] axes;
 	
 	/** The val axes. */
-	private float[] valAxes;
+	private double[] valAxes;
 	
 	/**
 	 * Instancie une nouvelle personne si on ne génère pas des valeurs de façon aléatoire
@@ -23,7 +23,7 @@ public abstract class Personne {
 	 * @param axes the axes
 	 * @param valAxes the val axes
 	 */
-	public Personne(Axe[] axes, float[] valAxes) {
+	public Personne(Axe[] axes, double[] valAxes) {
 		super();
 		this.axes = axes;
 		this.valAxes = valAxes;
@@ -38,7 +38,7 @@ public abstract class Personne {
 	public Personne(Axe[] axes) {
 		super();
 		this.axes = axes;
-		valAxes = new float[axes.length];
+		valAxes = new double[axes.length];
 		for(int i = 0;i<axes.length;i++)
 		{
 			valAxes[i] = (float) Math.random();
@@ -51,7 +51,7 @@ public abstract class Personne {
 	}
 
 
-	public float[] getValAxes() {
+	public double[] getValAxes() {
 		return valAxes;
 	}
 

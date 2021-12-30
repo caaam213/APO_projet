@@ -15,7 +15,7 @@ public class Candidat extends Personne{
 	 * @param valAxes Valeur des différents axes
 	 * @param nomPrenom Nom et Prénom
 	 */
-	public Candidat(Axe[] axes, float[] valAxes, String nomPrenom) {
+	public Candidat(Axe[] axes, double[] valAxes, String nomPrenom) {
 		super(axes,valAxes);
 		this.nomPrenom = nomPrenom;
 		nbCandidat++;

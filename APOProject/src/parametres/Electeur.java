@@ -21,7 +21,7 @@ public class Electeur extends Personne{
 	 * @param valAxes Valeur des différents axes
 	 * @param positionGeographique position geographique de l'individu
 	 */
-	public Electeur(Axe[] axes, float[] valAxes, String positionGeographique) {
+	public Electeur(Axe[] axes, double[] valAxes, String positionGeographique) {
 		super(axes, valAxes);
 		this.positionGeographique = positionGeographique;
 		this.nbElecteurs++;
