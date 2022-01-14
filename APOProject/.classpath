@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Polytech resources/JAVA/APO_projet/JUnit/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Polytech resources/JAVA/APO_projet/JUnit/junit-4.13.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nabil/Documents/Etudes/Polytech/3A/S5/APO/Projet/APO_projet/JUnit/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/nabil/Documents/Etudes/Polytech/3A/S5/APO/Projet/APO_projet/JUnit/junit-4.13.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

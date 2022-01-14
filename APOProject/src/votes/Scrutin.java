@@ -15,6 +15,7 @@ public abstract class Scrutin {
 	public abstract void simulation();
 	
 	public abstract void sondage( double pourcentElecteurs );
+<<<<<<< HEAD
 	/*-----------------------------------------------------------------------------*/
 	/*---------Méthodes ajoutés pour le bon fonctionnement du programme------------*/
 	/*-----------------------------------------------------------------------------*/
@@ -169,6 +170,8 @@ public abstract class Scrutin {
 	
 	
 	
+=======
+>>>>>>> d5ecd580bedd17e2fa042646a592fdf817996987
 	
 }
 
