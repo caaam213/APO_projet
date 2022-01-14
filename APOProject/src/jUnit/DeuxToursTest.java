@@ -56,7 +56,7 @@ public class DeuxToursTest {
 		resultat_deuxtours.put(c3, (double)2/9);
 		//assertTrue(deuxtours.scrutinDeuxTours(cs, es, 2),resultat_deuxtours);
 		assertEquals(resultat_deuxtours,deuxtours.scrutinDeuxTours(cs, es, 2));
-		
+	
 	}
 }
 

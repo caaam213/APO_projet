@@ -12,7 +12,7 @@ public class Alternatif extends Scrutin{
 
 	@Override
 	public void simulation() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

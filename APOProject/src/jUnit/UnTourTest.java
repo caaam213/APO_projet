@@ -6,7 +6,7 @@ import votes.*;
 import org.junit.Test;
 
 public class UnTourTest{
-
+	
 	@Test
 	public void testCalculDifferenceAxes ()
 	{

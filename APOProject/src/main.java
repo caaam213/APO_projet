@@ -11,7 +11,7 @@ public class main {
 		Scanner scAxes = new Scanner( System.in );
 		do
 		{
-			
+		
 			System.out.println("Veuillez saisir le nombre d'axes");
 			nbAxes = scAxes.nextInt();
 		}
