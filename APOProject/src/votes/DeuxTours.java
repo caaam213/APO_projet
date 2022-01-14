@@ -1,5 +1,6 @@
 package votes;
 
+import Utilites.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -71,11 +72,11 @@ public class DeuxTours extends Scrutin{
 
 	@Override
 	public void sondage(double pourcentElecteurs) {
-		scrutinDeuxTours(candidats, recupElecteurAlea(pourcentElecteurs), 2);
+		scrutinDeuxTours(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs), 2);
 	}
 
 	public void sondage(double pourcentElecteurs, int n) {
-		scrutinDeuxTours(candidats, recupElecteurAlea(pourcentElecteurs), n);
+		scrutinDeuxTours(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs), n);
 	}
 }
 

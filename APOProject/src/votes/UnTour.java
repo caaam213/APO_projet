@@ -1,7 +1,7 @@
 package votes;
 
+import Utilites.*;
 import java.util.HashMap;
-
 import parametres.Candidat;
 import parametres.Electeur;
 
@@ -20,12 +20,12 @@ public class UnTour extends Scrutin{
 	@Override
 	public void sondage(double pourcentElecteurs) 
 	{
-		scrutinUnTour(candidats, recupElecteurAlea(pourcentElecteurs));
+		scrutinUnTour(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs));
 	}
 	
 	public HashMap<Candidat,Double> scrutinUnTour(Candidat[] candidats, Electeur[] electeurs) {
 		//Récupération des normes représentant le rapprochement avec un candidat
-		double[][] diffnormes = CalculDiffNormes(candidats,electeurs);
+		double[][] diffnormes = CalculVote.CalculDiffNormes(candidats,electeurs);
 		//Choix des électeurs
 		int[] choix_electeurs = choixElecteurs(electeurs, diffnormes);
 		//Résultat par candidat

@@ -59,7 +59,6 @@ public class mainTest {
 
 		System.out.println("----------------Sondage:-----------------");
 		deuxtours.sondage(0.2,3);
-
 	}
 }
 		
