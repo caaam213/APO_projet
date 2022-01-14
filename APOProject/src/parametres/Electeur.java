@@ -2,7 +2,7 @@
  * 
  */
 package parametres;
-
+import Utilites.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.*;
@@ -31,6 +31,7 @@ public class Electeur extends Personne{
 		this.idElecteur = nbElecteurs;
 		this.nbElecteurs++;
 	}
+
 	
 	public int getIdElecteur() {
 		return idElecteur;
@@ -79,43 +80,15 @@ public class Electeur extends Personne{
 		}
 	}
 	
-	private ArrayList<Integer> trierNcandidats( int n , HashMap<Candidat, Double> sondage )
-    {
-        double pourcent_vote;
-        double pourcent_vote_max = 0;
-        int id_candidat_max = 0;
 
-        ArrayList<Integer> nCandidats = new ArrayList<Integer>();
-        List<Candidat> candidats = new ArrayList<>(sondage.keySet()); 
-        for(int k=0;k<n;k++)
-        {
-            for(int i=0;i<candidats.size();i++)
-            {
-                pourcent_vote = sondage.get(candidats.get(i));
-
-                if( (pourcent_vote >= pourcent_vote_max) && !nCandidats.contains(i))
-                {
-                    pourcent_vote_max = pourcent_vote;
-                    id_candidat_max = i;
-                }
-            }
-            if(!nCandidats.contains(id_candidat_max))
-            {
-            	nCandidats.add(id_candidat_max);
-                pourcent_vote_max = 0;
-            }
-        }
-
-        return nCandidats;
-    }
 
 	//Diagramme de séquence à faire
 	public void modifierOpinionParDiscussion(Personne p)
 	{
-		double[] difference = this.calculDifference(p);
-		double norme = this.getNorme(difference);
+		double[] difference = CalculVote.calculDifference(p,this);
+		double norme = CalculVote.getNorme(difference);
 		
-		//On s'éloigne d
+		//On s'éloigne
 		if(norme>1)
 		{
 			evoluer(p,"eloigner");
@@ -133,13 +106,13 @@ public class Electeur extends Personne{
 	public void evoluerOpinionsParIdee(HashMap<Candidat,Double> sondage, Candidat[] candidats,int N)
 	{
 		
-		ArrayList<Integer> nPremierCandidats = trierNcandidats(N,sondage);
+		ArrayList<Integer> nPremierCandidats = CalculVote.trierNcandidats(N,sondage);
 		double normeMin = 999999999;
 		Candidat candidat = null;
 		for(int idCandidat : nPremierCandidats)
 		{
-			double[] difference = this.calculDifference(candidats[idCandidat]);
-			double norme = this.getNorme(difference);
+			double[] difference = CalculVote.calculDifference(candidats[idCandidat],this);
+			double norme = CalculVote.getNorme(difference);
 			if(normeMin>norme)
 			{
 				normeMin = norme;
@@ -149,12 +122,6 @@ public class Electeur extends Personne{
 		this.evoluer(candidat, "rapprocher");
 	}
 
-	
-	
-	public double calculUtilite(double norme, double valeur)
-	{
-		return (1/norme)*valeur;
-	}
 
 	public void evoluerOpinionsParCote(HashMap<Candidat,Double> sondage)
 	{
@@ -164,8 +131,8 @@ public class Electeur extends Personne{
 		for(Map.Entry<Candidat,Double> unResultat : sondage.entrySet()) {
 			Candidat cle = unResultat.getKey();
 			Double valeur = unResultat.getValue();
-			double[] difference = this.calculDifference(cle);
-			double norme = this.getNorme(difference);
+			double[] difference = CalculVote.calculDifference(cle,this);
+			double norme = CalculVote.getNorme(difference);
 			
 		    utilite = (1/norme)*valeur;
 		    if(utiliteMax<utilite)
@@ -185,41 +152,16 @@ public class Electeur extends Personne{
 		for(Map.Entry<Candidat,Double> unResultat : sondage.entrySet()) {
 			Candidat cle = unResultat.getKey();
 			Double valeur = unResultat.getValue();
-			double[] difference = this.calculDifference(cle);
-			double norme = this.getNorme(difference);
+			double[] difference = CalculVote.calculDifference(cle,this);
+			double norme = CalculVote.getNorme(difference);
 			
 		    utilite = (1/norme)*valeur;
 		    RapprocherParUtilite(cle,utilite);
 		}		
 	}
 	
-	public double[] calculDifference(Personne p)
-	{
-		double[] valaxes_candidats = p.getValAxes();
 		
-		double[] valaxes_diff = new double[valaxes_candidats.length];
-
-		for(int j=0;j<valaxes_candidats.length;j++)
-		{
-			valaxes_diff[j] = Math.abs(valaxes_candidats[j]  - this.getValAxes()[j]);
-		}
-		
-		return valaxes_diff;
-	}
-		
-	public double getNorme(double[] vecteurs)
-	{
-		double norme = 0;
-		
-		for(int i=0;i<vecteurs.length;i++)
-		{
-			norme += vecteurs[i]*vecteurs[i];
-			
-			
-		}
-		norme =  Math.sqrt(norme);
-		return norme;
-	}
+	
 	
 	
 	
