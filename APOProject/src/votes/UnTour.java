@@ -10,7 +10,7 @@ public class UnTour extends Scrutin{
 	public UnTour(Candidat[] candidats, Electeur[] electeurs) {
 		super(candidats, electeurs);
 	}
-	
+
 	@Override
 	public void simulation()
 	{
@@ -45,7 +45,7 @@ public class UnTour extends Scrutin{
 			resultat.put(candidats[i],  ((double)nombre_votecandidat/electeurs.length));
 		}
 		
-		
+	
 		//Test
 		for(Candidat candidat: candidats)
 		{

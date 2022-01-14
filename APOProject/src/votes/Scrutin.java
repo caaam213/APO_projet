@@ -33,7 +33,7 @@ public abstract class Scrutin {
 			}
 			i++;
 		}
-		
+	
 		return valaxes_diff;
 	}
 	
@@ -72,12 +72,59 @@ public abstract class Scrutin {
 		
 		return normes;
 	}
-	
+
 
 	public void evoluerParDiscussion()
 	{
+		for(int i = 0;i<electeurs.length;i++)
+		{
+			int personneChoisi = (int) Math.random(); //0 :  electeur, 1 : candidat
+			Electeur electeur = electeurs[i];
+			int indPersChoisi = 0;
+			if(personneChoisi==0)
+			{
+				//On va boucler jusqu'à obtenir une personne différente de l'électeur
+				do
+				{
+					indPersChoisi = (int) (Math.random() * electeurs.length);
+				}while(indPersChoisi == i);
+			}
+			else
+			{
+				indPersChoisi = (int) (Math.random() * candidats.length);
+			}
+			System.out.print("Axes avant : ");
+			System.out.print(electeur.toString());
+			if(personneChoisi == 0)
+			{
+				electeur.modifierOpinionParDiscussion(electeurs[indPersChoisi]);
+			}
+			else
+			{
+				electeur.modifierOpinionParDiscussion(candidats[indPersChoisi]);
+			}
+			
+			System.out.print("Changement axes : ");
+			System.out.print(electeur.toString());
+		}
+	}
+	/*A modifier pour le sondage*/
+	public void evoluerParIdees()
+	{
 		
 	}
+	
+	public void evoluerParCote()
+	{
+		
+	}
+	
+	public void evoluerParMoyenne()
+	{
+		
+	}
+	
+	
 	public Electeur[] recupElecteurAlea(double pourcentElecteurs)
 	{
 		//Nombre de personnes à qui on fera le Sondage
@@ -118,32 +165,6 @@ public abstract class Scrutin {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	public double[] getNormes(Personne[] personnes)
-	{
-		return null;
-	}
-	
-	public void evoluerParIdee()
-	{
-		
-	}
-	
-	public void evoluerParCote()
-	{
-		
-	}
-	
-	public void evoluerParMoyenne()
-	{
-		
-	}
 
 	
 	

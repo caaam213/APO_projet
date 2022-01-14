@@ -35,7 +35,6 @@ public class Electeur extends Personne{
 	public int getIdElecteur() {
 		return idElecteur;
 	}
-
 	/**
 	 * Instantiates a new electeur.
 	 *
@@ -46,7 +45,7 @@ public class Electeur extends Personne{
 		super(axes);
 		this.positionGeographique = positionGeographique;
 	}
-	 
+
 	public void evoluer(Personne p,String action)
 	{
 		for(int i=0;i<axes.length;i++)
@@ -64,13 +63,12 @@ public class Electeur extends Personne{
 			}		
 		}
 	}
-	
 	public void RapprocherParUtilite(Personne p,Double utilite)
 	{
 		for(int i=0;i<axes.length;i++)
 		{
 			
-			valAxes[i] = valAxes[i] + utilite*((p.getValAxes()[i] - valAxes[i])/2);
+			valAxes[i] = valAxes[i] + (utilite/10)*((p.getValAxes()[i] - valAxes[i])/2);
 			if(valAxes[i]<0 || valAxes[i]>1)
 			{
 				if(valAxes[i]>1)
@@ -110,7 +108,7 @@ public class Electeur extends Personne{
 
         return nCandidats;
     }
-	
+
 	//Diagramme de séquence à faire
 	public void modifierOpinionParDiscussion(Personne p)
 	{
@@ -150,7 +148,14 @@ public class Electeur extends Personne{
 		}
 		this.evoluer(candidat, "rapprocher");
 	}
+
 	
+	
+	public double calculUtilite(double norme, double valeur)
+	{
+		return (1/norme)*valeur;
+	}
+
 	public void evoluerOpinionsParCote(HashMap<Candidat,Double> sondage)
 	{
 		double utiliteMax = -9999;
@@ -172,7 +177,8 @@ public class Electeur extends Personne{
 		this.evoluer(candidatUtilitePlusElevee, "rapprocher");
 		
 	}
-	
+
+
 	public void evoluerOpinionsParMoyenne(HashMap<Candidat,Double> sondage)
 	{
 		double utilite;
@@ -184,9 +190,7 @@ public class Electeur extends Personne{
 			
 		    utilite = (1/norme)*valeur;
 		    RapprocherParUtilite(cle,utilite);
-		}
-		
-		
+		}		
 	}
 	
 	public double[] calculDifference(Personne p)

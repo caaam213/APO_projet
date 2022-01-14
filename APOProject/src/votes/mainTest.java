@@ -1,5 +1,7 @@
 package votes;
 
+import java.util.HashMap;
+
 import parametres.*;
 
 public class mainTest {
@@ -12,7 +14,7 @@ public class mainTest {
 		Axe[] axes = {a1,a2};
 		
 		double[] fe0 = {(double) 0,1};
-		double[] fe1 = {(double) 0.25,(double) 0.75};
+		double[] fe1 = {(double) 0.20,(double) 0.7};
 		double[] fe2 = {(double) 0.25,(double) 0.74};
 		double[] fe3 = {(double) 0.5,(double) 0.5};
 		double[] fe4 = {(double) 0.4,(double) 0.5};
@@ -35,6 +37,14 @@ public class mainTest {
 		Candidat c3 = new Candidat(axes, f7,"Melenchon");
 		Candidat[] cand = {c0,c1,c2,c3};
 		
+		HashMap<Candidat,Double> sondage = new HashMap<Candidat,Double>();
+		sondage.put(c0, 0.2);
+		sondage.put(c1, 0.5);
+		sondage.put(c2, 0.1);
+		sondage.put(c3, 0.2);
+		
+		e1.evoluerOpinionsParIdee(sondage,cand,2);
+		System.out.println(e1.toString());
 		UnTour untour = new UnTour(cand,elec);
 		
 		//double[] normes = untour.getNormes(elec);
@@ -59,7 +69,6 @@ public class mainTest {
 
 		System.out.println("----------------Sondage:-----------------");
 		deuxtours.sondage(0.2,3);
-
 	}
 }
 		
