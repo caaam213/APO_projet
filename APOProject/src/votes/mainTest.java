@@ -44,12 +44,11 @@ public class mainTest {
 		{
 			System.out.println(normes[i]);
 		}*/
-<<<<<<< HEAD
-
+		
 		System.out.println("----------------1er Tour-----------------");
-=======
+
 		System.out.println("----------------Un Tour-----------------");
->>>>>>> 6fcbe0c8a7b6473ddb70108886348824e80c3e84
+
 		untour.simulation();
 		System.out.println("----------------Sondage:-----------------");
 		untour.sondage((double)0.5);
@@ -57,12 +56,10 @@ public class mainTest {
 		System.out.println("-----------------Deux Tours-----------------");
 		DeuxTours deuxtours = new DeuxTours(cand,elec);
 		deuxtours.scrutinDeuxTours(cand, elec, 3);
-<<<<<<< HEAD
 
-=======
 		System.out.println("----------------Sondage:-----------------");
 		deuxtours.sondage(0.2,3);
->>>>>>> 6fcbe0c8a7b6473ddb70108886348824e80c3e84
+
 	}
 }
 		

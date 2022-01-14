@@ -73,9 +73,11 @@ public abstract class Scrutin {
 		return normes;
 	}
 	
-<<<<<<< HEAD
+
 	public void evoluerParDiscussion()
-=======
+	{
+		
+	}
 	public Electeur[] recupElecteurAlea(double pourcentElecteurs)
 	{
 		//Nombre de personnes à qui on fera le Sondage
@@ -123,13 +125,9 @@ public abstract class Scrutin {
 	
 	
 	
-	
-	
-	
 	public double[] getNormes(Personne[] personnes)
->>>>>>> 6fcbe0c8a7b6473ddb70108886348824e80c3e84
 	{
-		
+		return null;
 	}
 	
 	public void evoluerParIdee()
