@@ -49,8 +49,6 @@ public class BordaTest {
 		resAttendu.put(c3, (double)9);
 		
 		Borda borda = new Borda(cs, es);
-		//borda.scrutinBorda(cs, es);
-		//HashMap<Candidat,Double> scrutinBorda(Candidat[] candidats, Electeur[] electeurs);
 		HashMap<Candidat,Double> test = new HashMap<Candidat,Double>();
 		test = borda.scrutinBorda(cs, es);
 		System.out.println(test.get(c1));

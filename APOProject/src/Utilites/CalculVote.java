@@ -46,17 +46,12 @@ public class CalculVote {
 	 * @param electeur
 	 * @return
 	 */
-	/*public static double[] CalculDifferenceAxes(Candidat candidat, Electeur electeur)
+	public static double[] CalculDifferenceAxes(Candidat candidat, Electeur electeur)
 	{
 		//double[] res = new double[];
 		Electeur[] unelecteur = {electeur};
-<<<<<<< HEAD
 		return CalculDifferenceAxes(candidat, unelecteur)[0];
-		//return null;
-=======
-		//return CalculDifferenceAxes(candidat, unelecteur);
-		return null;
-	}*/
+	}
 	
 
 	public static double[] calculDifference(Personne p, Electeur electeur)
@@ -71,7 +66,6 @@ public class CalculVote {
 		}
 		
 		return valaxes_diff;
->>>>>>> aeb3f7c1aa4fa1868639af3673a7f05bd4d63cb4
 	}
 	
 	
@@ -143,7 +137,6 @@ public class CalculVote {
 		
 		return normes;
 	}
-<<<<<<< HEAD
 	public static double getNormes(double[] vecteur)
 	{
 		double[][] levecteur = {vecteur};
@@ -155,16 +148,12 @@ public class CalculVote {
 	{
 		
 	}
-=======
-	
-	
 	/**
 	 * Cette fonction permet de récupérer un pourcentage d'électeurs au hasard
 	 * @param pourcentElecteurs
 	 * @param electeurs
 	 * @return
 	 */
->>>>>>> aeb3f7c1aa4fa1868639af3673a7f05bd4d63cb4
 	public static Electeur[] recupElecteurAlea(double pourcentElecteurs, Electeur[] electeurs)
 	{
 		//Nombre de personnes à qui on fera le Sondage
