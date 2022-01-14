@@ -34,8 +34,8 @@ public class CalculVote {
 	{
 		//double[] res = new double[];
 		Electeur[] unelecteur = {electeur};
-		//return CalculDifferenceAxes(candidat, unelecteur);
-		return null;
+		return CalculDifferenceAxes(candidat, unelecteur)[0];
+		//return null;
 	}
 	
 	public static double[][] CalculDiffNormes(Candidat[] candidats, Electeur[] electeurs)
@@ -73,7 +73,12 @@ public class CalculVote {
 		
 		return normes;
 	}
-	
+	public static double getNormes(double[] vecteur)
+	{
+		double[][] levecteur = {vecteur};
+		
+		return getNormes(levecteur)[0];
+	}
 
 	public static void evoluerParDiscussion()
 	{

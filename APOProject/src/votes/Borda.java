@@ -3,6 +3,8 @@ package votes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import parametres.Candidat;
 import parametres.Electeur;
 import Utilites.*;
@@ -22,11 +24,21 @@ public class Borda extends Scrutin{
 	
 	public HashMap<Candidat,Double> scrutinBorda(Candidat[] candidats, Electeur[] electeurs)
 	{
-		int n = electeurs.length;
+		//int n = electeurs.length;
 		HashMap<Candidat,Double> res = new HashMap<Candidat,Double>();
+		HashMap<Double,Candidat> NormeCandidats_Electeur = new HashMap<Double,Candidat>();
 		ArrayList<Double> list = new ArrayList<Double>();
 		Electeur[] unelecteur = new Electeur[1];
+		double[] diffaxes;
+		double diffnormes;
 		
+		
+		//Initialisation des candidats
+		for(Candidat candidat: candidats)
+		{
+			res.put(candidat, (double) 0);
+		}
+		//Traitement des électeurs un par un
 		for(Electeur electeur: electeurs)
 		{
 			//Récupération des points par candidats
@@ -34,27 +46,29 @@ public class Borda extends Scrutin{
 			{
 				unelecteur[0] = electeur;
 				//Calcul des différence
-				//double[][] diffaxes = CalculVote.CalculDifferenceAxes(candidat, electeur);
+				diffaxes = CalculVote.CalculDifferenceAxes(candidat, electeur);
 				//Calcul de la norme
-				//double[] diffnormes = CalculVote.getNormes(diffaxes);
-				
-				
-				
+				diffnormes = CalculVote.getNormes(diffaxes);
+				NormeCandidats_Electeur.put(diffnormes, candidat);
+				list.add(diffnormes);
 			}
-			//list.sort() // classement des candidats
+			
+			//Classement des candidats
+			Collections.sort(list);
 			
 			//Ajout des points par candidats
-			for(Candidat candidat: candidats)
+			for(int i=0;i<list.size();i++)
 			{
-				
+				res.put(NormeCandidats_Electeur.get(list.get(i)), res.get(NormeCandidats_Electeur.get(list.get(i))) + list.size() - i );
 			}
-			list.clear();// effacer pour éventuellement recommencer
+			
+			// Effacer pour éventuellement recommencer
+			list.clear();
 		}
-			//res.put(...)
 		
-		
-		return null;
+		return res;
 	}
+	
 	@Override
 	public void sondage(double pourcentpop) {
 		// TODO Auto-generated method stub
