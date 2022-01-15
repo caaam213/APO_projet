@@ -78,7 +78,7 @@ public class mainTest {
 		
 		System.out.println("-----------------Deux Tours-----------------");
 		DeuxTours deuxtours = new DeuxTours(cand,elec);
-		deuxtours.scrutinDeuxTours(cand, elec, 3);
+		deuxtours.simulation(3);
 
 		System.out.println("----------------Sondage:-----------------");
 		deuxtours.sondage(0.2,3);*/

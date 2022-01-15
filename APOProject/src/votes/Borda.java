@@ -9,20 +9,49 @@ import parametres.Candidat;
 import parametres.Electeur;
 import Utilites.*;
 
+/**
+ * @author nabil
+ *
+ */
 public class Borda extends Scrutin{
 
+	/**
+	 * Constructeur
+	 * 
+	 * @param candidats
+	 * @param electeurs
+	 */
 	public Borda(Candidat[] candidats, Electeur[] electeurs) {
 		super(candidats, electeurs);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Permet de lancer la simulation
+	 */
 	@Override
 	public void simulation() {
 		// TODO Auto-generated method stub
-		
+		resultatScrutin = scrutinBorda(candidats,electeurs);
 	}
 	
-	public HashMap<Candidat,Double> scrutinBorda(Candidat[] candidats, Electeur[] electeurs)
+	/**
+	 *@param pourcentElecteurs pourcentage d'électeurs testé dans la population
+	 */
+	@Override
+	public void sondage(double pourcentElecteurs) {
+		// TODO Auto-generated method stub
+		resultatSondage = scrutinBorda(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs));
+	}
+	
+	/**
+	 * Fonction de traitement
+	 * 
+	 * @param candidats
+	 * @param electeurs
+	 * @return
+	 */
+	private HashMap<Candidat,Double> scrutinBorda(Candidat[] candidats, Electeur[] electeurs)
 	{
 		//int n = electeurs.length;
 		HashMap<Candidat,Double> res = new HashMap<Candidat,Double>();
@@ -68,14 +97,5 @@ public class Borda extends Scrutin{
 		
 		return res;
 	}
-	
-	@Override
-	public void sondage(double pourcentpop) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	
 
 }

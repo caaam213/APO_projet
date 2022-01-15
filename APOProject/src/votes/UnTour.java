@@ -5,24 +5,49 @@ import java.util.HashMap;
 import parametres.Candidat;
 import parametres.Electeur;
 
+/**
+ * @author nabil
+ *
+ */
 public class UnTour extends Scrutin{
 
+	/**
+	 * Constructeur
+	 * 
+	 * @param candidats
+	 * @param electeurs
+	 */
 	public UnTour(Candidat[] candidats, Electeur[] electeurs) {
 		super(candidats, electeurs);
 	}
 
+	/**
+	 * Permet de lancer la simulation
+	 */
 	@Override
 	public void simulation()
 	{
-		scrutinUnTour(candidats,electeurs);
+		resultatScrutin = scrutinUnTour(candidats,electeurs);
 	}
 
+	/**
+	 * Permet de lancer la sondage
+	 * 
+	 * @param pourcentElecteurs pourcentage d'électeurs testé dans la population
+	 */
 	@Override
 	public void sondage(double pourcentElecteurs) 
 	{
-		scrutinUnTour(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs));
+		resultatSondage = scrutinUnTour(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs));
 	}
 	
+	/**
+	 * Fonction de traitement
+	 * 
+	 * @param candidats
+	 * @param electeurs
+	 * @return
+	 */
 	public HashMap<Candidat,Double> scrutinUnTour(Candidat[] candidats, Electeur[] electeurs) {
 		//Récupération des normes représentant le rapprochement avec un candidat
 		double[][] diffnormes = CalculVote.CalculDiffNormes(candidats,electeurs);
@@ -77,9 +102,13 @@ public class UnTour extends Scrutin{
 		
 		return choix_electeurs;
 	}
+<<<<<<< HEAD
 
 
 
+=======
+	
+>>>>>>> fbe9ad4e7928b13a5e807d2fe6efc40eb8922b0f
 }
 
 //-----ARCHIVES CODE

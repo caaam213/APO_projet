@@ -7,18 +7,60 @@ import java.util.HashMap;
 import parametres.Candidat;
 import parametres.Electeur;
 
+/**
+ * @author nabil
+ *
+ */
 public class DeuxTours extends Scrutin{
 
+	/**
+	 * Constructeur
+	 * 
+	 * @param candidats
+	 * @param electeurs
+	 */
 	public DeuxTours(Candidat[] candidats, Electeur[] electeurs) {
 		super(candidats, electeurs);
 	}
 
+	/**
+	 *	Simulation du scrutin avec 2 candidats au second tour par défaut
+	 */
 	@Override
 	public void simulation() {
-		
+		resultatScrutin = scrutinDeuxTours(candidats, electeurs, 2);
 	}
-
-	public HashMap<Candidat,Double> scrutinDeuxTours(Candidat[] candidats, Electeur[] electeurs, int nb_sectour)
+	/**
+	 * @param n nombre de Candidat voulus au second tour
+	 */
+	public void simulation(int n)
+	{
+		resultatSondage = scrutinDeuxTours(candidats, electeurs, n);
+	}
+	/**
+	 * @param pourcentElecteurs pourcentage d'électeurs testé dans la population
+	 */
+	@Override
+	public void sondage(double pourcentElecteurs) {
+		resultatSondage = scrutinDeuxTours(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs), 2);
+	}
+	/**
+	 * @param pourcentElecteurs pourcentage d'électeurs testé dans la population
+	 * @param n nombre de Candidat voulus au second tour
+	 */
+	public void sondage(double pourcentElecteurs, int n) {
+		resultatSondage = scrutinDeuxTours(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs), n);
+	}
+	
+	/**
+	 * Fonction de traitement
+	 * 
+	 * @param candidats
+	 * @param electeurs
+	 * @param nb_sectour
+	 * @return
+	 */
+	private HashMap<Candidat,Double> scrutinDeuxTours(Candidat[] candidats, Electeur[] electeurs, int nb_sectour)
 	{
 		//-------------1er Tour------------
 		UnTour tour_un = new UnTour(candidats, electeurs);
@@ -70,14 +112,7 @@ public class DeuxTours extends Scrutin{
 		return id_secondtour;
 	}
 
-	@Override
-	public void sondage(double pourcentElecteurs) {
-		scrutinDeuxTours(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs), 2);
-	}
 
-	public void sondage(double pourcentElecteurs, int n) {
-		scrutinDeuxTours(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs), n);
-	}
 }
 
 

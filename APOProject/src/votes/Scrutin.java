@@ -1,12 +1,16 @@
 package votes;
 
+import java.util.HashMap;
+
 import parametres.*;
 
 public abstract class Scrutin {
 	
 	protected Candidat[] candidats;
 	protected Electeur[] electeurs;
-
+	protected HashMap<Candidat,Double> resultatScrutin;
+	protected HashMap<Candidat,Double> resultatSondage;
+	
 	public Scrutin(Candidat[] candidats, Electeur[] electeurs) {
 		this.candidats = candidats;
 		this.electeurs = electeurs;
@@ -21,6 +25,7 @@ public abstract class Scrutin {
 	
 	public abstract void sondage( double pourcentElecteurs );
 
+<<<<<<< HEAD
 	/*-----------------------------------------------------------------------------*/
 	/*---------Méthodes ajoutés pour le bon fonctionnement du programme------------*/
 	/*-----------------------------------------------------------------------------*/
@@ -77,98 +82,16 @@ public abstract class Scrutin {
 		}
 		
 		return normes;
+=======
+	public HashMap<Candidat, Double> getResultatScrutin() {
+		return resultatScrutin;
+>>>>>>> fbe9ad4e7928b13a5e807d2fe6efc40eb8922b0f
 	}
 
+	public HashMap<Candidat, Double> getResultatSondage() {
+		return resultatSondage;
+	}
 
-	public void evoluerParDiscussion()
-	{
-		for(int i = 0;i<electeurs.length;i++)
-		{
-			int personneChoisi = (int) Math.random(); //0 :  electeur, 1 : candidat
-			Electeur electeur = electeurs[i];
-			int indPersChoisi = 0;
-			if(personneChoisi==0)
-			{
-				//On va boucler jusqu'à obtenir une personne différente de l'électeur
-				do
-				{
-					indPersChoisi = (int) (Math.random() * electeurs.length);
-				}while(indPersChoisi == i);
-			}
-			else
-			{
-				indPersChoisi = (int) (Math.random() * candidats.length);
-			}
-			System.out.print("Axes avant : ");
-			System.out.print(electeur.toString());
-			if(personneChoisi == 0)
-			{
-				electeur.modifierOpinionParDiscussion(electeurs[indPersChoisi]);
-			}
-			else
-			{
-				electeur.modifierOpinionParDiscussion(candidats[indPersChoisi]);
-			}
-			
-			System.out.print("Changement axes : ");
-			System.out.print(electeur.toString());
-		}
-	}
-	/*A modifier pour le sondage*/
-	public void evoluerParIdees()
-	{
-		
-	}
-	
-	public void evoluerParCote()
-	{
-		
-	}
-	
-	public void evoluerParMoyenne()
-	{
-		
-	}
-	
-	
-	public Electeur[] recupElecteurAlea(double pourcentElecteurs)
-	{
-		//Nombre de personnes à qui on fera le Sondage
-		int nb_sondage = (int) (pourcentElecteurs*electeurs.length);
-		Electeur[] leselecteurs = new Electeur[nb_sondage];
-		//Variable pour la sélection aléatoire
-		int id_electeur = 0;
-		//Boucle pour remplir le tableau electeurs
-		int i=0;
-		boolean b;
-		while(leselecteurs[nb_sondage-1] == null)
-		{
-			b = true;
-			double alea = Math.random();
-			if(alea != 1)//Empecher que id_electeur depassa la limite du tableau
-			{
-				id_electeur = (int) ((electeurs.length)*alea);
-			}
-			//Empecher les doublons
-			for(Electeur electeur: leselecteurs)
-			{
-				if(electeur != null)
-				{
-					if(electeur.getIdElecteur() == id_electeur)
-					{
-						b = false;
-					}
-				}
-			}
-			if(b == true)
-			{
-				leselecteurs[i] = electeurs[id_electeur];
-				i++;
-			}
-		}
-		
-		return leselecteurs;
-	}
 }	
 	
 
