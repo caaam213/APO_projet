@@ -50,12 +50,14 @@ public class BordaTest {
 		
 		Borda borda = new Borda(cs, es);
 		HashMap<Candidat,Double> test = new HashMap<Candidat,Double>();
-		test = borda.scrutinBorda(cs, es);
+		borda.simulation();
+		
+		test = borda.getResultatScrutin();
 		System.out.println(test.get(c1));
 		System.out.println(test.get(c2));
 		System.out.println(test.get(c3));
 		
-		assertEquals(resAttendu,borda.scrutinBorda(cs, es));
+		assertEquals(resAttendu,borda.getResultatScrutin());
 	}
 }
 

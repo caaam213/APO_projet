@@ -50,13 +50,20 @@ public class DeuxToursTest {
 		
 		Candidat[] cs =  {c1,c2,c3};
 		DeuxTours deuxtours = new DeuxTours(cs, es); 
+		HashMap<Candidat,Double> resultat_deuxtourstest = new HashMap<Candidat,Double>();
+		deuxtours.simulation();
 		
-		HashMap<Candidat,Double> resultat_deuxtours = new HashMap<Candidat,Double>();
-		resultat_deuxtours.put(c2, (double)7/9);
-		resultat_deuxtours.put(c3, (double)2/9);
-		//assertTrue(deuxtours.scrutinDeuxTours(cs, es, 2),resultat_deuxtours);
-		assertEquals(resultat_deuxtours,deuxtours.scrutinDeuxTours(cs, es, 2));
-	
+		resultat_deuxtourstest = deuxtours.getResultatScrutin();
+		//System.out.println(resultat_deuxtourstest.get(c2));
+		//System.out.println(resultat_deuxtourstest.get(c3));
+		
+		HashMap<Candidat,Double> resAttendu = new HashMap<Candidat,Double>();
+		resAttendu.put(c2, (double)7/9);
+		resAttendu.put(c3, (double)2/9);
+		
+		
+		//resAttendu.equals(resultat_deuxtourstest);
+		assertEquals(resAttendu,resultat_deuxtourstest);
 	}
 }
 
