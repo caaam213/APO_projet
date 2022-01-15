@@ -22,12 +22,12 @@ public class mainTest {
 		double[] fe3 = {(double) 0.5,(double) 0.5};
 		double[] fe4 = {(double) 0.4,(double) 0.5};
 		double[] fe5 = {(double) 0.5,(double) 0.5};
-		Electeur e0 = new Electeur(axes, fe0,"s");
-		Electeur e1 = new Electeur(axes, fe1,"s");
-		Electeur e2 = new Electeur(axes, fe2,"s");
-		Electeur e3 = new Electeur(axes, fe3,"s");
-		Electeur e4 = new Electeur(axes, fe4,"s");
-		Electeur e5 = new Electeur(axes, fe5,"s");
+		Electeur e0 = new Electeur(axes, fe0);
+		Electeur e1 = new Electeur(axes, fe1);
+		Electeur e2 = new Electeur(axes, fe2);
+		Electeur e3 = new Electeur(axes, fe3);
+		Electeur e4 = new Electeur(axes, fe4);
+		Electeur e5 = new Electeur(axes, fe5);
 		Electeur[] elec = {e0,e1,e2,e3,e4,e5};
 		
 		double[] f4 = {0,1};

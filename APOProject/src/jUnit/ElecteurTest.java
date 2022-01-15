@@ -28,7 +28,7 @@ public class ElecteurTest {
 	    double[] f2 = {0.4,0.6,0.5};
 	    
 	    Candidat c1 = new Candidat(axes,f1, "fer");
-	    Electeur e1 = new Electeur(axes,f2, "fer");
+	    Electeur e1 = new Electeur(axes,f2);
 	    
 	    double[] tabTest = CalculVote.calculDifference(c1,e1); 
 	    double[] resultatAttendu = {0.1,0.1,0};
@@ -47,8 +47,8 @@ public class ElecteurTest {
 	    double[] f1 = {0.5,0.5,0.5};
 	    double[] f2 = {0.4,0.6,0.5};
 	    
-	    Candidat c1 = new Candidat(axes,f1, "fer");
-	    Electeur e1 = new Electeur(axes,f2, "fer");
+	    Candidat c1 = new Candidat(axes,f1,"fer");
+	    Electeur e1 = new Electeur(axes,f2);
 	    
 	    double[] tabTest = CalculVote.calculDifference(c1,e1);  
 	    double norme = CalculVote.getNorme(tabTest);
@@ -68,8 +68,8 @@ public class ElecteurTest {
 	    double[] f1 = {0.2,0.8,0.4};
 	    double[] f2 = {0.8,0.1,0.9};
 	    
-	    Candidat c1 = new Candidat(axes,f1, "fer");
-	    Electeur e1 = new Electeur(axes,f2, "fer");
+	    Candidat c1 = new Candidat(axes,f1,"fer");
+	    Electeur e1 = new Electeur(axes,f2);
 
 	    double[] axesAttendus = {1,0,1};
 	    e1.modifierOpinionParDiscussion(c1);
@@ -91,7 +91,7 @@ public class ElecteurTest {
 	    double[] f2 = {0.8,0.8,0.8};
 	    
 	    Candidat c1 = new Candidat(axes,f1, "fer");
-	    Electeur e1 = new Electeur(axes,f2, "fer");
+	    Electeur e1 = new Electeur(axes,f2);
 
 	    double[] axesAttendus = {0.8,0.8,0.8};
 	    e1.modifierOpinionParDiscussion(c1);
@@ -112,7 +112,7 @@ public class ElecteurTest {
 	    double[] f2 = {0.4,0.6,0.5};
 	    
 	    Candidat c1 = new Candidat(axes,f1, "fer");
-	    Electeur e1 = new Electeur(axes,f2, "fer");
+	    Electeur e1 = new Electeur(axes,f2);
 
 	    double[] axesAttendus = {0.45,0.55,0.5};
 	    e1.modifierOpinionParDiscussion(c1);
@@ -129,7 +129,7 @@ public class ElecteurTest {
 		Axe[] axes = {a1,a2};
 		
 		double[] fe1 = {(double) 0.23,(double) 0.68};
-		Electeur e1 = new Electeur(axes, fe1,"s");
+		Electeur e1 = new Electeur(axes, fe1);
 		
 		double[] f4 = {0,1};
 		double[] f5 = {(double) 0.25,(double) 0.74};
@@ -164,7 +164,7 @@ public class ElecteurTest {
 
 
 		double[] fe1 = {(double) 0.20,(double) 0.7};
-		Electeur e1 = new Electeur(axes, fe1,"s");
+		Electeur e1 = new Electeur(axes, fe1);
 
 		double[] f4 = {0,1};
 		double[] f5 = {(double) 0.25,(double) 0.74};
@@ -199,7 +199,7 @@ public class ElecteurTest {
 		Axe[] axes = {a1,a2};
 
 		double[] fe1 = {(double) 0.20,(double) 0.7};
-		Electeur e1 = new Electeur(axes, fe1,"s");
+		Electeur e1 = new Electeur(axes, fe1);
 
 
 		double[] f4 = {0,1};

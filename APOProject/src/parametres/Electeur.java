@@ -16,23 +16,24 @@ public class Electeur extends Personne{
 	private static int nbElecteurs = 0;
 	private int idElecteur;
 	/** The position geographique. */
-	private String positionGeographique;
+	private double[] positionGeographique;
 
 	/**
 	 * Instantiates a new electeur.
 	 *
 	 * @param axes Tableau des différents axes
 	 * @param valAxes Valeur des différents axes
-	 * @param positionGeographique position geographique de l'individu
+	 * @param positionGeographique Latitudes et longitudes fictives
 	 */
-	public Electeur(Axe[] axes, double[] valAxes, String positionGeographique) {
+	public Electeur(Axe[] axes, double[] valAxes, double[] positionGeographique) {
 		super(axes, valAxes);
 		this.positionGeographique = positionGeographique;
 		this.idElecteur = nbElecteurs;
 		this.nbElecteurs++;
 	}
 
-	
+
+
 	public int getIdElecteur() {
 		return idElecteur;
 	}
@@ -42,7 +43,7 @@ public class Electeur extends Personne{
 	 * @param axes Tableau des différents axes
 	 * @param positionGeographique position geographique de l'individu
 	 */
-	public Electeur(Axe[] axes,String positionGeographique) {
+	public Electeur(Axe[] axes,double[] positionGeographique) {
 		super(axes);
 		this.positionGeographique = positionGeographique;
 	}
@@ -171,6 +172,15 @@ public class Electeur extends Personne{
 		this.evoluer(candidatUtilitePlusElevee, "rapprocher");
 		
 	}
+
+
+	
+	
+	
+	public double[] getPositionGeographique() {
+		return positionGeographique;
+	}
+
 
 
 	/**

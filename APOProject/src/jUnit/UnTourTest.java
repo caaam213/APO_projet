@@ -20,8 +20,8 @@ public class UnTourTest{
 	    double[] f3 = {1,0,0};
 	    
 	    Candidat c1 = new Candidat(axes,f1, "fer");
-	    Electeur e1 = new Electeur(axes,f2, "fer");
-	    Electeur e2 = new Electeur(axes,f3, "fer");
+	    Electeur e1 = new Electeur(axes,f2);
+	    Electeur e2 = new Electeur(axes,f3);
 	    
 	    Candidat[] tabc = new Candidat[1];
 	    tabc[0] = c1;

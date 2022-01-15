@@ -24,13 +24,13 @@ public class AlternatifTest {
 		Axe[] axes = {a1,a2};
 		
 		double[] d1 =  {(double)0.3,(double)0.2};
-		Electeur e1 = new Electeur(axes,d1,"");
+		Electeur e1 = new Electeur(axes,d1);
 		double[] d2 =  {(double)0.4,(double)0.1};
-		Electeur e2 = new Electeur(axes,d2,"");
+		Electeur e2 = new Electeur(axes,d2);
 		double[] d3 =  {(double)0.8,(double)0.2};
-		Electeur e3 = new Electeur(axes,d3,"");
+		Electeur e3 = new Electeur(axes,d3);
 		double[] d4 =  {(double)0.1,(double)0.1};
-		Electeur e4 = new Electeur(axes,d4,"");
+		Electeur e4 = new Electeur(axes,d4);
 ; 
 		
 		Electeur[] es = {e1,e2,e3,e4};

@@ -69,7 +69,17 @@ public class CalculVote {
 		
 		return valaxes_diff;
 	}
-
+	
+	public static double[] calculDifference(double[] d1, double[] d2)
+	{
+		double[] diffs = new double[d1.length];
+		for(int j=0;j<d1.length;j++)
+		{
+			diffs[j] = Math.abs(d1[j]  - d2[j]);
+		}
+		
+		return diffs;
+	}
 	
 	/**
 	 * Calculer la différence des normes

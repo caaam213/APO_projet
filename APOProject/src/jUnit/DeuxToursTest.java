@@ -21,23 +21,23 @@ public class DeuxToursTest {
 		Axe[] axes = {a1,a2,a3};
 		
 		double[] d1 =  {(double)0.75,(double)0,(double)0};
-		Electeur e1 = new Electeur(axes,d1,"");
+		Electeur e1 = new Electeur(axes,d1);
 		double[] d2 =  {(double)0,(double)0.75,(double)0};
-		Electeur e2 = new Electeur(axes,d2,"");
+		Electeur e2 = new Electeur(axes,d2);
 		double[] d3 =  {(double)0,(double)0,(double)0.75};
-		Electeur e3 = new Electeur(axes,d3,"");
+		Electeur e3 = new Electeur(axes,d3);
 		double[] d4 =  {(double)0.5,(double)0.5,(double)0.75};
-		Electeur e4 = new Electeur(axes,d4,"");
+		Electeur e4 = new Electeur(axes,d4);
 		double[] d5 =  {(double)0.5,(double)0.5,(double)0.5};
-		Electeur e5 = new Electeur(axes,d5,"");
+		Electeur e5 = new Electeur(axes,d5);
 		double[] d6 =  {(double)0.2,(double)1,(double)0.7};
-		Electeur e6 = new Electeur(axes,d6,"");
+		Electeur e6 = new Electeur(axes,d6);
 		double[] d7 =  {(double)0.2,(double)1,(double)0.6};
-		Electeur e7 = new Electeur(axes,d7,"");
+		Electeur e7 = new Electeur(axes,d7);
 		double[] d8 =  {(double)1,(double)0,(double)0};
-		Electeur e8 = new Electeur(axes,d8,"");
+		Electeur e8 = new Electeur(axes,d8);
 		double[] d9 =  {(double)0.5,(double)0.5,(double)0.5};
-		Electeur e9 = new Electeur(axes,d9,""); 
+		Electeur e9 = new Electeur(axes,d9); 
 		
 		Electeur[] es = {e1,e2,e3,e4,e5,e6,e7,e8,e9};
 		

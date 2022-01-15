@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
+import Utilites.CalculVote;
 import parametres.*;
 
 public abstract class Scrutin {
@@ -27,24 +28,64 @@ public abstract class Scrutin {
 	
 	public abstract void sondage( double pourcentElecteurs );
 	
-	public void evoluerToutesLesOpinionsParDiscussion()
+	public void evoluerToutesLesOpinionsParDiscussion(boolean spacialisation)
 	{
 		Random rand = new Random();
+		LinkedHashMap<Electeur,Double> distances;
 		
+		int nbElecteur = 0;
+		boolean tropLoin = true; //Detection s'il y a une personne proche sinon on interagit avec un candidat
 		for(Electeur electeur : electeurs)
 		{
+			tropLoin = true;
+			distances = new LinkedHashMap<Electeur,Double>();
 			int personneChoisie = rand.nextInt(2); //0:electeur 1:candidat
 			if(personneChoisie == 0)
 			{
-				//Gérer la spacialisation ici
-				int electeurChoisi = rand.nextInt(electeurs.length);
+				int electeurChoisi = nbElecteur;
+				
+				if(spacialisation)
+				{
+					for(Electeur autreElecteur : electeurs)
+					{
+						double[] diffs = CalculVote.calculDifference(electeur.getPositionGeographique(), electeurs[electeurChoisi].getPositionGeographique());  
+					    double distance = CalculVote.getNorme(diffs);
+					    if(distance < 10)
+					    {
+					    	tropLoin = false;
+					    }
+					    distances.put(autreElecteur, distance);
+					}	
+					if(tropLoin)
+					{
+						personneChoisie = 1;
+					}
+					else
+					{
+						while((electeurChoisi == nbElecteur) || (distances.get(electeurs[electeurChoisi]))>=10)
+						{
+							 electeurChoisi = rand.nextInt(electeurs.length);
+						}
+					}
+					
+				}
+				else
+				{
+					while(electeurChoisi == nbElecteur)
+					{
+						 electeurChoisi = rand.nextInt(electeurs.length);
+					}
+				}
+				
 				electeur.modifierOpinionParDiscussion(electeurs[electeurChoisi]);
 			}
-			else
+			
+			if(personneChoisie == 1)
 			{
 				int candidatChoisi = rand.nextInt(candidats.length);
 				electeur.modifierOpinionParDiscussion(electeurs[candidatChoisi]);
 			}
+			nbElecteur++;
 		}
 	}
 	

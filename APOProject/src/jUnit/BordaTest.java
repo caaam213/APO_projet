@@ -22,15 +22,15 @@ public class BordaTest {
 		Axe[] axes = {a1,a2,a3};
 		
 		double[] d1 =  {(double)0.4,(double)0.4,(double)0.4};
-		Electeur e1 = new Electeur(axes,d1,"");
+		Electeur e1 = new Electeur(axes,d1);
 		double[] d2 =  {(double)0.3,(double)0.3,(double)0.3};
-		Electeur e2 = new Electeur(axes,d2,"");
+		Electeur e2 = new Electeur(axes,d2);
 		double[] d3 =  {(double)0.2,(double)0.2,(double)0.2};
-		Electeur e3 = new Electeur(axes,d3,"");
+		Electeur e3 = new Electeur(axes,d3);
 		double[] d4 =  {(double)1,(double)1,(double)1};
-		Electeur e4 = new Electeur(axes,d4,"");
+		Electeur e4 = new Electeur(axes,d4);
 		double[] d5 =  {(double)0.8,(double)0.8,(double)0.8};
-		Electeur e5 = new Electeur(axes,d5,"");
+		Electeur e5 = new Electeur(axes,d5);
 		
 		Electeur[] es = {e1,e2,e3,e4,e5};
 		
