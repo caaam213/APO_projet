@@ -149,7 +149,7 @@ public class ElecteurTest {
 		sondage.put(c2, 0.1);
 		sondage.put(c3, 0.2);
 		
-		e1.evoluerOpinionsParIdee(sondage,cand,3);
+		e1.evoluerOpinionsParIdee(sondage,3);
 		assertArrayEquals(axesAttendus,e1.getValAxes(),0.01);
 
 	}

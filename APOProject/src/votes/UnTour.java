@@ -2,6 +2,8 @@ package votes;
 
 import Utilites.*;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import parametres.Candidat;
 import parametres.Electeur;
 
@@ -48,13 +50,13 @@ public class UnTour extends Scrutin{
 	 * @param electeurs
 	 * @return
 	 */
-	public HashMap<Candidat,Double> scrutinUnTour(Candidat[] candidats, Electeur[] electeurs) {
+	public LinkedHashMap<Candidat,Double> scrutinUnTour(Candidat[] candidats, Electeur[] electeurs) {
 		//Récupération des normes représentant le rapprochement avec un candidat
 		double[][] diffnormes = CalculVote.CalculDiffNormes(candidats,electeurs);
 		//Choix des électeurs
 		int[] choix_electeurs = choixElecteurs(electeurs, diffnormes);
 		//Résultat par candidat
-		HashMap<Candidat,Double> resultat = new HashMap<Candidat,Double>();
+		LinkedHashMap<Candidat,Double> resultat = new LinkedHashMap<Candidat,Double>();
 		
 		int nombre_votecandidat;
 		for(int i=0;i<candidats.length;i++)
@@ -102,13 +104,7 @@ public class UnTour extends Scrutin{
 		
 		return choix_electeurs;
 	}
-<<<<<<< HEAD
 
-
-
-=======
-	
->>>>>>> fbe9ad4e7928b13a5e807d2fe6efc40eb8922b0f
 }
 
 //-----ARCHIVES CODE

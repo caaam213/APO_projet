@@ -37,7 +37,7 @@ public class Electeur extends Personne{
 		return idElecteur;
 	}
 	/**
-	 * Instantiates a new electeur.
+	 * Instantie un nouveau electeur.
 	 *
 	 * @param axes Tableau des différents axes
 	 * @param positionGeographique position geographique de l'individu
@@ -47,6 +47,11 @@ public class Electeur extends Personne{
 		this.positionGeographique = positionGeographique;
 	}
 
+	/**
+	 * Eloigne ou rapproche un electeur des opinions d'une personne
+	 * @param p
+	 * @param action
+	 */
 	public void evoluer(Personne p,String action)
 	{
 		for(int i=0;i<axes.length;i++)
@@ -64,6 +69,11 @@ public class Electeur extends Personne{
 			}		
 		}
 	}
+	/**
+	 * Rapprochement proportionnelement à l'utilité
+	 * @param p
+	 * @param utilite
+	 */
 	public void RapprocherParUtilite(Personne p,Double utilite)
 	{
 		for(int i=0;i<axes.length;i++)
@@ -82,6 +92,10 @@ public class Electeur extends Personne{
 	
 
 	//Diagramme de séquence à faire
+	/**
+	 * On se rapproche ou on s'éloigne par discussion
+	 * @param p
+	 */
 	public void modifierOpinionParDiscussion(Personne p)
 	{
 		double[] difference = CalculVote.calculDifference(p,this);
@@ -102,26 +116,36 @@ public class Electeur extends Personne{
 	
 	
 	
-	public void evoluerOpinionsParIdee(HashMap<Candidat,Double> sondage, Candidat[] candidats,int N)
+	/**
+	 * En fonction des préferences parmi N personnes
+	 * @param sondage
+	 * @param N
+	 */
+	public void evoluerOpinionsParIdee(HashMap<Candidat,Double> sondage, int N)
 	{
 		
-		/*ArrayList<Integer> nPremierCandidats = CalculVote.trierNcandidats(N,sondage);
+		ArrayList<Integer> nPremierCandidats = CalculVote.trierNcandidats(N,sondage);
 		double normeMin = 999999999;
-		Candidat candidat = null;
-		for(int idCandidat : nPremierCandidats)
-		{
-			double[] difference = CalculVote.calculDifference(candidats[idCandidat],this);
+		Candidat candidatMax = null;
+		for(Map.Entry<Candidat,Double> unRes : sondage.entrySet()) {
+			Candidat cand = unRes.getKey();
+			Double valeur = unRes.getValue();
+			double[] difference = CalculVote.calculDifference(cand,this);
 			double norme = CalculVote.getNorme(difference);
 			if(normeMin>norme)
 			{
 				normeMin = norme;
-				candidat = candidats[idCandidat];
+				candidatMax = cand;
 			}
-		}*/
-		//this.evoluer(candidat, "rapprocher");
+		}
+		this.evoluer(candidatMax, "rapprocher");
 	}
 
 
+	/**
+	 * On s'éloigne ou on se rappoche en fonction du candidat ayant l utilité la plus élevée
+	 * @param sondage
+	 */
 	public void evoluerOpinionsParCote(HashMap<Candidat,Double> sondage)
 	{
 		double utiliteMax = -9999;
@@ -145,6 +169,10 @@ public class Electeur extends Personne{
 	}
 
 
+	/**
+	 * En fonction de l'utilité de chaque candidats
+	 * @param sondage
+	 */
 	public void evoluerOpinionsParMoyenne(HashMap<Candidat,Double> sondage)
 	{
 		double utilite;

@@ -3,6 +3,7 @@ package votes;
 import Utilites.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import parametres.Candidat;
 import parametres.Electeur;
@@ -60,12 +61,12 @@ public class DeuxTours extends Scrutin{
 	 * @param nb_sectour
 	 * @return
 	 */
-	private HashMap<Candidat,Double> scrutinDeuxTours(Candidat[] candidats, Electeur[] electeurs, int nb_sectour)
+	private LinkedHashMap<Candidat,Double> scrutinDeuxTours(Candidat[] candidats, Electeur[] electeurs, int nb_sectour)
 	{
 		//-------------1er Tour------------
 		UnTour tour_un = new UnTour(candidats, electeurs);
 		System.out.println("---1er tour:---");
-		HashMap<Candidat, Double> res_tourun = tour_un.scrutinUnTour(candidats, electeurs);
+		LinkedHashMap<Candidat,Double> res_tourun = tour_un.scrutinUnTour(candidats, electeurs);
 		
 		//Selection des n premiers candidats
 		ArrayList<Integer> id_secondtour = trier_ncandidats( nb_sectour , res_tourun );

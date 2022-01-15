@@ -58,7 +58,7 @@ public class ApprobationTest {
 		resultats.put(c3, (double)2/8);
 		resultats.put(c4, (double)4/8);
 		//assertTrue(deuxtours.scrutinDeuxTours(cs, es, 2),resultat_deuxtours);
-		assertEquals(resultats,app.getVotes());
+		assertEquals(resultats,app.getResultatScrutin());
 	
 	}
 }

@@ -146,10 +146,6 @@ public class CalculVote {
 		return getNormes(levecteur)[0];
 	}
 
-	public static void evoluerParDiscussion()
-	{
-		
-	}
 	/**
 	 * Cette fonction permet de récupérer un pourcentage d'électeurs au hasard
 	 * @param pourcentElecteurs
@@ -233,19 +229,26 @@ public class CalculVote {
         return nCandidats;
     }
 	
-	public static ArrayList<Candidat> trierNcandidatsParNorme( int n , HashMap<Candidat,Double> sondage )
+	/**
+	 * @param n
+	 * @param votes
+	 * @return
+	 * 
+	 * Cette méthode permet de trier les candidats par normes et de retourner une liste de candidats triées
+	 */
+	public static ArrayList<Candidat> trierNcandidatsParNorme( int n , HashMap<Candidat,Double> votes )
     {
         double norme_vote;
         double norme_vote_min = 99999;
         Candidat candidatMin = null;
 
         ArrayList<Candidat> nCandidats = new ArrayList<Candidat>();
-        List<Candidat> candidats = new ArrayList<>(sondage.keySet()); 
+        List<Candidat> candidats = new ArrayList<>(votes.keySet()); 
         for(int k=0;k<n;k++)
         {
         	for(Candidat candidat : candidats)
             {
-            	norme_vote = sondage.get(candidat);
+            	norme_vote = votes.get(candidat);
 
                 if( (norme_vote <= norme_vote_min) && !nCandidats.contains(candidat))
                 {
@@ -265,6 +268,14 @@ public class CalculVote {
         return nCandidats;
     }
 	
+	/**
+	 * @param n
+	 * @param votes
+	 * @param nbTotalVoix
+	 * @return
+	 * 
+	 * Retourne un LinkedHashMap trié selon le nombre de votes 
+	 */
 	public static LinkedHashMap<Candidat, Double> trier_par_votes( int n , LinkedHashMap<Candidat, Double> votes, int nbTotalVoix)
 	{
 		double pourcent_vote;

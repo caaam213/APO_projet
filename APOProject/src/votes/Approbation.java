@@ -16,20 +16,26 @@ import parametres.Electeur;
 public class Approbation extends Scrutin{
 
 	HashMap<Electeur, Integer> electeursAvecNChoisi; //Un electeur peut voter pour N candidats 
-	LinkedHashMap<Candidat, Double> votes;
+
 	public Approbation(Candidat[] candidats,HashMap<Electeur, Integer> electeursAvecNChoisi) {
 		super(candidats);
 		this.electeursAvecNChoisi = electeursAvecNChoisi;
+		List<Electeur> electeursList = new ArrayList(electeursAvecNChoisi.keySet());
+		electeurs = new Electeur[electeursList.size()];
+		for(int i = 0;i<electeurs.length;i++)
+		{
+			electeurs[i] = electeursList.get(i);
+		}
 	}
 
 	@Override
 	public void simulation() {
 		// TODO Auto-generated method stub
-		votes = new LinkedHashMap<Candidat, Double>(); //Contient le candidat et le pourcentage
+		resultatScrutin = new LinkedHashMap<Candidat, Double>(); //Contient le candidat et le pourcentage
 		
 		for(Candidat candidat : candidats)
 	    {
-	    	votes.put(candidat, 0.0);
+			resultatScrutin.put(candidat, 0.0);
 	    }
 		
 		HashMap<Candidat, Double> classementCandidatsParNorme;
@@ -53,14 +59,14 @@ public class Approbation extends Scrutin{
 		    //Comptabilisation des votes
 		    for(Candidat candidat : cands)
 		    {
-		    	votes.put(candidat, votes.get(candidat) + 1.0);
+		    	resultatScrutin.put(candidat, resultatScrutin.get(candidat) + 1.0);
 		    }
 		}
 		
 		
 		//Trier les votes en commencant par le gagnant
-		votes = CalculVote.trier_par_votes(candidats.length,votes,total);
-		for(Entry<Candidat, Double> vote : votes.entrySet()) {
+		resultatScrutin = CalculVote.trier_par_votes(candidats.length,resultatScrutin,total);
+		for(Entry<Candidat, Double> vote : resultatScrutin.entrySet()) {
 			Candidat candidat = vote.getKey();
 		    Double pourcent_vote = vote.getValue();
 		    
@@ -69,16 +75,6 @@ public class Approbation extends Scrutin{
 		// --- Cas d'égalité : Evoluer les opinions puis refaire une simulation
 	}
 	
-	
-
-	public LinkedHashMap<Candidat, Double> getVotes() {
-		return votes;
-	}
-
-	public HashMap<Electeur, Integer> getElecteursAvecNChoisi() {
-		return electeursAvecNChoisi;
-	}
-
 	@Override
 	public void sondage(double pourcentpop) {
 		// TODO Auto-generated method stub

@@ -2,6 +2,7 @@ package votes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import Utilites.CalculVote;
 import parametres.*;
@@ -52,6 +53,8 @@ public class mainTest {
 		electeursAvecNChoisi.put(e3, 3);
 		electeursAvecNChoisi.put(e4, 3);
 		electeursAvecNChoisi.put(e5, 1);
+		
+		
 		
 		ArrayList<Candidat> de = CalculVote.trierNcandidatsParNorme(2,sondage);
 		Approbation app = new Approbation(cand, electeursAvecNChoisi);

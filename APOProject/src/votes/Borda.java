@@ -1,6 +1,7 @@
 package votes;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,10 +52,10 @@ public class Borda extends Scrutin{
 	 * @param electeurs
 	 * @return
 	 */
-	private HashMap<Candidat,Double> scrutinBorda(Candidat[] candidats, Electeur[] electeurs)
+	private LinkedHashMap<Candidat,Double> scrutinBorda(Candidat[] candidats, Electeur[] electeurs)
 	{
 		//int n = electeurs.length;
-		HashMap<Candidat,Double> res = new HashMap<Candidat,Double>();
+		LinkedHashMap<Candidat,Double> res = new LinkedHashMap<Candidat,Double>();
 		HashMap<Double,Candidat> NormeCandidats_Electeur = new HashMap<Double,Candidat>();
 		ArrayList<Double> list = new ArrayList<Double>();
 		Electeur[] unelecteur = new Electeur[1];
