@@ -192,6 +192,7 @@ public class CalculVote {
 	}
 	
 	
+	
 	/**
 	 * @param n
 	 * @param sondage

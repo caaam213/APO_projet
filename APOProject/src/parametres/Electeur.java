@@ -80,7 +80,7 @@ public class Electeur extends Personne{
 		{
 			
 			valAxes[i] = valAxes[i] + (utilite/10)*((p.getValAxes()[i] - valAxes[i])/2);
-			if(valAxes[i]<0 || valAxes[i]>1)
+			if(valAxes[i]<0 || valAxes[i]>p.getValAxes()[i])
 			{
 				if(valAxes[i]>1)
 					valAxes[i] = 1;
@@ -149,7 +149,7 @@ public class Electeur extends Personne{
 	public void evoluerOpinionsParCote(HashMap<Candidat,Double> sondage)
 	{
 		double utiliteMax = -9999;
-		double utilite;
+		double utilite = 1; //Valeur par defaut si norme = 0
 		Candidat candidatUtilitePlusElevee = null;
 		for(Map.Entry<Candidat,Double> unResultat : sondage.entrySet()) {
 			Candidat cle = unResultat.getKey();
@@ -157,7 +157,11 @@ public class Electeur extends Personne{
 			double[] difference = CalculVote.calculDifference(cle,this);
 			double norme = CalculVote.getNorme(difference);
 			
-		    utilite = (1/norme)*valeur;
+			if(norme != 0)
+			{
+				 utilite = (1/norme)*valeur;
+			}
+			
 		    if(utiliteMax<utilite)
 		    {
 		    	utiliteMax = utilite;

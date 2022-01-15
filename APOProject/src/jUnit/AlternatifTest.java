@@ -9,13 +9,16 @@ import org.junit.Test;
 import parametres.Axe;
 import parametres.Candidat;
 import parametres.Electeur;
+import votes.Alternatif;
 import votes.Approbation;
 import votes.DeuxTours;
 
-public class ApprobationTest {
+
+public class AlternatifTest {
+
 	@Test
-	public void ApprobationSimulationTest()
-	{
+    public void AlternatifSimulationTest()
+    {
 		Axe a1 = new Axe("Immigration");
 		Axe a2 = new Axe("Environnement");
 		Axe[] axes = {a1,a2};
@@ -49,16 +52,15 @@ public class ApprobationTest {
 		Candidat c4 = new Candidat(axes,dc4,"Melenchon");
 		
 		Candidat[] cs =  {c1,c2,c3,c4};
-		Approbation app = new Approbation(cs, electeursAvecNChoisi); 
+		Alternatif app = new Alternatif(cs, es);
 		app.simulation();
 		
 		HashMap<Candidat,Double> resultats = new HashMap<Candidat,Double>();
-		resultats.put(c1, (double)1/8);
-		resultats.put(c2, (double)1/8);
-		resultats.put(c3, (double)2/8);
-		resultats.put(c4, (double)4/8);
+		resultats.put(c1, (double)4/16);
+		resultats.put(c2, (double)0/16);
+		resultats.put(c3, (double)0/16);
+		resultats.put(c4, (double)12/16);
 		//assertTrue(deuxtours.scrutinDeuxTours(cs, es, 2),resultat_deuxtours);
 		assertEquals(resultats,app.getResultatScrutin());
-	
-	}
+    }
 }
