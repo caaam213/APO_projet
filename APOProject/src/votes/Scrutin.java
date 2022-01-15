@@ -12,6 +12,11 @@ public abstract class Scrutin {
 		this.electeurs = electeurs;
 	}
 
+	public Scrutin(Candidat[] candidats)
+	{
+		this.candidats = candidats;
+		this.electeurs = electeurs; //Pour les votes alternatifs, on ne va pas utiliser ce tableau
+	}
 	public abstract void simulation();
 	
 	public abstract void sondage( double pourcentElecteurs );
@@ -55,7 +60,7 @@ public abstract class Scrutin {
 		return diffnormes;
 	}
 	
-	
+
 	public double[] getNormes(double[][] vecteurs)
 	{
 		double[] normes = new double[vecteurs.length];

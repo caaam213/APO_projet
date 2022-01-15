@@ -1,7 +1,9 @@
 package votes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import Utilites.CalculVote;
 import parametres.*;
 
 public class mainTest {
@@ -38,15 +40,26 @@ public class mainTest {
 		Candidat[] cand = {c0,c1,c2,c3};
 		
 		HashMap<Candidat,Double> sondage = new HashMap<Candidat,Double>();
-		sondage.put(c0, 0.2);
-		sondage.put(c1, 0.5);
-		sondage.put(c2, 0.1);
-		sondage.put(c3, 0.2);
+		sondage.put(c0, 1.0);
+		sondage.put(c1, 0.2);
+		sondage.put(c2, 3.0);
+		sondage.put(c3, 0.1);
 		
-		e1.evoluerOpinionsParIdee(sondage,cand,2);
-		System.out.println(e1.toString());
-		UnTour untour = new UnTour(cand,elec);
+		HashMap<Electeur,Integer> electeursAvecNChoisi = new HashMap<Electeur,Integer>();
+		electeursAvecNChoisi.put(e0, 1);
+		electeursAvecNChoisi.put(e1, 2);
+		electeursAvecNChoisi.put(e2, 1);
+		electeursAvecNChoisi.put(e3, 3);
+		electeursAvecNChoisi.put(e4, 3);
+		electeursAvecNChoisi.put(e5, 1);
 		
+		ArrayList<Candidat> de = CalculVote.trierNcandidatsParNorme(2,sondage);
+		Approbation app = new Approbation(cand, electeursAvecNChoisi);
+		app.simulation();
+		/*for(Candidat candidat : de)
+		{
+			System.out.println(candidat.toString());
+		}
 		//double[] normes = untour.getNormes(elec);
 		
 		
@@ -55,7 +68,7 @@ public class mainTest {
 			System.out.println(normes[i]);
 		}*/
 		
-		System.out.println("----------------1er Tour-----------------");
+		/*System.out.println("----------------1er Tour-----------------");
 
 		System.out.println("----------------Un Tour-----------------");
 
@@ -68,7 +81,8 @@ public class mainTest {
 		deuxtours.scrutinDeuxTours(cand, elec, 3);
 
 		System.out.println("----------------Sondage:-----------------");
-		deuxtours.sondage(0.2,3);
+		deuxtours.sondage(0.2,3);*/
+		
 	}
 }
 		

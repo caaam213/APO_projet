@@ -81,7 +81,6 @@ public class Electeur extends Personne{
 	}
 	
 
-
 	//Diagramme de séquence à faire
 	public void modifierOpinionParDiscussion(Personne p)
 	{
@@ -106,7 +105,7 @@ public class Electeur extends Personne{
 	public void evoluerOpinionsParIdee(HashMap<Candidat,Double> sondage, Candidat[] candidats,int N)
 	{
 		
-		ArrayList<Integer> nPremierCandidats = CalculVote.trierNcandidats(N,sondage);
+		/*ArrayList<Integer> nPremierCandidats = CalculVote.trierNcandidats(N,sondage);
 		double normeMin = 999999999;
 		Candidat candidat = null;
 		for(int idCandidat : nPremierCandidats)
@@ -118,8 +117,8 @@ public class Electeur extends Personne{
 				normeMin = norme;
 				candidat = candidats[idCandidat];
 			}
-		}
-		this.evoluer(candidat, "rapprocher");
+		}*/
+		//this.evoluer(candidat, "rapprocher");
 	}
 
 

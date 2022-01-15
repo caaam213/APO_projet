@@ -2,7 +2,9 @@ package Utilites;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import parametres.Candidat;
 import parametres.Electeur;
@@ -67,7 +69,7 @@ public class CalculVote {
 		
 		return valaxes_diff;
 	}
-	
+
 	
 	/**
 	 * Calculer la différence des normes
@@ -201,7 +203,7 @@ public class CalculVote {
 	 * 
 	 * Cette méthode permet de trier les candidats du plus favorable au moins faborable au sondage
 	 */
-	public static ArrayList<Integer> trierNcandidats( int n , HashMap<Candidat, Double> sondage )
+	public static ArrayList<Integer> trierNcandidats( int n , HashMap<Candidat,Double> sondage )
     {
         double pourcent_vote;
         double pourcent_vote_max = 0;
@@ -230,5 +232,67 @@ public class CalculVote {
 
         return nCandidats;
     }
+	
+	public static ArrayList<Candidat> trierNcandidatsParNorme( int n , HashMap<Candidat,Double> sondage )
+    {
+        double norme_vote;
+        double norme_vote_min = 99999;
+        Candidat candidatMin = null;
+
+        ArrayList<Candidat> nCandidats = new ArrayList<Candidat>();
+        List<Candidat> candidats = new ArrayList<>(sondage.keySet()); 
+        for(int k=0;k<n;k++)
+        {
+        	for(Candidat candidat : candidats)
+            {
+            	norme_vote = sondage.get(candidat);
+
+                if( (norme_vote <= norme_vote_min) && !nCandidats.contains(candidat))
+                {
+                	norme_vote_min = norme_vote;
+                	candidatMin = candidat;
+                }
+            }
+            if(!nCandidats.contains(candidatMin))
+            {
+            	nCandidats.add(candidatMin);
+            	norme_vote_min = 999999;
+            }
+
+        }
+            
+
+        return nCandidats;
+    }
+	
+	public static LinkedHashMap<Candidat, Double> trier_par_votes( int n , LinkedHashMap<Candidat, Double> votes, int nbTotalVoix)
+	{
+		double pourcent_vote;
+		double pourcent_vote_max = 0;
+		Candidat candidatMax = null;
+		//int[] id_sectour = new int[nb_sectour];
+		LinkedHashMap voteTrie = new LinkedHashMap<Candidat, Double>();
+		List<Candidat> candidats = new ArrayList<>(votes.keySet()); 
+		for(int k=0;k<n;k++)
+		{
+			for(Entry<Candidat, Double> vote : votes.entrySet()) {
+				Candidat candidat = vote.getKey();
+			    pourcent_vote = vote.getValue()/nbTotalVoix;
+				
+				if( (pourcent_vote >= pourcent_vote_max) && !voteTrie.containsKey(candidat))
+				{
+					pourcent_vote_max = pourcent_vote;
+					candidatMax = candidat;
+				}
+			}
+			if(!voteTrie.containsKey(candidatMax))
+			{
+				voteTrie.put(candidatMax,pourcent_vote_max);
+				pourcent_vote_max = 0;
+			}
+		}
+		
+		return voteTrie;
+	}
 
 }

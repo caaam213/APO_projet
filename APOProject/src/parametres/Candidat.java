@@ -39,4 +39,17 @@ public class Candidat extends Personne{
 		idCandidat = nbCandidat;
 	}
 
+	public int compareTo(Candidat key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String toString() {
+		String str = super.toString();
+		return str + "Candidat [idCandidat=" + idCandidat + ", nomPrenom=" + nomPrenom + "]";
+	}
+	
+	
+
 }
