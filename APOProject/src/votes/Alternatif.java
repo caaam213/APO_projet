@@ -38,7 +38,7 @@ public class Alternatif extends Scrutin {
 		LinkedHashMap<Candidat, Double> nbVoteParTours;  
 		int total = 0;
 		int minValeur;
-		int tour = 1;
+		int tour = 0;
 
 		
 		// Utilisation d'une arrayList pour faciliter la suppression
@@ -66,6 +66,7 @@ public class Alternatif extends Scrutin {
 		while (!avoirUnGagnant) {
 			total += elects.length;
 			nbVoteParTours = new LinkedHashMap<Candidat, Double>();
+			tour++;
 			for (Candidat candidat : candidatsAL)
 			{
 				nbVoteParTours.put(candidat, 0.0);
@@ -79,24 +80,38 @@ public class Alternatif extends Scrutin {
 					i++;
 				}
 				nbVoteParTours.put(cands.get(i), nbVoteParTours.get(cands.get(i)) + 1);
-				resultatScrutinP.put(cands.get(i), resultatScrutinP.get(cands.get(i)) + 1);
+				
 			}
 			nbVoteParTours = CalculVote.trier_par_votes(candidatsAL.size(), nbVoteParTours, 1);
 			List<Candidat> candidats = new ArrayList<>(nbVoteParTours.keySet());
 			List<Double> nbPremierChoix = new ArrayList<>(nbVoteParTours.values());
-			if (nbPremierChoix.get(0) == nbPremierChoix.get(candidatsAL.size() - 1)) {
+			if (nbPremierChoix.get(0) == nbPremierChoix.get(nbPremierChoix.size() - 1)) {
 				avoirUnGagnant = true; // En cas d'égalité. Les égalités vont être gérées ailleurs.
 			}
-			Candidat candidatElimine = candidats.get(candidatsAL.size() - 1);
-			candidatsAL.remove(candidatElimine);
-			if (candidatsAL.size() == 1) {
-				avoirUnGagnant = true;
+			else
+			{
+				Candidat candidatElimine = candidats.get(candidatsAL.size() - 1);
+
+				if(tour==total)//On va garder les resultats du dernier tour uniquement
+				{
+					resultatScrutinP.put(candidatElimine, nbVoteParTours.get(candidatElimine));
+				}
+				
+				candidatsAL.remove(candidatElimine);
+				if (candidatsAL.size() == 1) {
+					avoirUnGagnant = true;
+				}
+			}
+		
+			for(Candidat cand : candidatsAL) //Le ou les gagnants
+			{
+				resultatScrutinP.put(cand,  (nbVoteParTours.get(cand)/elects.length));
 			}
 		}
-		resultatScrutinP = CalculVote.trier_par_votes(candsP.length, resultatScrutinP, total);
+		resultatScrutinP = CalculVote.trier_par_votes(candsP.length, resultatScrutinP, 1);
 		return resultatScrutinP;
 	}
 	
-	
+
 
 }
