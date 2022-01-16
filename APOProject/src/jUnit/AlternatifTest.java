@@ -31,7 +31,6 @@ public class AlternatifTest {
 		Electeur e3 = new Electeur(axes,d3);
 		double[] d4 =  {(double)0.1,(double)0.1};
 		Electeur e4 = new Electeur(axes,d4);
-; 
 		
 		Electeur[] es = {e1,e2,e3,e4};
 		
@@ -56,7 +55,7 @@ public class AlternatifTest {
 		app.simulation();
 		
 		HashMap<Candidat,Double> resultats = new HashMap<Candidat,Double>();
-		resultats.put(c1, (double)4/16);
+		resultats.put(c1, (double)1/4);
 		resultats.put(c2, (double)0/16);
 		resultats.put(c3, (double)0/16);
 		resultats.put(c4, (double)12/16);

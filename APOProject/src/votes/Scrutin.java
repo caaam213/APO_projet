@@ -8,7 +8,7 @@ import Utilites.CalculVote;
 import parametres.*;
 
 public abstract class Scrutin {
-	
+
 	protected Candidat[] candidats;
 	protected Electeur[] electeurs;
 	protected LinkedHashMap<Candidat,Double> resultatScrutin;

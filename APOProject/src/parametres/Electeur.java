@@ -31,7 +31,12 @@ public class Electeur extends Personne{
 		this.idElecteur = nbElecteurs;
 		this.nbElecteurs++;
 	}
-
+	
+	public Electeur(Axe[] axes,double[] valAxes) {
+		super(axes,valAxes);
+		this.idElecteur = nbElecteurs;
+		this.nbElecteurs++;
+	}
 
 
 	public int getIdElecteur() {
@@ -43,10 +48,6 @@ public class Electeur extends Personne{
 	 * @param axes Tableau des différents axes
 	 * @param positionGeographique position geographique de l'individu
 	 */
-	public Electeur(Axe[] axes,double[] positionGeographique) {
-		super(axes);
-		this.positionGeographique = positionGeographique;
-	}
 
 	/**
 	 * Eloigne ou rapproche un electeur des opinions d'une personne

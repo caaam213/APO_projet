@@ -35,6 +35,7 @@ public class Alternatif extends Scrutin {
 	private LinkedHashMap<Candidat, Double> scrutinAlternatif(Candidat[] candsP, Electeur[] elects) {
 		LinkedHashMap<Candidat, Double> resultatScrutinP = new LinkedHashMap<Candidat, Double>(); // Contient le candidat et le pourcentage
 		HashMap<Candidat, Double> classementCandidatsParNorme;
+		LinkedHashMap<Candidat, Double> nbVoteParTours;  
 		int total = 0;
 		int minValeur;
 		int tour = 1;
@@ -64,7 +65,11 @@ public class Alternatif extends Scrutin {
 
 		while (!avoirUnGagnant) {
 			total += elects.length;
-
+			nbVoteParTours = new LinkedHashMap<Candidat, Double>();
+			for (Candidat candidat : candidatsAL)
+			{
+				nbVoteParTours.put(candidat, 0.0);
+			}
 			for (Electeur electeur : elects) {
 				int i = 0;
 				ArrayList<Candidat> cands = electeurAvecNormeParCandidats.get(electeur);
@@ -73,11 +78,12 @@ public class Alternatif extends Scrutin {
 				while (!candidatsAL.contains(cands.get(i))) {
 					i++;
 				}
+				nbVoteParTours.put(cands.get(i), nbVoteParTours.get(cands.get(i)) + 1);
 				resultatScrutinP.put(cands.get(i), resultatScrutinP.get(cands.get(i)) + 1);
 			}
-			resultatScrutinP = CalculVote.trier_par_votes(candsP.length, resultatScrutinP, 1);
-			List<Candidat> candidats = new ArrayList<>(resultatScrutinP.keySet());
-			List<Double> nbPremierChoix = new ArrayList<>(resultatScrutinP.values());
+			nbVoteParTours = CalculVote.trier_par_votes(candidatsAL.size(), nbVoteParTours, 1);
+			List<Candidat> candidats = new ArrayList<>(nbVoteParTours.keySet());
+			List<Double> nbPremierChoix = new ArrayList<>(nbVoteParTours.values());
 			if (nbPremierChoix.get(0) == nbPremierChoix.get(candidatsAL.size() - 1)) {
 				avoirUnGagnant = true; // En cas d'égalité. Les égalités vont être gérées ailleurs.
 			}
