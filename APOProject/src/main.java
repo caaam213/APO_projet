@@ -152,14 +152,13 @@ public class main {
 	public static int faireChoix(String instruction) {
 
 		Scanner choixScanner = new Scanner(System.in);
-		int choix;
+		int choix=-1;
 		try {
 			do {
 				System.out.println(instruction);
 				choix = choixScanner.nextInt();
 			} while (choix != 0 && choix != 1);
 		} catch (Exception e) {
-			choix = 0;
 			System.out.println("Veuillez saisir une valeur correcte");
 			faireChoix(instruction);
 		}
@@ -260,16 +259,18 @@ public class main {
 		try {
 			while (pourcentage < 0 || pourcentage >= 100) {
 				System.out.println("Quel est le pourcentage de la population que vous souhaitez " + "interroger :  ");
-				if (pourcentageScanner.hasNextLine()) {
-					pourcentage = pourcentageScanner.nextDouble();
-				}
+				pourcentage = pourcentageScanner.nextDouble();
 			}
 			
+			scrutin.sondage(pourcentage/100);
+			
 		} catch (Exception e) {
+			pourcentageScanner.next();
 			System.out.println("Veuillez saisir un pourcentage valide");
 			realiserSondage(scrutin);
 		}
-		scrutin.sondage(pourcentage);
+		
+		
 		return scrutin;
 	}
 
@@ -283,10 +284,7 @@ public class main {
 		System.out.println("3 - Evoluer par côte :  ");
 		System.out.println("4 - Evoluer par moyenne :  ");
 		
-		if (scrutin.getResultatSondage().size() == 0) {
-			System.out.println("Aucun sondage n'a été fait, un sondage va être réalisé");
-			scrutin = realiserSondage(scrutin);
-		}
+		
 		
 		Scanner choix = new Scanner(System.in);
 		try {
@@ -304,6 +302,10 @@ public class main {
 			scrutin.evoluerToutesLesOpinionsParDiscussion(false);
 			return scrutin;
 		case 2:
+			if (scrutin.getResultatSondage().size() == 0) {
+				System.out.println("Aucun sondage n'a été fait, un sondage va être réalisé");
+				scrutin = realiserSondage(scrutin);
+			}
 			int i = 0;
 			Scanner choix2 = new Scanner(System.in);
 			try {
