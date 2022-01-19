@@ -64,9 +64,11 @@ public class Alternatif extends Scrutin {
 		}
 
 		while (!avoirUnGagnant) {
+			
 			total += elects.length;
 			nbVoteParTours = new LinkedHashMap<Candidat, Double>();
 			tour++;
+			System.out.println("---Tour "+tour);
 			for (Candidat candidat : candidatsAL)
 			{
 				nbVoteParTours.put(candidat, 0.0);
@@ -87,26 +89,36 @@ public class Alternatif extends Scrutin {
 			List<Double> nbPremierChoix = new ArrayList<>(nbVoteParTours.values());
 			if (nbPremierChoix.get(0) == nbPremierChoix.get(nbPremierChoix.size() - 1)) {
 				avoirUnGagnant = true; // En cas d'égalité. Les égalités vont être gérées ailleurs.
+				for(Candidat cand : candidatsAL) //Le ou les gagnants
+				{
+					resultatScrutinP = CalculVote.trier_par_votes(candidatsAL.size(), resultatScrutinP, 1);
+					System.out.println(cand.getNomPrenom() + "Pourcentage : " + resultatScrutinP.get(cand)*100 + " %");
+				}
 			}
 			else
 			{
 				Candidat candidatElimine = candidats.get(candidatsAL.size() - 1);
 
-				if(tour==total)//On va garder les resultats du dernier tour uniquement
+				/*if(tour==total)//On va garder les resultats du dernier tour uniquement
 				{
 					resultatScrutinP.put(candidatElimine, nbVoteParTours.get(candidatElimine));
+				}*/
+				for(Candidat cand : candidatsAL) //Le ou les gagnants
+				{
+					resultatScrutinP.put(cand,  (nbVoteParTours.get(cand)/elects.length));
 				}
-				
+				resultatScrutinP = CalculVote.trier_par_votes(candidatsAL.size(), resultatScrutinP, 1);
+				for(Candidat cand : candidatsAL) //Le ou les gagnants
+				{
+					System.out.println(cand.getNomPrenom() + " Pourcentage : " + resultatScrutinP.get(cand)*100 + " %");
+				}
 				candidatsAL.remove(candidatElimine);
-				if (candidatsAL.size() == 1) {
+				if (candidatsAL.size() <= 1) {
 					avoirUnGagnant = true;
 				}
 			}
 		
-			for(Candidat cand : candidatsAL) //Le ou les gagnants
-			{
-				resultatScrutinP.put(cand,  (nbVoteParTours.get(cand)/elects.length));
-			}
+			
 		}
 		resultatScrutinP = CalculVote.trier_par_votes(candsP.length, resultatScrutinP, 1);
 		return resultatScrutinP;

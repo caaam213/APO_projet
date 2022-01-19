@@ -1,7 +1,9 @@
 package votes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Random;
 
 import Utilites.CalculVote;
@@ -17,13 +19,20 @@ public abstract class Scrutin {
 	public Scrutin(Candidat[] candidats, Electeur[] electeurs) {
 		this.candidats = candidats;
 		this.electeurs = electeurs;
+		resultatScrutin= new LinkedHashMap<Candidat, Double>();
+		resultatSondage = new LinkedHashMap<Candidat, Double>();
 	}
 
 	public Scrutin(Candidat[] candidats)
 	{
 		this.candidats = candidats;
 		this.electeurs = null; //Pour les votes alternatifs, on ne va pas utiliser ce tableau
+		resultatScrutin= new LinkedHashMap<Candidat, Double>();
+		resultatSondage = new LinkedHashMap<Candidat, Double>();
 	}
+	
+	
+	
 	public abstract void simulation();
 	
 	public abstract void sondage( double pourcentElecteurs );
@@ -76,14 +85,23 @@ public abstract class Scrutin {
 						 electeurChoisi = rand.nextInt(electeurs.length);
 					}
 				}
-				
+				System.out.print("Axes de cet electeur avant : ");
+				System.out.print(electeur.toString());
 				electeur.modifierOpinionParDiscussion(electeurs[electeurChoisi]);
+				System.out.print(" ==> Axes de cet electeur après : ");
+				System.out.print(electeur.toString());
+				System.out.println("");
 			}
 			
 			if(personneChoisie == 1)
 			{
+				System.out.print("Axes de cet electeur avant : ");
+				System.out.print(electeur.toString());
 				int candidatChoisi = rand.nextInt(candidats.length);
 				electeur.modifierOpinionParDiscussion(electeurs[candidatChoisi]);
+				System.out.print(" ==> Axes de cet electeur après : ");
+				System.out.print(electeur.toString());
+				System.out.println("");
 			}
 			nbElecteur++;
 		}
@@ -93,7 +111,12 @@ public abstract class Scrutin {
 	{
 		for(Electeur electeur : electeurs)
 		{
+			System.out.print("Axes de cet electeur avant : ");
+			System.out.print(electeur.toString());
 			electeur.evoluerOpinionsParIdee(resultatSondage, N);
+			System.out.print(" ==> Axes de cet electeur après : ");
+			System.out.print(electeur.toString());
+			System.out.println("");
 		}
 	}
 	
@@ -101,7 +124,12 @@ public abstract class Scrutin {
 	{
 		for(Electeur electeur : electeurs)
 		{
+			System.out.print("Axes de cet electeur avant : ");
+			System.out.print(electeur.toString());
 			electeur.evoluerOpinionsParCote(resultatSondage);
+			System.out.print(" ==> Axes de cet electeur après : ");
+			System.out.print(electeur.toString());
+			System.out.println("");
 		}
 	}
 	
@@ -109,16 +137,29 @@ public abstract class Scrutin {
 	{
 		for(Electeur electeur : electeurs)
 		{
+			System.out.print("Axes de cet electeur avant : ");
+			System.out.print(electeur.toString());
 			electeur.evoluerOpinionsParMoyenne(resultatSondage);
+			System.out.print(" ==> Axes de cet electeur après : ");
+			System.out.print(electeur.toString());
+			System.out.println("");
 		}
 	}
 	
-	public HashMap<Candidat, Double> getResultatScrutin() {
+	public LinkedHashMap<Candidat, Double> getResultatScrutin() {
 		return resultatScrutin;
 	}
 
-	public HashMap<Candidat, Double> getResultatSondage() {
+	public LinkedHashMap<Candidat, Double> getResultatSondage() {
 		return resultatSondage;
+	}
+
+	public Candidat[] getCandidats() {
+		return candidats;
+	}
+
+	public Electeur[] getElecteurs() {
+		return electeurs;
 	}
 
 }	
