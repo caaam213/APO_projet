@@ -50,7 +50,7 @@ public class BordaTest {
 		
 		Borda borda = new Borda(cs, es);
 		HashMap<Candidat,Double> test = new HashMap<Candidat,Double>();
-		borda.simulation();
+		borda.simulation(cs);
 		
 		test = borda.getResultatScrutin();
 		System.out.println(test.get(c1));

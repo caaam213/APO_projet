@@ -1,4 +1,4 @@
-/*
+ /*
  * 
  */
 package parametres;
@@ -202,7 +202,40 @@ public class Electeur extends Personne{
 		}		
 	}
 	
-		
+	public String stringPourSauvegarder(boolean spacialisation)
+	{
+		String str = idElecteur+"-[";
+		for(int i=0;i<valAxes.length-1;i++)
+		{
+			str+=valAxes[i]+",";
+		}
+		str+=valAxes[valAxes.length-1]+"]-";
+		if(spacialisation)
+		{
+			str += "[";
+			for(int j=0;j<positionGeographique.length-1;j++)
+			{
+				str+=(double) Math.round(positionGeographique[positionGeographique.length-1]*100)/100+",";
+			}
+			str+=(double) Math.round(positionGeographique[positionGeographique.length-1]*100)/100+"];";
+			
+		}
+		else
+		{
+			str+="null;";
+		}
+		return str;
+	}
+
+	@Override
+	public String toString() {
+		String str = "Electeur n°"+this.idElecteur+" [";
+		for(int i=0;i<axes.length;i++)
+		{
+			str+=" "+axes[i].getNom()+" : "+valAxes[i];
+		}
+		return str+"] ";
+	}	
 	
 	
 	

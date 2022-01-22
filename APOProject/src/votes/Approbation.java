@@ -28,7 +28,7 @@ public class Approbation extends Scrutin {
 	}
 
 	@Override
-	public void simulation() {
+	public void simulation(Candidat[] candidats) {
 		resultatScrutin = scrutinApprobation(candidats, electeurs);
 	}
 	
@@ -74,7 +74,7 @@ public class Approbation extends Scrutin {
 			Candidat candidat = vote.getKey();
 			Double pourcent_vote = vote.getValue();
 
-			System.out.println(candidat.getNomPrenom() + "Pourcentage : " + pourcent_vote*100+" %");
+			System.out.println(candidat.getNomPrenom() + " Pourcentage : " + pourcent_vote*100+" %");
 		}
 		return resultats;
 		// --- Cas d'égalité : Evoluer les opinions puis refaire une simulation

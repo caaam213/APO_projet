@@ -31,7 +31,7 @@ public class Borda extends Scrutin{
 	 * Permet de lancer la simulation
 	 */
 	@Override
-	public void simulation() {
+	public void simulation(Candidat[] candidats) {
 		// TODO Auto-generated method stub
 		resultatScrutin = scrutinBorda(candidats,electeurs);
 	}

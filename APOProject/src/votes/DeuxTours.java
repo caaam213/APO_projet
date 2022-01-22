@@ -28,7 +28,7 @@ public class DeuxTours extends Scrutin{
 	 *	Simulation du scrutin avec 2 candidats au second tour par défaut
 	 */
 	@Override
-	public void simulation() {
+	public void simulation(Candidat[] candidats) {
 		resultatScrutin = scrutinDeuxTours(candidats, electeurs, 2);
 	}
 	/**

@@ -15,12 +15,16 @@ public abstract class Scrutin {
 	protected Electeur[] electeurs;
 	protected LinkedHashMap<Candidat,Double> resultatScrutin;
 	protected LinkedHashMap<Candidat,Double> resultatSondage;
+	protected Candidat abstention;
 	
 	public Scrutin(Candidat[] candidats, Electeur[] electeurs) {
 		this.candidats = candidats;
 		this.electeurs = electeurs;
 		resultatScrutin= new LinkedHashMap<Candidat, Double>();
 		resultatSondage = new LinkedHashMap<Candidat, Double>();
+		int tailleValAxes = candidats[0].getValAxes().length;
+		double[] valAxesPourAbstention = new double[tailleValAxes];
+		abstention = new Candidat(candidats[0].getAxes(),valAxesPourAbstention,"");
 	}
 
 	public Scrutin(Candidat[] candidats)
@@ -29,13 +33,47 @@ public abstract class Scrutin {
 		this.electeurs = null; //Pour les votes alternatifs, on ne va pas utiliser ce tableau
 		resultatScrutin= new LinkedHashMap<Candidat, Double>();
 		resultatSondage = new LinkedHashMap<Candidat, Double>();
+		int tailleValAxes = candidats[0].getValAxes().length;
+		double[] valAxesPourAbstention = new double[tailleValAxes];
+		abstention = new Candidat(candidats[0].getAxes(),valAxesPourAbstention,"");
 	}
 	
 	
 	
-	public abstract void simulation();
+	public abstract void simulation(Candidat[] cands);
 	
 	public abstract void sondage( double pourcentElecteurs );
+	
+	public void afficherGagnant() {
+		if(resultatScrutin.size()!=0)
+		{
+			List<Candidat> candidats = new ArrayList<>(resultatScrutin.keySet());
+			List<Double> pourcentages = new ArrayList<>(resultatScrutin.values());
+			ArrayList<Candidat> candidatsRestants = new ArrayList<>();
+			while(pourcentages.get(0) == pourcentages.get(1))
+			{
+				int i = 2;
+				candidatsRestants.add(candidats.get(0));
+				candidatsRestants.add(candidats.get(1));
+				while(pourcentages.get(i) == pourcentages.get(1))
+				{
+					candidatsRestants.add(candidats.get(i));
+				}
+				System.out.println("Cas d'égalité, nouvelles elections !");
+				if(resultatSondage.size()==0)
+				{
+					sondage(50); //Si un sondage n'a pas été réalisé, un sondage va être fait avec 50% de la population
+				}
+				this.evoluerToutesLesOpinionsParDiscussion(false);
+				Candidat[] cRestants = (Candidat[]) candidatsRestants.toArray();
+				this.simulation(cRestants);
+				candidats = new ArrayList<>(resultatScrutin.keySet());
+				pourcentages = new ArrayList<>(resultatScrutin.values());
+			}
+			System.out.println("Le gagnant est "+candidats.get(0).getNomPrenom()+" avec "+pourcentages.get(0)*100+" %");
+		}
+		
+	}
 	
 	public void evoluerToutesLesOpinionsParDiscussion(boolean spacialisation)
 	{
@@ -49,6 +87,7 @@ public abstract class Scrutin {
 			tropLoin = true;
 			distances = new LinkedHashMap<Electeur,Double>();
 			int personneChoisie = rand.nextInt(2); //0:electeur 1:candidat
+			
 			if(personneChoisie == 0)
 			{
 				int electeurChoisi = nbElecteur;
@@ -86,7 +125,9 @@ public abstract class Scrutin {
 					}
 				}
 				System.out.print("Axes de cet electeur avant : ");
+				String personne = "L'id de l'electeur choisi est "+electeurs[electeurChoisi].getIdElecteur();
 				System.out.print(electeur.toString());
+				System.out.print(" ---"+personne+" --- ");
 				electeur.modifierOpinionParDiscussion(electeurs[electeurChoisi]);
 				System.out.print(" ==> Axes de cet electeur après : ");
 				System.out.print(electeur.toString());
@@ -98,11 +139,15 @@ public abstract class Scrutin {
 				System.out.print("Axes de cet electeur avant : ");
 				System.out.print(electeur.toString());
 				int candidatChoisi = rand.nextInt(candidats.length);
-				electeur.modifierOpinionParDiscussion(electeurs[candidatChoisi]);
+				String personne = "Le nom du candidat choisi est "+candidats[candidatChoisi].getNomPrenom();
+				System.out.print(" ---"+personne+" --- ");
+				electeur.modifierOpinionParDiscussion(candidats[candidatChoisi]);
 				System.out.print(" ==> Axes de cet electeur après : ");
 				System.out.print(electeur.toString());
 				System.out.println("");
 			}
+			
+			
 			nbElecteur++;
 		}
 	}
@@ -161,6 +206,9 @@ public abstract class Scrutin {
 	public Electeur[] getElecteurs() {
 		return electeurs;
 	}
+	
+	
+	
 
 }	
 	

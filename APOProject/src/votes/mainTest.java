@@ -58,7 +58,7 @@ public class mainTest {
 		
 		ArrayList<Candidat> de = CalculVote.trierNcandidatsParNorme(2,sondage);
 		Approbation app = new Approbation(cand, electeursAvecNChoisi);
-		app.simulation();
+		app.simulation(cand);
 		/*for(Candidat candidat : de)
 		{
 			System.out.println(candidat.toString());
