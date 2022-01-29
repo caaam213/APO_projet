@@ -26,7 +26,7 @@ public class Approbation extends Scrutin {
 			electeurs[i] = electeursList.get(i);
 		}
 	}
-
+	
 	@Override
 	public void simulation() {
 		resultatScrutin = scrutinApprobation(candidats, electeurs);
@@ -80,6 +80,9 @@ public class Approbation extends Scrutin {
 		// --- Cas d'égalité : Evoluer les opinions puis refaire une simulation
 	}
 
-	
+	public String getTypeScrutin()
+	{
+		return "Approbation";
+	}
 
 }

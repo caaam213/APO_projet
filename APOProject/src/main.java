@@ -1,7 +1,10 @@
 import parametres.*;
 import votes.*;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
@@ -9,6 +12,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
+
+import Utilites.AnalyseScrutin;
+import Utilites.SaveExcel;
 
 //TODO : Ajouter la gestion des égalité et la verification de l'existence d'un sondage pour les évolutions
 //TODO : Afficher le ou les gagnants
@@ -54,7 +60,7 @@ public class main {
 		return axes;
 	}
 
-	public static double[] genererAxesValeursAlea(Axe[] axes) {
+	public static double[] genererAxesValeursAlea(Axe[] axes) { 
 		double[] valAxes = new double[axes.length];
 		Random rand = new Random();
 		for (int i = 0; i < valAxes.length; i++) {
@@ -213,7 +219,7 @@ public class main {
 			nChoisis = electeursNchoisisPourApprobation(candidats, electeurs);
 			return new Approbation(candidats, nChoisis);
 		case 4:
-			return new Alternatif(candidats, electeurs);
+			return new Alternatif(candidats, electeurs); 
 		case 5:
 			return new Borda(candidats, electeurs);
 		default:
@@ -333,7 +339,9 @@ public class main {
 	public static void afficherResultat(LinkedHashMap<Candidat, Double> resultat) {
 		List<Candidat> candidats = new ArrayList<>(resultat.keySet());
 		List<Double> pourcentages = new ArrayList<>(resultat.values());
-
+		
+		
+		
 		if (pourcentages.get(0) == pourcentages.get(1)) {
 			System.out.println("Egalité entre ces candidats");
 			int i = 0;
@@ -354,6 +362,76 @@ public class main {
 				System.out.println(i + " - " + candidats.get(i) + " avec " + (pourcentages.get(i) * 100) + " %.");
 			}
 		}
+	}
+	
+	public static void saveResultatExcel(Scrutin scrutin) {
+		LinkedHashMap<Candidat, Double> resultat = scrutin.getResultatScrutin();
+		if(resultat == null || resultat.size() == 0)
+		{
+			System.out.println("Aucun simulation n'a été faîtes!");
+			return;
+		}
+		
+
+		//Date aujourdhui = SystemClockFactory.getDatetime();
+		List<Candidat> candidats = new ArrayList<>(resultat.keySet());
+		List<Double> pourcentages = new ArrayList<>(resultat.values());
+		String filename = System.getProperty("user.home") + "/Desktop/Data.xls";
+		SaveExcel s = new SaveExcel();
+		DecimalFormat df = new DecimalFormat("0.00"); // import java.text.DecimalFormat;
+
+		Date aujourdhui = new Date();
+		SimpleDateFormat formater = null;
+		formater = new SimpleDateFormat("dd-MM-yy hh:mm aaa");
+		
+		double search_max = 0;
+		for(Candidat candidat: scrutin.getCandidats())
+		{
+			if( scrutin.getResultatScrutin().get(candidat) != null)
+			{
+				if(scrutin.getResultatScrutin().get(candidat) > search_max )
+				{
+					search_max = scrutin.getResultatScrutin().get(candidat);
+				}
+			}
+		}
+		
+		for(Candidat candidat: scrutin.getCandidats())
+		{
+			if( scrutin.getResultatScrutin().get(candidat) != null)
+			{
+				if( scrutin.getResultatScrutin().get(candidat) == search_max  )
+				{
+					s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidat.getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * scrutin.getResultatScrutin().get(candidat) )),(df.format(scrutin.getResultatScrutin().get(candidat) * 100)) + "%", "Vainqueur");
+				}
+				else
+				{
+					s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidat.getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * scrutin.getResultatScrutin().get(candidat) )),(df.format(scrutin.getResultatScrutin().get(candidat) * 100)) + "%", "Défaite");
+				}
+			}
+		}
+		/*
+		if (pourcentages.get(0) == pourcentages.get(1)) {
+			//Egalité entre ces candidats
+			int i = 0;
+			while (pourcentages.get(0) == pourcentages.get(i)) {
+				s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidats.get(0).getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * pourcentages.get(0))),(df.format(pourcentages.get(0) * 100)) + "%", "Egalité");
+				i++;
+			}
+			//Candidats perdants
+			while (i < pourcentages.size()) {
+				s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidats.get(i).getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * pourcentages.get(i))),(df.format(pourcentages.get(i) * 100)) + "%", "Défaite");
+				i++;
+			}
+		} else {
+			//Candidat gagnant
+			s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidats.get(0).getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * pourcentages.get(0))),(df.format(pourcentages.get(0) * 100)) + "%", "Victoire");
+			
+			//Candidat défavorable
+			for (int i = 1; i < pourcentages.size(); i++) {
+				s.AddRowFile(filename,formater.format(aujourdhui), scrutin.getTypeScrutin(), candidats.get(i).getNomPrenom().toString() , String.valueOf( (int)(scrutin.getElecteurs().length * pourcentages.get(i))),(df.format(pourcentages.get(i) * 100)) + "%", "Défaite");
+			}
+		}*/
 
 	}
 
@@ -428,6 +506,7 @@ public class main {
 				quitterApplication = quitterApplication();
 				break;
 			case 8:
+				saveResultatExcel(scrutin);
 				quitterApplication = quitterApplication();
 				break;
 			case 9:
@@ -449,7 +528,13 @@ public class main {
 		Electeur[] electeurs;
 		Scrutin scrutin;
 		int choixMenu;
+		
+		/*System.out.println("Création file");
+		SaveExcel se = new SaveExcel();
+		String filename = "C:\\Users\\nabil\\Desktop\\NewExcelFile.xls";
+		se.AddRowFile(filename, "UnTour", "Eric Zemmour", "75", "0.19", "");*/
 
+		
 		// ----------------Introduction--------------------
 		System.out.println("BIENVENUE DANS NOTRE SIMULATION D'ELECTION");
 

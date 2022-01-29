@@ -3,6 +3,10 @@ package votes;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -79,7 +83,7 @@ public class Borda extends Scrutin{
 				diffaxes = CalculVote.CalculDifferenceAxes(candidat, electeur);
 				//Calcul de la norme
 				diffnormes = CalculVote.getNormes(diffaxes);
-				NormeCandidats_Electeur.put(diffnormes, candidat);
+				NormeCandidats_Electeur.put(diffnormes, candidat); 
 				list.add(diffnormes);
 			}
 			
@@ -89,14 +93,46 @@ public class Borda extends Scrutin{
 			//Ajout des points par candidats
 			for(int i=0;i<list.size();i++)
 			{
-				res.put(NormeCandidats_Electeur.get(list.get(i)), res.get(NormeCandidats_Electeur.get(list.get(i))) + list.size() - i );
+				res.put(NormeCandidats_Electeur.get(list.get(i)), (res.get(NormeCandidats_Electeur.get(list.get(i))) + list.size() - i) );
 			}
 			
 			// Effacer pour éventuellement recommencer
 			list.clear();
 		}
 		
+		//----------------------------Mise en pourcentage du résultat-----------------------
+		int total_points = 0;
+		for(Candidat candidat: candidats)
+		{
+			total_points += res.get(candidat);
+		}
+		for(Candidat candidat: candidats)
+		{
+			res.put( candidat, res.get(candidat)/ total_points );
+		}
+		
+		res = tri_LinkedHashMap(res);//a tester
+		//----------Resultat Test Borda-------------
+		System.out.println("---Resultat Test Borda---");
+		DecimalFormat df = new DecimalFormat("0.00");
+		for(Candidat candidat: candidats)
+		{
+			System.out.println(candidat.getNomPrenom() + " : " + df.format(res.get(candidat)*100) +"%");
+		}
+		
 		return res;
+	}
+	
+	private LinkedHashMap<Candidat,Double> tri_LinkedHashMap(LinkedHashMap<Candidat, Double> myMap)
+	{
+		myMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
+	    .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+		
+		return myMap;
+	}
+	public String getTypeScrutin()
+	{
+		return "Borda";
 	}
 
 }

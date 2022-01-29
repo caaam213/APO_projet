@@ -162,6 +162,7 @@ public abstract class Scrutin {
 		return electeurs;
 	}
 
+	public abstract String getTypeScrutin();
 }	
 	
 

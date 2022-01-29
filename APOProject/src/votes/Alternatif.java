@@ -110,7 +110,10 @@ public class Alternatif extends Scrutin {
 				resultatScrutinP = CalculVote.trier_par_votes(candidatsAL.size(), resultatScrutinP, 1);
 				for(Candidat cand : candidatsAL) //Le ou les gagnants
 				{
-					System.out.println(cand.getNomPrenom() + " Pourcentage : " + resultatScrutinP.get(cand)*100 + " %");
+					if( resultatScrutinP.get(cand) != null )
+					{
+						System.out.println(cand.getNomPrenom() + " Pourcentage : " + resultatScrutinP.get(cand)*100 + " %");
+					}
 				}
 				candidatsAL.remove(candidatElimine);
 				if (candidatsAL.size() <= 1) {
@@ -124,6 +127,10 @@ public class Alternatif extends Scrutin {
 		return resultatScrutinP;
 	}
 	
+	public String getTypeScrutin()
+	{
+		return "Alternatif";
+	}
 
 
 }

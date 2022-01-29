@@ -114,6 +114,10 @@ public class DeuxTours extends Scrutin{
 	}
 
 
+	public String getTypeScrutin()
+	{
+		return "DeuxTours";
+	}
 }
 
 

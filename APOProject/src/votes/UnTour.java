@@ -104,6 +104,11 @@ public class UnTour extends Scrutin{
 		
 		return choix_electeurs;
 	}
+	
+	public String getTypeScrutin()
+	{
+		return "UnTour";
+	}
 
 }
 
