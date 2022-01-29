@@ -52,7 +52,7 @@ public class AlternatifTest {
 		
 		Candidat[] cs =  {c1,c2,c3,c4};
 		Alternatif app = new Alternatif(cs, es);
-		app.simulation();
+		app.simulation(cs);
 		
 		HashMap<Candidat,Double> resultats = new HashMap<Candidat,Double>();
 		resultats.put(c1, (double)1/4);

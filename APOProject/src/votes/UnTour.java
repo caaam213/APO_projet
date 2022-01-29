@@ -27,7 +27,7 @@ public class UnTour extends Scrutin{
 	 * Permet de lancer la simulation
 	 */
 	@Override
-	public void simulation()
+	public void simulation(Candidat[] candidats)
 	{
 		resultatScrutin = scrutinUnTour(candidats,electeurs);
 	}
@@ -105,10 +105,14 @@ public class UnTour extends Scrutin{
 		return choix_electeurs;
 	}
 	
+<<<<<<< HEAD
 	public String getTypeScrutin()
 	{
 		return "UnTour";
 	}
+=======
+	
+>>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
 
 }
 

@@ -1,25 +1,35 @@
 import parametres.*;
 import votes.*;
 
+<<<<<<< HEAD
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+=======
+import java.io.*;
+>>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
+<<<<<<< HEAD
 import Utilites.AnalyseScrutin;
 import Utilites.SaveExcel;
 
 //TODO : Ajouter la gestion des égalité et la verification de l'existence d'un sondage pour les évolutions
 //TODO : Afficher le ou les gagnants
+=======
+
+//TODO : Changer l'ordre des scrutins pour UnTour
+//TODO : Pour Borda, afficher un pourcentage pour le gagnant
+>>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
 //TODO : Gérer les abstentions
-//TODO : Gérer la spacialisation
+
+
 public class main {
 
 	public static int saisirNbAxes() {
@@ -56,7 +66,7 @@ public class main {
 			axes[i] = axe;
 			i++;
 		}
-
+ 
 		return axes;
 	}
 
@@ -111,7 +121,7 @@ public class main {
 		if (choix == 0) {
 			for (int j = 0; j < nbCandidats; j++) {
 				do {
-					System.out.print("Veuillez saisir le nom et prénom pour le candidat n° " + (j + 1) + " : ");
+					System.out.print("Veuillez saisir le nom et prénom pour le candidat n°" + (j + 1) + " : ");
 					nomprenom = scCandidats.nextLine();
 					System.out.println();
 
@@ -124,7 +134,7 @@ public class main {
 				scCandidats = new Scanner(System.in);
 
 				do {
-					System.out.print("Veuillez saisir le nom et prénom pour le candidat n°: " + (j + 1));
+					System.out.print("Veuillez saisir le nom et prénom pour le candidat n° " + (j + 1) + ": ");
 					nomprenom = scCandidats.nextLine();
 					System.out.println();
 
@@ -136,8 +146,17 @@ public class main {
 
 		return candidats;
 	}
+	
+	public static double[] latitudeEtLongitide()
+	{
+		double[] endroit = new double[2];
+		Random r = new Random();
+		endroit[0] = 50 * r.nextDouble(); //Generer des coordonnee entre 0 et 50
+		endroit[1] = 50 * r.nextDouble();
+		return endroit;
+	}
 
-	public static Electeur[] parametrageElecteurs(Axe[] axes) {
+	public static Electeur[] parametrageElecteurs(Axe[] axes, boolean spacialisation) {
 		int nbElecteurs;
 		Scanner scElecteurs = new Scanner(System.in);
 		do {
@@ -145,12 +164,26 @@ public class main {
 			nbElecteurs = scElecteurs.nextInt();
 		} while (nbElecteurs <= 0);
 		Electeur[] electeurs = new Electeur[nbElecteurs];
-
-		for (int j = 0; j < nbElecteurs; j++) {
-			scElecteurs = new Scanner(System.in);
-			double[] valAxes = genererAxesValeursAlea(axes);
-			electeurs[j] = new Electeur(axes, valAxes);
+		
+		if(spacialisation)
+		{
+			for (int j = 0; j < nbElecteurs; j++) {
+				scElecteurs = new Scanner(System.in);
+				double[] valAxes = genererAxesValeursAlea(axes);
+				double[] lieu = latitudeEtLongitide();
+				electeurs[j] = new Electeur(axes, valAxes, lieu);
+			}
 		}
+		else
+		{
+			for (int j = 0; j < nbElecteurs; j++) {
+				scElecteurs = new Scanner(System.in);
+				double[] valAxes = genererAxesValeursAlea(axes);
+				electeurs[j] = new Electeur(axes, valAxes);
+			}
+		}
+
+		
 		return electeurs;
 
 	}
@@ -158,14 +191,13 @@ public class main {
 	public static int faireChoix(String instruction) {
 
 		Scanner choixScanner = new Scanner(System.in);
-		int choix;
+		int choix = -1;
 		try {
 			do {
 				System.out.println(instruction);
 				choix = choixScanner.nextInt();
 			} while (choix != 0 && choix != 1);
 		} catch (Exception e) {
-			choix = 0;
 			System.out.println("Veuillez saisir une valeur correcte");
 			faireChoix(instruction);
 		}
@@ -264,36 +296,34 @@ public class main {
 		pourcentageScanner.useLocale(Locale.US);
 		double pourcentage = -1;
 		try {
-			while (pourcentage < 0 || pourcentage >= 100) {
-				System.out.println("Quel est le pourcentage de la population que vous souhaitez " + "interroger :  ");
-				if (pourcentageScanner.hasNextLine()) {
-					pourcentage = pourcentageScanner.nextDouble();
-				}
-			}
 			
+			while (pourcentage < 20 || pourcentage >= 100){ //Pertinent d'interroger a partir de 20%
+				System.out.println("Veuillez saisir un pourcentage qui est supérieur à 20%");
+				pourcentage = pourcentageScanner.nextDouble();
+				
+			}
+
+			scrutin.sondage(pourcentage / 100);
+
 		} catch (Exception e) {
+			pourcentageScanner.next();
 			System.out.println("Veuillez saisir un pourcentage valide");
 			realiserSondage(scrutin);
 		}
-		scrutin.sondage(pourcentage);
+
 		return scrutin;
 	}
 
-	public static Scrutin evoluerOpinions(Scrutin scrutin) {
+	public static Scrutin evoluerOpinions(Scrutin scrutin, boolean spacialisation) {
 		int m = 0;
 		int N = scrutin.getCandidats().length;
-		
+
 		System.out.println("Evoluer les opinions : ");
 		System.out.println("1 - Evoluer par discussions : ");
 		System.out.println("2 - Evoluer par idées : ");
 		System.out.println("3 - Evoluer par côte :  ");
 		System.out.println("4 - Evoluer par moyenne :  ");
-		
-		if (scrutin.getResultatSondage().size() == 0) {
-			System.out.println("Aucun sondage n'a été fait, un sondage va être réalisé");
-			scrutin = realiserSondage(scrutin);
-		}
-		
+
 		Scanner choix = new Scanner(System.in);
 		try {
 			while (m <= 0 || m > 4) {
@@ -304,12 +334,16 @@ public class main {
 			System.out.println("Veuillez saisir un nombre entier");
 			m = choix.nextInt();
 		}
-		
+
 		switch (m) {
 		case 1:
 			scrutin.evoluerToutesLesOpinionsParDiscussion(false);
 			return scrutin;
 		case 2:
+			if (scrutin.getResultatSondage().size() == 0) {
+				System.out.println("Aucun sondage n'a été fait, un sondage va être réalisé");
+				scrutin = realiserSondage(scrutin);
+			}
 			int i = 0;
 			Scanner choix2 = new Scanner(System.in);
 			try {
@@ -456,7 +490,7 @@ public class main {
 
 	}
 
-	public static void lancerApplication(Axe[] axes, Candidat[] candidats, Electeur[] electeurs, Scrutin scrutin) {
+	public static void lancerApplication(Axe[] axes, Candidat[] candidats, Electeur[] electeurs, Scrutin scrutin, File file,boolean spacialisation) {
 		LinkedHashMap<Candidat, Double> resultatScrutin = new LinkedHashMap<Candidat, Double>();
 		LinkedHashMap<Candidat, Double> resultatSondage = new LinkedHashMap<Candidat, Double>();
 		int choixMenu;
@@ -473,23 +507,31 @@ public class main {
 				quitterApplication = quitterApplication();
 				break;
 			case 2:
-				scrutin = evoluerOpinions(scrutin);
-				resultatSondage = realiserSondage(scrutin).getResultatSondage();
+				scrutin = evoluerOpinions(scrutin,spacialisation);
+				resultatSondage = scrutin.getResultatSondage();
 				electeurs = scrutin.getElecteurs();
 				quitterApplication = quitterApplication();
 				break;
 			case 3:
-				scrutin.simulation();
+				scrutin.simulation(candidats);
 				resultatScrutin = scrutin.getResultatScrutin();
+				scrutin.afficherGagnant();
 				quitterApplication = quitterApplication();
 				break;
 			case 4:
-				scrutin = evoluerOpinions(scrutin);
 				quitterApplication = quitterApplication();
 				break;
 			case 5:
 				for (int i1 = 0; i1 < electeurs.length; i1++) {
-					System.out.println(electeurs[i1].toString());
+					System.out.print(electeurs[i1].toString());
+					if(spacialisation)
+					{
+						double latitude = electeurs[i1].getPositionGeographique()[0];
+						double longitude = electeurs[i1].getPositionGeographique()[1];
+						System.out.print("Coordonnées : ("+latitude+", "+longitude+")");
+						
+					}
+					System.out.println(" ");
 				}
 				quitterApplication = quitterApplication();
 				break;
@@ -510,6 +552,14 @@ public class main {
 				quitterApplication = quitterApplication();
 				break;
 			case 9:
+				try {
+					sauvegarderParametres(file,axes,candidats, electeurs,spacialisation);
+				} catch (IOException e) {
+					System.out.println("Un problème est survenu lors de la sauvegarde");
+				}
+				quitterApplication = quitterApplication();
+				break;
+			case 10:
 				quitterApplication = true;
 				break;
 			default:
@@ -519,20 +569,59 @@ public class main {
 
 		}
 	}
+	
+	public static void sauvegarderParametres(File file,Axe[] axes, Candidat[] candidats, Electeur[] electeurs,boolean spacialisation) throws IOException
+	{
+		BufferedWriter ecrire = new BufferedWriter(new FileWriter(file));
+		String axesString = "";
+		String candidatsString = "";
+		String electeursString = "";
+		//Remplir les axes
+		for(int j=0;j<axes.length-1;j++)
+		{
+			axesString+=axes[j].stringPourSauvegarder()+";";
+		}
+		axesString+=axes[axes.length-1].stringPourSauvegarder();
+		
+		//Remplir les candidats
+		for(int i=0;i<candidats.length-1;i++)
+		{
+			candidatsString+=candidats[i].stringPourSauvegarder()+";";
+		}
+		candidatsString+=candidats[candidats.length-1].stringPourSauvegarder();
+		
+		//Remplir les electeurs
+		for(int k=0;k<electeurs.length-1;k++)
+		{
+			electeursString+=electeurs[k].stringPourSauvegarder(spacialisation);
+		}
+		electeursString+=electeurs[electeurs.length-1].stringPourSauvegarder(spacialisation);
+		ecrire.write(axesString);
+		ecrire.write("\r\n");
+		ecrire.write(candidatsString);
+		ecrire.write("\r\n");
+		ecrire.write(electeursString);
+		ecrire.close();
+	}
 
 	public static void main(String[] args) {
 
 		// -----------------Configuration-----------------
-		Axe[] axes;
-		Candidat[] candidats;
-		Electeur[] electeurs;
+		Axe[] axes = null;
+		Candidat[] candidats = null;
+		Electeur[] electeurs = null;
 		Scrutin scrutin;
 		int choixMenu;
+<<<<<<< HEAD
 		
 		/*System.out.println("Création file");
 		SaveExcel se = new SaveExcel();
 		String filename = "C:\\Users\\nabil\\Desktop\\NewExcelFile.xls";
 		se.AddRowFile(filename, "UnTour", "Eric Zemmour", "75", "0.19", "");*/
+=======
+		File file = new File("./configuration.txt");
+		boolean spacialisation = false;
+>>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
 
 		
 		// ----------------Introduction--------------------
@@ -540,7 +629,9 @@ public class main {
 
 		int choix = faireChoix("Voulez-vous récupérer les paramètres déjà stockés dans le fichier de configuration ? "
 				+ "Tapez 1 pour oui et 0 pour non.");
-		if (choix == 0) {
+		if(file.length()==0 && choix==1)
+			System.out.println("Le fichier est vide, veuillez configurer vos paramètres");
+		if (choix == 0 || file.length()==0) {
 			// ----------------Partie Axes--------------------
 			System.out.println("1ère étape : Paramétrage des axes");
 			axes = axesParametrages();
@@ -551,15 +642,105 @@ public class main {
 
 			// ---------------Partie Electeur----------------
 			System.out.println("3ème étape : Paramétrage des électeurs : ");
-			electeurs = parametrageElecteurs(axes);
+			int choixSpacialisation = faireChoix("Voulez vous gérer la spacialisation (La latitude et la longitude seront générées au hasard"+
+			". Tapez 1 pour oui et 0 pour non.");
+			if(choixSpacialisation==1)
+				spacialisation = true;
+			electeurs = parametrageElecteurs(axes,spacialisation);
 
 		} else {
-			axes = axesParametrages();
-			candidats = candidatsParametrage(axes);
-			electeurs = parametrageElecteurs(axes);
+			BufferedReader br = null;
+			String[] parametres = new String[3];
+			try {
+				br = new BufferedReader(new FileReader(file));
+				String inputLine = null;
+				int i = 0;
+				while ((inputLine = br.readLine()) != null)
+				{
+					parametres[i] = inputLine;
+					i++;
+				}
+				//Pour les axes
+				String axesString = parametres[0];
+				String[] axesArray = axesString.split(";");
+				axes = new Axe[axesArray.length];
+				for(int j=0;j<axes.length;j++)
+				{
+					axes[j] = new Axe(axesArray[j]);
+				}
+				
+				//Pour les candidats
+				String candidatsString = parametres[1];
+				String[] tousLesCandidats = candidatsString.split(";");
+				candidats = new Candidat[tousLesCandidats.length];
+				for(int j=0;j<candidats.length;j++)
+				{
+					String[] paraCandidat = tousLesCandidats[j].split("-");
+					String tabString = paraCandidat[2].replace("[", "");
+					tabString = tabString.replace("]", "");
+					String[] tab = tabString.split(",");
+					double[] valAxes = new double[tab.length];
+					for(int j1 = 0;j1<valAxes.length;j1++)
+					{
+						valAxes[j1] = Double.parseDouble(tab[j1]);
+					}
+					candidats[j] = new Candidat(axes,valAxes,paraCandidat[1]);
+				}
+				
+				//Pour les electeurs
+				String electeursString = parametres[2];
+				String[] tousLesElecteurs = electeursString.split(";");
+				electeurs = new Electeur[tousLesElecteurs.length];
+				for(int k=0;k<electeurs.length;k++)
+				{
+					String[] paraElecteur = tousLesElecteurs[k].split("-");
+					
+					String tabString2 = paraElecteur[1].replace("[", "");
+					tabString2 = tabString2.replace("]", "");
+					String[] tab = tabString2.split(",");
+					double[] valAxes2 = new double[tab.length];
+					for(int j1 = 0;j1<valAxes2.length;j1++)
+					{
+						valAxes2[j1] = Double.parseDouble(tab[j1]);
+					}
+					
+					if(paraElecteur[2].equals("null"))
+					{
+						electeurs[k] = new Electeur(axes,valAxes2);
+					}
+					else
+					{
+						//Spacialisation
+						String tabString3 = paraElecteur[2].replace("[", "");
+						tabString3 = tabString3.replace("]", "");
+						String[] tab2 = tabString3.split(",");
+						double[] position = new double[tab2.length];
+						for(int j1 = 0;j1<position.length;j1++)
+						{
+							position[j1] = Double.parseDouble(tab2[j1]);
+						}
+						electeurs[k] = new Electeur(axes,valAxes2,position);
+						spacialisation = true;
+					}
+				}
+					
+			} catch (IOException ex) {
+				System.err.println("Probleme sur l'ouverture du fichier");
+				ex.printStackTrace();
+			} finally {
+				// Close the file.
+				try {
+					br.close();
+				} catch (IOException ex) {
+					System.err.println("Probleme sur la fermeture du fichier");
+					ex.printStackTrace();
+				}
+			}
+
+			
 		}
 		scrutin = choixScrutin(candidats, electeurs);
-		lancerApplication(axes, candidats, electeurs, scrutin);
+		lancerApplication(axes, candidats, electeurs, scrutin,file,spacialisation);
 
 		System.out.println("Fin de l'application.");
 	}

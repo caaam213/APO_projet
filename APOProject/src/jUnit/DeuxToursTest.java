@@ -51,7 +51,7 @@ public class DeuxToursTest {
 		Candidat[] cs =  {c1,c2,c3};
 		DeuxTours deuxtours = new DeuxTours(cs, es); 
 		HashMap<Candidat,Double> resultat_deuxtourstest = new HashMap<Candidat,Double>();
-		deuxtours.simulation();
+		deuxtours.simulation(cs);
 		
 		resultat_deuxtourstest = deuxtours.getResultatScrutin();
 		//System.out.println(resultat_deuxtourstest.get(c2));

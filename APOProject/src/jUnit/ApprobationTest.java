@@ -50,7 +50,7 @@ public class ApprobationTest {
 		
 		Candidat[] cs =  {c1,c2,c3,c4};
 		Approbation app = new Approbation(cs, electeursAvecNChoisi); 
-		app.simulation();
+		app.simulation(cs);
 		
 		HashMap<Candidat,Double> resultats = new HashMap<Candidat,Double>();
 		resultats.put(c1, (double)1/8);

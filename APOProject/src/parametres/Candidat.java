@@ -50,6 +50,17 @@ public class Candidat extends Personne{
 		return str + "Candidat [idCandidat=" + idCandidat + ", nomPrenom=" + nomPrenom + "]";
 	}
 	
+	public String stringPourSauvegarder()
+	{
+		String str = idCandidat+"-";
+		str+=nomPrenom+"-[";
+		for(int i=0;i<valAxes.length-1;i++)
+		{
+			str+=valAxes[i]+",";
+		}
+		str+=valAxes[valAxes.length-1]+"]";
+		return str;
+	}
 	
 
 }

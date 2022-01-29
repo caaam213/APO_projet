@@ -22,7 +22,7 @@ public class Alternatif extends Scrutin {
 	}
 
 	@Override
-	public void simulation() {
+	public void simulation(Candidat[] candidats) {
 		resultatScrutin = scrutinAlternatif(candidats, electeurs);
 	}
 	
@@ -36,6 +36,7 @@ public class Alternatif extends Scrutin {
 		LinkedHashMap<Candidat, Double> resultatScrutinP = new LinkedHashMap<Candidat, Double>(); // Contient le candidat et le pourcentage
 		HashMap<Candidat, Double> classementCandidatsParNorme;
 		LinkedHashMap<Candidat, Double> nbVoteParTours;  
+		
 		int total = 0;
 		int minValeur;
 		int tour = 0;
@@ -126,6 +127,8 @@ public class Alternatif extends Scrutin {
 		resultatScrutinP = CalculVote.trier_par_votes(candsP.length, resultatScrutinP, 1);
 		return resultatScrutinP;
 	}
+
+	
 	
 	public String getTypeScrutin()
 	{

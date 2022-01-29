@@ -41,4 +41,9 @@ public class Axe {
 		return "Axe [nom=" + nom + "]";
 	}
 	
+	public String stringPourSauvegarder()
+	{
+		String str = nom;
+		return str;
+	}
 }

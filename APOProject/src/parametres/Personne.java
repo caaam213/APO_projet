@@ -56,10 +56,10 @@ public abstract class Personne {
 	}
 
 
-	@Override
-	public String toString() {
+	
+	/*public String toString() {
 		return "Personne [axes=" + Arrays.toString(axes) + ", valAxes=" + Arrays.toString(valAxes) + "]";
-	}
+	}*/
 	
 	
 	
