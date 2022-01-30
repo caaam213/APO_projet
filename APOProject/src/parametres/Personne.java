@@ -45,7 +45,10 @@ public abstract class Personne {
 		}
 	}
 
-
+	/**
+	 * Fonction utile pour le fichier de configuration
+	 *
+	 */
 	public Axe[] getAxes() {
 		return axes;
 	}
@@ -53,6 +56,7 @@ public abstract class Personne {
 
 	public double[] getValAxes() {
 		return valAxes;
+		
 	}
 
 

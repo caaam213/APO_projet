@@ -122,6 +122,7 @@ public class Borda extends Scrutin{
 		
 		return res;
 	}
+
 	
 	private LinkedHashMap<Candidat,Double> tri_LinkedHashMap(LinkedHashMap<Candidat, Double> myMap)
 	{
@@ -130,6 +131,10 @@ public class Borda extends Scrutin{
 		
 		return myMap;
 	}
+	/**
+	 * Obtenir le type de scrutin à travers une chaine de caractère
+	 * 
+	 */
 	public String getTypeScrutin()
 	{
 		return "Borda";

@@ -227,6 +227,10 @@ public class Electeur extends Personne{
 		return str;
 	}
 
+	/**
+	 * Fonction utile pour le fichier de configuration
+	 *
+	 */
 	@Override
 	public String toString() {
 		String str = "Electeur n°"+this.idElecteur+" [";

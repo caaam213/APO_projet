@@ -50,6 +50,10 @@ public class Candidat extends Personne{
 		return str + "Candidat [idCandidat=" + idCandidat + ", nomPrenom=" + nomPrenom + "]";
 	}
 	
+	/**
+	 * Fonction utile pour le fichier de configuration
+	 *
+	 */
 	public String stringPourSauvegarder()
 	{
 		String str = idCandidat+"-";

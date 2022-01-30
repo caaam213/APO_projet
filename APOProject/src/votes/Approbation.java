@@ -17,7 +17,13 @@ import parametres.Electeur;
 public class Approbation extends Scrutin {
 
 	HashMap<Electeur, Integer> electeursAvecNChoisi; // Un electeur peut voter pour N candidats
-
+	
+	/**
+	 * Constructeur
+	 * 
+	 * @param candidats tableaux de tout les candidats
+	 * @param electeurs	electeurs choisi
+	 */
 	public Approbation(Candidat[] candidats, HashMap<Electeur, Integer> electeursAvecNChoisi) {
 		super(candidats);
 		this.electeursAvecNChoisi = electeursAvecNChoisi;
@@ -28,17 +34,34 @@ public class Approbation extends Scrutin {
 		}
 	}
 	
+	/**
+	 * Permet de lancer la simulation
+	 * 
+	 * @param candidats tableau de tout les candidats
+	 */
 	@Override
 	public void simulation(Candidat[] candidats) {
 		resultatScrutin = scrutinApprobation(candidats, CalculVote.chercher_noabstentionniste(electeurs,candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length));
 	}
 	
+	/**
+	 * Permet de lancer un sondage
+	 * 
+	 * @param pourcentpop pourcentage d'électeurs testé dans la population
+	 */
 	@Override
 	public void sondage(double pourcentpop) {
 		resultatSondage = scrutinApprobation(candidats, CalculVote.chercher_noabstentionniste(CalculVote.recupElecteurAlea(pourcentpop, electeurs),candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length));
 
 	}
- 
+
+	/** 
+	 * Fonction de traitement du Scrutin
+	 * 
+	 * @param candidats tableau des candidats dans le scrutin
+	 * @param electeurs tableau des electeurs dans le scrutin
+	 * @return
+	 */
 	private LinkedHashMap<Candidat, Double> scrutinApprobation(Candidat[] candsP, Electeur[] elecs) {
 		// TODO Auto-generated method stub
 		LinkedHashMap<Candidat, Double> resultats = new LinkedHashMap<Candidat, Double>(); // Contient le candidat et le pourcentage
@@ -81,7 +104,11 @@ public class Approbation extends Scrutin {
 		return resultats;
 		// --- Cas d'égalité : Evoluer les opinions puis refaire une simulation
 	}
-
+	/** 
+	 * Fonction permettant de reconnaitre quelle est le scrutin avec un chaine de caractère
+	 * 
+	 * @return
+	 */
 	public String getTypeScrutin()
 	{
 		return "Approbation";
