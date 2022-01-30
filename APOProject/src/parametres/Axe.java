@@ -41,6 +41,10 @@ public class Axe {
 		return "Axe [nom=" + nom + "]";
 	}
 	
+	/**
+	 * Fonction utile pour le fichier de configuration
+	 *
+	 */
 	public String stringPourSauvegarder()
 	{
 		String str = nom;

@@ -17,22 +17,45 @@ import parametres.Electeur;
  */
 public class Alternatif extends Scrutin {
 
+	/**
+	 * Constructeur
+	 * 
+	 * @param candidats tableaux de tout les candidats
+	 * @param electeurs	electeurs choisi
+	 */
 	public Alternatif(Candidat[] candidats, Electeur[] electeurs) { 
 		super(candidats, electeurs); 
 
 	}
 
+	/**
+	 * Permet de lancer la simulation
+	 * 
+	 * @param candidats tableau de tout les candidats
+	 */
 	@Override
 	public void simulation(Candidat[] candidats) {
 		resultatScrutin = scrutinAlternatif(candidats, CalculVote.chercher_noabstentionniste(electeurs,candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length));
 	}
 	
+	/**
+	 * Permet de lancer un sondage
+	 * 
+	 * @param pourcentpop pourcentage d'électeurs testé dans la population
+	 */
 	@Override
 	public void sondage(double pourcentpop) { 
 		resultatSondage = scrutinAlternatif(candidats, CalculVote.chercher_noabstentionniste(CalculVote.recupElecteurAlea(pourcentpop, electeurs),candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length)); 
 
 	}
 	
+	/** 
+	 * Fonction de traitement du Scrutin
+	 * 
+	 * @param candsP tableau des candidats dans le scrutin
+	 * @param elects tableau des electeurs dans le scrutin
+	 * @return
+	 */
 	private LinkedHashMap<Candidat, Double> scrutinAlternatif(Candidat[] candsP, Electeur[] elects) {
 		LinkedHashMap<Candidat, Double> resultatScrutinP = new LinkedHashMap<Candidat, Double>(); // Contient le candidat et le pourcentage
 		HashMap<Candidat, Double> classementCandidatsParNorme;
@@ -130,8 +153,11 @@ public class Alternatif extends Scrutin {
 		return resultatScrutinP;
 	}
 
-	
-	
+	/** 
+	 * Fonction permettant de reconnaitre quelle est le scrutin avec un chaine de caractère
+	 * 
+	 * @return
+	 */
 	public String getTypeScrutin()
 	{
 		return "Alternatif";
