@@ -10,17 +10,31 @@ import java.util.Random;
 import Utilites.CalculVote;
 import parametres.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe Scrutin.
+ */
 public abstract class Scrutin {
 
+	
 	protected Candidat[] candidats;
+	
+	
 	protected Electeur[] electeurs;
+	
+	
 	protected LinkedHashMap<Candidat,Double> resultatScrutin;
+	
+	
 	protected LinkedHashMap<Candidat,Double> resultatSondage;
+	
+	
 	protected Candidat abstention;
+	
 	/**
-	 * Constructeur
-	 * 
-	 * @param candidats Tableau de tout les candidats
+	 * Constructeur.
+	 *
+	 * @param candidats Tableau de tous les candidats
 	 * @param electeurs Tableau de tout les electeurs
 	 */
 	public Scrutin(Candidat[] candidats, Electeur[] electeurs) {
@@ -34,8 +48,8 @@ public abstract class Scrutin {
 	}
 	
 	/**
-	 * Constructeur
-	 * 
+	 * Constructeur.
+	 *
 	 * @param candidats Tableau de tout les electeurs
 	 */
 	public Scrutin(Candidat[] candidats)
@@ -51,22 +65,22 @@ public abstract class Scrutin {
 	
 	
 	/**
-	 * Permet de lancé une simulation
-	 * 
+	 * Permet de lancer une simulation.
+	 *
 	 * @param cands Tableau de tout les candidats
 	 */
 	public abstract void simulation(Candidat[] cands);
+	
 	/**
-	 * Permet de lancé un sondage
-	 * 
+	 * Permet de lancer un sondage.
+	 *
 	 * @param pourcentElecteurs pourcentage d'electeurs qui participeront au sondage
 	 */
 	public abstract void sondage( double pourcentElecteurs );
 	
 	
 	/**
-	 * Permet d'afficher le victorieux et traité les cas d'égalité
-	 * 
+	 * Permet d'afficher le gagnant et traitement de l'égalité
 	 */
 	public void afficherGagnant() {
 		if(resultatScrutin.size()!=0) 
@@ -123,8 +137,8 @@ public abstract class Scrutin {
 	}
 	
 	/**
-	 * Permet de faire évoluer les opinions
-	 * 
+	 * Permet de faire évoluer les opinions par discussion et restreindre en cas de spacialisation
+	 *
 	 * @param spacialisation Permet de décider si la spacialisation sera utilisé
 	 */
 	public void evoluerToutesLesOpinionsParDiscussion(boolean spacialisation)
@@ -204,6 +218,11 @@ public abstract class Scrutin {
 		}
 	}
 	
+	/**
+	 * Evoluer toutes les opinions par idees.
+	 *
+	 * @param N the n
+	 */
 	public void evoluerToutesLesOpinionsParIdees(int N)
 	{
 		for(Electeur electeur : electeurs)
@@ -217,6 +236,9 @@ public abstract class Scrutin {
 		}
 	}
 	
+	/**
+	 * Evoluer toutes les opinions par cote.
+	 */
 	public void evoluerToutesLesOpinionsParCote()
 	{
 		for(Electeur electeur : electeurs)
@@ -231,8 +253,7 @@ public abstract class Scrutin {
 	}
 	
 	/**
-	 * Permet de faire évoluer les opinions
-	 * 
+	 * Permet de faire évoluer toutes les opinions par la moyenne
 	 */
 	public void evoluerToutesLesOpinionsParMoyenne()
 	{
@@ -248,31 +269,36 @@ public abstract class Scrutin {
 	}
 	
 	/**
-	 * Permet d'obtenir les résultats d'un scrutin
-	 * 
+	 * Permet d'obtenir les résultats d'un scrutin.
+	 *
+	 * @return the resultat scrutin
 	 */
 	public LinkedHashMap<Candidat, Double> getResultatScrutin() {
 		return resultatScrutin;
 	}
 
 	/**
-	 * Permet d'obtenir les résultats d'un sondage
-	 * 
+	 * Permet d'obtenir les résultats d'un sondage.
+	 *
+	 * @return the resultat sondage
 	 */
 	public LinkedHashMap<Candidat, Double> getResultatSondage() {
 		return resultatSondage;
 	}
 
 	/**
-	 * Permet d'obtenir les candidats d'un scrutin
-	 * 
+	 * Permet d'obtenir les candidats d'un scrutin.
+	 *
+	 * @return the candidats
 	 */
 	public Candidat[] getCandidats() {
 		return candidats;
 	}
+	
 	/**
-	 * Permet d'obtenir les electeurs d'un scrutin
-	 * 
+	 * Permet d'obtenir les electeurs d'un scrutin.
+	 *
+	 * @return the electeurs
 	 */
 	public Electeur[] getElecteurs() {
 		return electeurs;
@@ -281,8 +307,9 @@ public abstract class Scrutin {
 	
 	
 	/**
-	 * Permet de connaitre quelle sera le type de scrutin avec une chaine de caractère
-	 * 
+	 * Permet de connaitre quelle sera le type de scrutin avec une chaine de caractère.
+	 *
+	 * @return the type scrutin
 	 */
 	public abstract String getTypeScrutin();
 }	

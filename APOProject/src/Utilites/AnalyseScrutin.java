@@ -24,11 +24,11 @@ import votes.UnTour;
 public class AnalyseScrutin {
 
 	/**
-	 * Permet de faire une analyse des cinq modes de scrutins
+	 * Permet de faire une analyse des cinq modes de scrutins.
 	 *
-	 * @param candidats 
-	 * @param axes 
-	 * @param valAxesCentre 
+	 * @param candidats the candidats
+	 * @param axes the axes
+	 * @param valAxesCentre the val axes centre
 	 * @return the linked hash map
 	 */
 	public LinkedHashMap<Candidat, Double> AnalyseModeScrutin(Candidat[] candidats,Axe[] axes, double[] valAxesCentre)
@@ -109,10 +109,10 @@ public class AnalyseScrutin {
 	}
 	
 	/**
-	 * Générer des électeurs de façon aléatoire
+	 * Générer des électeurs de façon aléatoire.
 	 *
-	 * @param axes
-	 * @param valAxesCentre
+	 * @param axes the axes
+	 * @param valAxesCentre the val axes centre
 	 * @return electeur[]
 	 */
 	private Electeur[] generationElecteurs(Axe[] axes, double[] valAxesCentre)

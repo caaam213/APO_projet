@@ -1,6 +1,5 @@
 import parametres.*;
 import votes.*;
-<<<<<<< HEAD
 
 
 import java.text.DecimalFormat;
@@ -13,14 +12,14 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.io.*;
 
-=======
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.io.*;
->>>>>>> 406bb4dc7e0410a9331fe3b8a2137aa6f209ae02
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,26 +28,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
-<<<<<<< HEAD
 
-=======
->>>>>>> 406bb4dc7e0410a9331fe3b8a2137aa6f209ae02
+
 import Utilites.AnalyseScrutin;
 import Utilites.CalculVote;
 import Utilites.SaveExcel;
 
-<<<<<<< HEAD
-=======
-//TODO : Ajouter la gestion des égalité et la verification de l'existence d'un sondage pour les évolutions
-//TODO : Afficher le ou les gagnants
-
-
-//TODO : Changer l'ordre des scrutins pour UnTour
-//TODO : Pour Borda, afficher un pourcentage pour le gagnant
-//TODO : Gérer les abstentions
-
-
->>>>>>> 406bb4dc7e0410a9331fe3b8a2137aa6f209ae02
 
 public class main {
 
@@ -611,10 +596,7 @@ public class main {
 		Electeur[] electeurs = null;
 		Scrutin scrutin;
 		int choixMenu;
-<<<<<<< HEAD
 
-=======
->>>>>>> 406bb4dc7e0410a9331fe3b8a2137aa6f209ae02
 		
 		/*System.out.println("Création file");
 		SaveExcel se = new SaveExcel();
