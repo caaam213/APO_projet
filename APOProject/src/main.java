@@ -1,12 +1,11 @@
 import parametres.*;
 import votes.*;
 
-<<<<<<< HEAD
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-=======
+
 import java.io.*;
->>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,17 +15,17 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
-<<<<<<< HEAD
+
 import Utilites.AnalyseScrutin;
+import Utilites.CalculVote;
 import Utilites.SaveExcel;
 
 //TODO : Ajouter la gestion des égalité et la verification de l'existence d'un sondage pour les évolutions
 //TODO : Afficher le ou les gagnants
-=======
+
 
 //TODO : Changer l'ordre des scrutins pour UnTour
 //TODO : Pour Borda, afficher un pourcentage pour le gagnant
->>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
 //TODO : Gérer les abstentions
 
 
@@ -46,7 +45,7 @@ public class main {
 			System.out.println("Veuillez saisir un entier");
 			nbAxes = saisirNbAxes();
 		}
-		return nbAxes;
+		return nbAxes; 
 	}
 
 	public static Axe[] axesParametrages() {
@@ -418,6 +417,8 @@ public class main {
 		SimpleDateFormat formater = null;
 		formater = new SimpleDateFormat("dd-MM-yy hh:mm aaa");
 		
+		int nb_participants = CalculVote.chercher_noabstentionniste(scrutin.getElecteurs(),scrutin.getCandidats(), 0.57).length;
+		
 		double search_max = 0;
 		for(Candidat candidat: scrutin.getCandidats())
 		{
@@ -436,37 +437,14 @@ public class main {
 			{
 				if( scrutin.getResultatScrutin().get(candidat) == search_max  )
 				{
-					s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidat.getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * scrutin.getResultatScrutin().get(candidat) )),(df.format(scrutin.getResultatScrutin().get(candidat) * 100)) + "%", "Vainqueur");
+					s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidat.getNomPrenom().toString() , String.valueOf((int)((double)nb_participants * scrutin.getResultatScrutin().get(candidat) )),(df.format(scrutin.getResultatScrutin().get(candidat) * 100)) + "%", "Vainqueur");
 				}
 				else
 				{
-					s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidat.getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * scrutin.getResultatScrutin().get(candidat) )),(df.format(scrutin.getResultatScrutin().get(candidat) * 100)) + "%", "Défaite");
+					s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidat.getNomPrenom().toString() , String.valueOf((int)((double)nb_participants * scrutin.getResultatScrutin().get(candidat) )),(df.format(scrutin.getResultatScrutin().get(candidat) * 100)) + "%", "Défaite");
 				}
 			}
 		}
-		/*
-		if (pourcentages.get(0) == pourcentages.get(1)) {
-			//Egalité entre ces candidats
-			int i = 0;
-			while (pourcentages.get(0) == pourcentages.get(i)) {
-				s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidats.get(0).getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * pourcentages.get(0))),(df.format(pourcentages.get(0) * 100)) + "%", "Egalité");
-				i++;
-			}
-			//Candidats perdants
-			while (i < pourcentages.size()) {
-				s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidats.get(i).getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * pourcentages.get(i))),(df.format(pourcentages.get(i) * 100)) + "%", "Défaite");
-				i++;
-			}
-		} else {
-			//Candidat gagnant
-			s.AddRowFile(filename, formater.format(aujourdhui), scrutin.getTypeScrutin(), candidats.get(0).getNomPrenom().toString() , String.valueOf((int)(scrutin.getElecteurs().length * pourcentages.get(0))),(df.format(pourcentages.get(0) * 100)) + "%", "Victoire");
-			
-			//Candidat défavorable
-			for (int i = 1; i < pourcentages.size(); i++) {
-				s.AddRowFile(filename,formater.format(aujourdhui), scrutin.getTypeScrutin(), candidats.get(i).getNomPrenom().toString() , String.valueOf( (int)(scrutin.getElecteurs().length * pourcentages.get(i))),(df.format(pourcentages.get(i) * 100)) + "%", "Défaite");
-			}
-		}*/
-
 	}
 
 	public static boolean quitterApplication() {
@@ -612,16 +590,16 @@ public class main {
 		Electeur[] electeurs = null;
 		Scrutin scrutin;
 		int choixMenu;
-<<<<<<< HEAD
+
 		
 		/*System.out.println("Création file");
 		SaveExcel se = new SaveExcel();
 		String filename = "C:\\Users\\nabil\\Desktop\\NewExcelFile.xls";
 		se.AddRowFile(filename, "UnTour", "Eric Zemmour", "75", "0.19", "");*/
-=======
+
 		File file = new File("./configuration.txt");
 		boolean spacialisation = false;
->>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
+
 
 		
 		// ----------------Introduction--------------------

@@ -17,8 +17,8 @@ public class DeuxTours extends Scrutin{
 	/**
 	 * Constructeur
 	 * 
-	 * @param candidats
-	 * @param electeurs
+	 * @param candidats Tableau de tout les candidats
+	 * @param electeurs Tableau de tout les électeurs
 	 */
 	public DeuxTours(Candidat[] candidats, Electeur[] electeurs) {
 		super(candidats, electeurs);
@@ -26,35 +26,41 @@ public class DeuxTours extends Scrutin{
 
 	/**
 	 *	Simulation du scrutin avec 2 candidats au second tour par défaut
+	 *
+	 *	@param candidats Tableau de tout les candidats
 	 */
 	@Override
 	public void simulation(Candidat[] candidats) {
-		resultatScrutin = scrutinDeuxTours(candidats, electeurs, 2);
+		resultatScrutin = scrutinDeuxTours(candidats, CalculVote.chercher_noabstentionniste(electeurs,candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length), 2);
 	}
 	/**
+	 * Simulation du scrutin avec n candidats au second tour par défaut
+	 * 
 	 * @param n nombre de Candidat voulus au second tour
 	 */
 	public void simulation(int n)
 	{
-		resultatSondage = scrutinDeuxTours(candidats, electeurs, n);
+		resultatSondage = scrutinDeuxTours(candidats, CalculVote.chercher_noabstentionniste(electeurs,candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length), n);
 	}
 	/**
+	 * Réaliser un sondage
+	 * 
 	 * @param pourcentElecteurs pourcentage d'électeurs testé dans la population
 	 */
 	@Override
 	public void sondage(double pourcentElecteurs) {
-		resultatSondage = scrutinDeuxTours(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs), 2);
+		resultatSondage = scrutinDeuxTours(candidats, CalculVote.chercher_noabstentionniste(CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs),candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length), 2);
 	}
 	/**
 	 * @param pourcentElecteurs pourcentage d'électeurs testé dans la population
 	 * @param n nombre de Candidat voulus au second tour
 	 */
 	public void sondage(double pourcentElecteurs, int n) {
-		resultatSondage = scrutinDeuxTours(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs), n);
+		resultatSondage = scrutinDeuxTours(candidats, CalculVote.chercher_noabstentionniste(CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs),candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length), n);
 	}
 	
 	/**
-	 * Fonction de traitement
+	 * Fonction de traitement permettant de réaliser le scrutin
 	 * 
 	 * @param candidats
 	 * @param electeurs
@@ -81,9 +87,15 @@ public class DeuxTours extends Scrutin{
 		System.out.println("---2eme tour:---");
 		
 		
-		return tour_deux.scrutinUnTour(candidats_2, electeurs);
+		return tour_deux.scrutinUnTour(candidats_2, electeurs); 
 	}
-	
+	/**
+	 * Fonction de retrouver les n candidats pour le second tour
+	 * 
+	 * @param n n candidats pour le second tour
+	 * @param res_tourun Resultat du premier tour
+	 * @return
+	 */
 	private ArrayList<Integer> trier_ncandidats( int n , HashMap<Candidat, Double> res_tourun )
 	{
 		double pourcent_vote;
@@ -113,7 +125,11 @@ public class DeuxTours extends Scrutin{
 		return id_secondtour;
 	}
 
-
+	/**
+	 * Fonction permettant de reconnaitre quelle est le scrutin avec un chaine de caractère
+	 * 
+	 * @return
+	 */
 	public String getTypeScrutin()
 	{
 		return "DeuxTours";

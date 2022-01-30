@@ -316,5 +316,56 @@ public class CalculVote {
 		
 		return voteTrie;
 	}
+	
+	public static Electeur[] chercher_noabstentionniste(Electeur[] electeurs, Candidat[] candidats, double norme_ecart)
+	{
+		Electeur[] electeurs_ret = new Electeur[electeurs.length];
+		double[] diffaxes;
+		double norme;
+		int count = 0;//nb d'électeur qui participeront
+		
+		boolean b;
+		for(Electeur electeur: electeurs)
+		{
+			b = false;
+			//On regarde si le candidat va voter
+			for(Candidat candidat: candidats)
+			{
+				diffaxes = CalculDifferenceAxes(candidat, electeur);
+				norme = getNorme(diffaxes);
+				
+				if( norme < norme_ecart)
+				{
+					b = true;
+				}
+			}
+			
+			//Ajout du candidat sur la liste des participants
+			if(b)
+			{
+				electeurs_ret[count] = electeur;
+				count++;
+			}
+		}
+		
+		//pour que le tableau qu'on retourne fasse la bonne taille
+		Electeur[] electeurs_return = new Electeur[count];
+		for(int i=0;i<count;i++)
+		{
+			electeurs_return[i] = electeurs_ret[i];
+		}
+				
+				
+		return electeurs_return; 
+	}
 
 }
+
+
+
+
+
+
+
+
+

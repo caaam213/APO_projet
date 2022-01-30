@@ -37,16 +37,16 @@ public class Borda extends Scrutin{
 	@Override
 	public void simulation(Candidat[] candidats) {
 		// TODO Auto-generated method stub
-		resultatScrutin = scrutinBorda(candidats,electeurs);
+		resultatScrutin = scrutinBorda(candidats,CalculVote.chercher_noabstentionniste(electeurs,candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length));
 	}
 	
-	/**
+	/** 
 	 *@param pourcentElecteurs pourcentage d'électeurs testé dans la population
 	 */
 	@Override
 	public void sondage(double pourcentElecteurs) {
 		// TODO Auto-generated method stub
-		resultatSondage = scrutinBorda(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs));
+		resultatSondage = scrutinBorda(candidats, CalculVote.chercher_noabstentionniste(CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs),candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length));
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class Borda extends Scrutin{
 	
 	private LinkedHashMap<Candidat,Double> tri_LinkedHashMap(LinkedHashMap<Candidat, Double> myMap)
 	{
-		myMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
+		myMap.entrySet().stream().sorted(Map.Entry.comparingByValue()) 
 	    .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 		
 		return myMap;

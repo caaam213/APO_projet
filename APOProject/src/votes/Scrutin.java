@@ -1,5 +1,6 @@
 package votes;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -16,7 +17,12 @@ public abstract class Scrutin {
 	protected LinkedHashMap<Candidat,Double> resultatScrutin;
 	protected LinkedHashMap<Candidat,Double> resultatSondage;
 	protected Candidat abstention;
-	
+	/**
+	 * Constructeur
+	 * 
+	 * @param candidats Tableau de tout les candidats
+	 * @param electeurs Tableau de tout les electeurs
+	 */
 	public Scrutin(Candidat[] candidats, Electeur[] electeurs) {
 		this.candidats = candidats;
 		this.electeurs = electeurs;
@@ -26,7 +32,12 @@ public abstract class Scrutin {
 		double[] valAxesPourAbstention = new double[tailleValAxes];
 		abstention = new Candidat(candidats[0].getAxes(),valAxesPourAbstention,"");
 	}
-
+	
+	/**
+	 * Constructeur
+	 * 
+	 * @param candidats Tableau de tout les electeurs
+	 */
 	public Scrutin(Candidat[] candidats)
 	{
 		this.candidats = candidats;
@@ -39,13 +50,26 @@ public abstract class Scrutin {
 	}
 	
 	
-	
+	/**
+	 * Permet de lancé une simulation
+	 * 
+	 * @param cands Tableau de tout les candidats
+	 */
 	public abstract void simulation(Candidat[] cands);
-	
+	/**
+	 * Permet de lancé un sondage
+	 * 
+	 * @param pourcentElecteurs pourcentage d'electeurs qui participeront au sondage
+	 */
 	public abstract void sondage( double pourcentElecteurs );
 	
+	
+	/**
+	 * Permet d'afficher le victorieux et traité les cas d'égalité
+	 * 
+	 */
 	public void afficherGagnant() {
-		if(resultatScrutin.size()!=0)
+		if(resultatScrutin.size()!=0) 
 		{
 			List<Candidat> candidats = new ArrayList<>(resultatScrutin.keySet());
 			List<Double> pourcentages = new ArrayList<>(resultatScrutin.values());
@@ -70,11 +94,39 @@ public abstract class Scrutin {
 				candidats = new ArrayList<>(resultatScrutin.keySet());
 				pourcentages = new ArrayList<>(resultatScrutin.values());
 			}
-			System.out.println("Le gagnant est "+candidats.get(0).getNomPrenom()+" avec "+pourcentages.get(0)*100+" %");
+			//System.out.println("Le gagnant est "+candidats.get(0).getNomPrenom()+" avec "+pourcentages.get(0)*100+" %");
+			
+			double search_max = 0;
+			for(Candidat cand: candidats)
+			{
+				if(resultatScrutin.get(cand) != null)
+				{
+					if(resultatScrutin.get(cand) > search_max)
+					{
+						search_max = resultatScrutin.get(cand);
+					}
+				}
+			}
+			DecimalFormat df = new DecimalFormat("0.00");
+			for(Candidat cand: candidats)
+			{
+				if(resultatScrutin.get(cand) != null)
+				{
+					if( resultatScrutin.get(cand) == search_max )
+					{
+						System.out.println("Le gagnant est "+cand.getNomPrenom()+" avec " +df.format(search_max*100)  + " %");
+					}
+				}
+			}
 		}
 		
 	}
 	
+	/**
+	 * Permet de faire évoluer les opinions
+	 * 
+	 * @param spacialisation Permet de décider si la spacialisation sera utilisé
+	 */
 	public void evoluerToutesLesOpinionsParDiscussion(boolean spacialisation)
 	{
 		Random rand = new Random();
@@ -178,6 +230,10 @@ public abstract class Scrutin {
 		}
 	}
 	
+	/**
+	 * Permet de faire évoluer les opinions
+	 * 
+	 */
 	public void evoluerToutesLesOpinionsParMoyenne()
 	{
 		for(Electeur electeur : electeurs)
@@ -191,25 +247,43 @@ public abstract class Scrutin {
 		}
 	}
 	
+	/**
+	 * Permet d'obtenir les résultats d'un scrutin
+	 * 
+	 */
 	public LinkedHashMap<Candidat, Double> getResultatScrutin() {
 		return resultatScrutin;
 	}
 
+	/**
+	 * Permet d'obtenir les résultats d'un sondage
+	 * 
+	 */
 	public LinkedHashMap<Candidat, Double> getResultatSondage() {
 		return resultatSondage;
 	}
 
+	/**
+	 * Permet d'obtenir les candidats d'un scrutin
+	 * 
+	 */
 	public Candidat[] getCandidats() {
 		return candidats;
 	}
-
+	/**
+	 * Permet d'obtenir les electeurs d'un scrutin
+	 * 
+	 */
 	public Electeur[] getElecteurs() {
 		return electeurs;
 	}
 	
 	
 	
-
+	/**
+	 * Permet de connaitre quelle sera le type de scrutin avec une chaine de caractère
+	 * 
+	 */
 	public abstract String getTypeScrutin();
 }	
 	

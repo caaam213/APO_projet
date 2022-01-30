@@ -1,5 +1,6 @@
 package votes;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -16,19 +17,19 @@ import parametres.Electeur;
  */
 public class Alternatif extends Scrutin {
 
-	public Alternatif(Candidat[] candidats, Electeur[] electeurs) {
-		super(candidats, electeurs);
+	public Alternatif(Candidat[] candidats, Electeur[] electeurs) { 
+		super(candidats, electeurs); 
 
 	}
 
 	@Override
 	public void simulation(Candidat[] candidats) {
-		resultatScrutin = scrutinAlternatif(candidats, electeurs);
+		resultatScrutin = scrutinAlternatif(candidats, CalculVote.chercher_noabstentionniste(electeurs,candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length));
 	}
 	
 	@Override
-	public void sondage(double pourcentpop) {
-		resultatSondage = scrutinAlternatif(candidats, CalculVote.recupElecteurAlea(pourcentpop, electeurs));
+	public void sondage(double pourcentpop) { 
+		resultatSondage = scrutinAlternatif(candidats, CalculVote.chercher_noabstentionniste(CalculVote.recupElecteurAlea(pourcentpop, electeurs),candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length)); 
 
 	}
 	
@@ -109,11 +110,12 @@ public class Alternatif extends Scrutin {
 					resultatScrutinP.put(cand,  (nbVoteParTours.get(cand)/elects.length));
 				}
 				resultatScrutinP = CalculVote.trier_par_votes(candidatsAL.size(), resultatScrutinP, 1);
+				DecimalFormat df = new DecimalFormat("0.00");
 				for(Candidat cand : candidatsAL) //Le ou les gagnants
 				{
 					if( resultatScrutinP.get(cand) != null )
 					{
-						System.out.println(cand.getNomPrenom() + " Pourcentage : " + resultatScrutinP.get(cand)*100 + " %");
+						System.out.println(cand.getNomPrenom() + " Pourcentage : " +df.format(resultatScrutinP.get(cand)*100)  + " %");
 					}
 				}
 				candidatsAL.remove(candidatElimine);

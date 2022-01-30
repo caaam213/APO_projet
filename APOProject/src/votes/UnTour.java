@@ -1,6 +1,8 @@
 package votes;
 
 import Utilites.*;
+
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -25,32 +27,36 @@ public class UnTour extends Scrutin{
 
 	/**
 	 * Permet de lancer la simulation
+	 * 
+	 * @param candidats tableau de tout les candidats
 	 */
 	@Override
 	public void simulation(Candidat[] candidats)
 	{
-		resultatScrutin = scrutinUnTour(candidats,electeurs);
+		resultatScrutin = scrutinUnTour(candidats,CalculVote.chercher_noabstentionniste(electeurs,candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length));
+		System.out.println("ICI:" + electeurs[0].getAxes().length);
 	}
 
 	/**
-	 * Permet de lancer la sondage
+	 * Permet de lancer un sondage
 	 * 
 	 * @param pourcentElecteurs pourcentage d'électeurs testé dans la population
 	 */
 	@Override
 	public void sondage(double pourcentElecteurs) 
 	{
-		resultatSondage = scrutinUnTour(candidats, CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs));
+		resultatSondage = scrutinUnTour(candidats, CalculVote.chercher_noabstentionniste(CalculVote.recupElecteurAlea(pourcentElecteurs, electeurs),candidats, (double)Math.sqrt((double)electeurs[0].getAxes().length)/electeurs[0].getAxes().length));
 	}
 	
-	/**
-	 * Fonction de traitement
+	/** 
+	 * Fonction de traitement du Scrutin
 	 * 
-	 * @param candidats
-	 * @param electeurs
+	 * @param candidats tableau des candidats dans le scrutin
+	 * @param electeurs tableau des electeurs dans le scrutin
 	 * @return
 	 */
-	public LinkedHashMap<Candidat,Double> scrutinUnTour(Candidat[] candidats, Electeur[] electeurs) {
+	public LinkedHashMap<Candidat,Double> scrutinUnTour(Candidat[] candidats, Electeur[] electeurs) { 
+		
 		//Récupération des normes représentant le rapprochement avec un candidat
 		double[][] diffnormes = CalculVote.CalculDiffNormes(candidats,electeurs);
 		//Choix des électeurs
@@ -73,16 +79,22 @@ public class UnTour extends Scrutin{
 		}
 		
 	
-		//Test
+		DecimalFormat df = new DecimalFormat("0.00");
 		for(Candidat candidat: candidats)
 		{
-			System.out.println( candidat.getNomPrenom() + " :"+ resultat.get(candidat)*100+"%");
+			System.out.println( candidat.getNomPrenom() + " :"+ df.format(resultat.get(candidat)*100) +"%");
 		}
 		
 		return resultat;
 		
 	}
-	
+	/** 
+	 * Fonction de traitement du Scrutin
+	 * 
+	 * @param electeurs tableau des electeurs dans le scrutin
+	 * @param diffnormes 
+	 * @return
+	 */
 	public int[] choixElecteurs( Electeur[] electeurs, double[][] diffnormes )
 	{
 		int[] choix_electeurs = new int[electeurs.length];
@@ -105,50 +117,18 @@ public class UnTour extends Scrutin{
 		return choix_electeurs;
 	}
 	
-<<<<<<< HEAD
+	/** 
+	 * Fonction permettant de reconnaitre quelle est le scrutin avec un chaine de caractère
+	 * 
+	 * @return
+	 */
 	public String getTypeScrutin()
 	{
 		return "UnTour";
 	}
-=======
-	
->>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
+
 
 }
-
-//-----ARCHIVES CODE
-
-//-------------Récupération des normes représentant le rapprochement avec un candidat----------
-/*double[][] diffaxes = new double[electeurs.length][];
-double[][] diffnormes = new double[candidats.length][];//[Candidat][electeur]
-int i=0;
-for(Candidat candidat: candidats)
-{
-	//Calcul des différences
-	diffaxes = CalculDifferenceAxes(candidat, electeurs);
-	//Calcul de la norme
-	diffnormes[i] = getNormes(diffaxes);
-	i++;
-}
-
-int[] choix_electeurs = new int[electeurs.length];
-double norme_electeur_min = 0;
-for( int i1=0;i1<electeurs.length;i1++ )
-{
-	//Choix du meilleur candidat
-	norme_electeur_min = diffnormes[0][i1];
-	choix_electeurs[i1] = 0;// 0 par défaut
-	for( int j=0;j<candidats.length;j++ )
-	{
-		if(diffnormes[j][i1] < norme_electeur_min)
-		{
-			norme_electeur_min = diffnormes[j][i1];
-			choix_electeurs[i1] = j;//Mise à jour du choix de l'électeur
-		}
-	}
-}
-*/
-
 
 
 
