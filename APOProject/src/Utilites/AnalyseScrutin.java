@@ -35,11 +35,11 @@ public class AnalyseScrutin {
 		Borda borda = new Borda(candidats, electeurs);
 		
 		//-----------On fait les simulations-----------
-		untour.simulation();
-		deuxtours.simulation();
-		alternatif.simulation();
-		approbation.simulation();
-		borda.simulation();
+		untour.simulation(candidats);
+		deuxtours.simulation(candidats);
+		alternatif.simulation(candidats);
+		approbation.simulation(candidats);
+		borda.simulation(candidats);
 		
 		//-----------
 		//untour.getResultatScrutin()

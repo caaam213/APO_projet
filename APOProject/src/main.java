@@ -1,12 +1,10 @@
 import parametres.*;
 import votes.*;
 
-<<<<<<< HEAD
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-=======
 import java.io.*;
->>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,18 +14,9 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
-<<<<<<< HEAD
 import Utilites.AnalyseScrutin;
 import Utilites.SaveExcel;
 
-//TODO : Ajouter la gestion des égalité et la verification de l'existence d'un sondage pour les évolutions
-//TODO : Afficher le ou les gagnants
-=======
-
-//TODO : Changer l'ordre des scrutins pour UnTour
-//TODO : Pour Borda, afficher un pourcentage pour le gagnant
->>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
-//TODO : Gérer les abstentions
 
 
 public class main {
@@ -612,16 +601,15 @@ public class main {
 		Electeur[] electeurs = null;
 		Scrutin scrutin;
 		int choixMenu;
-<<<<<<< HEAD
 		
 		/*System.out.println("Création file");
 		SaveExcel se = new SaveExcel();
 		String filename = "C:\\Users\\nabil\\Desktop\\NewExcelFile.xls";
 		se.AddRowFile(filename, "UnTour", "Eric Zemmour", "75", "0.19", "");*/
-=======
+
 		File file = new File("./configuration.txt");
 		boolean spacialisation = false;
->>>>>>> 7f73f50aa8b25ca8e0ac53569629f502ee488605
+
 
 		
 		// ----------------Introduction--------------------
