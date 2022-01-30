@@ -1,18 +1,17 @@
 import parametres.*;
 import votes.*;
 
-<<<<<<< HEAD
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import java.io.*;
 
-=======
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.io.*;
->>>>>>> fa04a3c90bf438b9be5095d2b311c3b410f73aec
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,24 +21,9 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> fa04a3c90bf438b9be5095d2b311c3b410f73aec
 import Utilites.AnalyseScrutin;
 import Utilites.CalculVote;
 import Utilites.SaveExcel;
-
-<<<<<<< HEAD
-//TODO : Ajouter la gestion des égalité et la verification de l'existence d'un sondage pour les évolutions
-//TODO : Afficher le ou les gagnants
-
-
-//TODO : Changer l'ordre des scrutins pour UnTour
-//TODO : Pour Borda, afficher un pourcentage pour le gagnant
-//TODO : Gérer les abstentions
-=======
->>>>>>> fa04a3c90bf438b9be5095d2b311c3b410f73aec
 
 
 public class main {
@@ -309,8 +293,8 @@ public class main {
 		double pourcentage = -1;
 		try {
 			
-			while (pourcentage < 20 || pourcentage >= 100){ //Pertinent d'interroger a partir de 20%
-				System.out.println("Veuillez saisir un pourcentage qui est supérieur à 20%");
+			while (pourcentage < 20 || pourcentage >= 80){ //Pertinent d'interroger a partir de 20%
+				System.out.println("Veuillez saisir un pourcentage qui est compris entre 20 et 80%");
 				pourcentage = pourcentageScanner.nextDouble();
 				
 			}
@@ -603,10 +587,7 @@ public class main {
 		Electeur[] electeurs = null;
 		Scrutin scrutin;
 		int choixMenu;
-<<<<<<< HEAD
 
-=======
->>>>>>> fa04a3c90bf438b9be5095d2b311c3b410f73aec
 		
 		/*System.out.println("Création file");
 		SaveExcel se = new SaveExcel();

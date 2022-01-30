@@ -116,24 +116,17 @@ public class UnTour extends Scrutin{
 		
 		return choix_electeurs;
 	}
-	
-<<<<<<< HEAD
+
 	/** 
 	 * Fonction permettant de reconnaitre quelle est le scrutin avec un chaine de caractère
 	 * 
 	 * @return
 	 */
-=======
 
->>>>>>> fa04a3c90bf438b9be5095d2b311c3b410f73aec
 	public String getTypeScrutin()
 	{
 		return "UnTour";
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> fa04a3c90bf438b9be5095d2b311c3b410f73aec
 
 }
 

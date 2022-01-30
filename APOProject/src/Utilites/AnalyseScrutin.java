@@ -17,8 +17,20 @@ import votes.DeuxTours;
 import votes.Scrutin;
 import votes.UnTour;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AnalyseScrutin.
+ */
 public class AnalyseScrutin {
 
+	/**
+	 * Permet de faire une analyse des cinq modes de scrutins
+	 *
+	 * @param candidats 
+	 * @param axes 
+	 * @param valAxesCentre 
+	 * @return the linked hash map
+	 */
 	public LinkedHashMap<Candidat, Double> AnalyseModeScrutin(Candidat[] candidats,Axe[] axes, double[] valAxesCentre)
 	{
 		Electeur[] electeurs;
@@ -96,6 +108,13 @@ public class AnalyseScrutin {
 		return res_moyenne;
 	}
 	
+	/**
+	 * Générer des électeurs de façon aléatoire
+	 *
+	 * @param axes
+	 * @param valAxesCentre
+	 * @return electeur[]
+	 */
 	private Electeur[] generationElecteurs(Axe[] axes, double[] valAxesCentre)
 	{
 		Electeur[] electeurs = new Electeur[1000];
@@ -134,6 +153,13 @@ public class AnalyseScrutin {
 		return electeurs;
 	}
 	
+	/**
+	 * Electeurs nchoisis pour approbation.
+	 *
+	 * @param candidats the candidats
+	 * @param electeurs the electeurs
+	 * @return the hash map
+	 */
 	private HashMap<Electeur, Integer> electeursNchoisisPourApprobation(Candidat[] candidats, Electeur[] electeurs) {
 		HashMap<Electeur, Integer> nChoisis = new HashMap<Electeur, Integer>();
 		int N = candidats.length;

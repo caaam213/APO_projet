@@ -12,6 +12,7 @@ import parametres.Personne;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
  * Classe qui contient toutes les opérations mathématiques liées à notre application.
  *
@@ -19,11 +20,11 @@ import parametres.Personne;
 public class CalculVote {
 	
 	/**
-	 * Permet de calculer la différence entre chaque axe et retourne un tableau 2D
-	 * 
-	 * @param candidat
-	 * @param electeurs
-	 * @return
+	 * Permet de calculer la différence entre chaque axe et retourne un tableau 2D.
+	 *
+	 * @param candidat the candidat
+	 * @param electeurs the electeurs
+	 * @return the double[][]
 	 */
 	public static double[][] CalculDifferenceAxes(Candidat candidat, Electeur[] electeurs)
 	{
@@ -42,11 +43,13 @@ public class CalculVote {
 		
 		return valaxes_diff;
 	}
+	
 	/**
-	 * Surcharge de la méthode CalculDifferenceAxes en retournant un tableau 1D
-	 * @param candidat
-	 * @param electeur
-	 * @return
+	 * Surcharge de la méthode CalculDifferenceAxes en retournant un tableau 1D.
+	 *
+	 * @param candidat the candidat
+	 * @param electeur the electeur
+	 * @return the double[]
 	 */
 	public static double[] CalculDifferenceAxes(Candidat candidat, Electeur electeur)
 	{
@@ -56,6 +59,13 @@ public class CalculVote {
 	}
 	
 
+	/**
+	 * Calculer la difference des axes et la retourne sous la forme d'un tableau 1D 
+	 *
+	 * @param p
+	 * @param electeur
+	 * @return double[]
+	 */
 	public static double[] calculDifference(Personne p, Electeur electeur)
 	{
 		double[] valaxes_candidats = p.getValAxes();
@@ -70,6 +80,14 @@ public class CalculVote {
 		return valaxes_diff;
 	}
 	
+	/**
+	 * Calculer la difference des axes et la retourne sous la forme d'un tableau 1D. Utile pour des
+	 * valeurs qui ne sont pas contenues dans la classe personne
+	 *
+	 * @param d1 the d 1
+	 * @param d2 the d 2
+	 * @return the double[]
+	 */
 	public static double[] calculDifference(double[] d1, double[] d2)
 	{
 		double[] diffs = new double[d1.length];
@@ -82,10 +100,11 @@ public class CalculVote {
 	}
 	
 	/**
-	 * Calculer la différence des normes
-	 * @param candidats
-	 * @param electeurs
-	 * @return
+	 * Calculer la différence des normes.
+	 *
+	 * @param candidats the candidats
+	 * @param electeurs the electeurs
+	 * @return the double[][]
 	 */
 	public static double[][] CalculDiffNormes(Candidat[] candidats, Electeur[] electeurs)
 	{
@@ -107,9 +126,10 @@ public class CalculVote {
 	
 	
 	/**
-	 * Retourne la norme d'un vecteur 
-	 * @param vecteurs
-	 * @return
+	 * Retourne la norme d'un vecteur .
+	 *
+	 * @param vecteurs the vecteurs
+	 * @return the norme
 	 */
 	public static double getNorme(double[] vecteurs)
 	{
@@ -128,9 +148,10 @@ public class CalculVote {
 	/**
 	 * Recupérer la norme d'un vecteur sous la forme d'un tableau 2D
 	 * Première dimension : Distances
-	 * Deuxième personne : Norme
-	 * @param vecteurs
-	 * @return
+	 * Deuxième personne : Norme.
+	 *
+	 * @param vecteurs the vecteurs
+	 * @return the normes
 	 */
 	public static double[] getNormes(double[][] vecteurs)
 	{
@@ -149,6 +170,13 @@ public class CalculVote {
 		
 		return normes;
 	}
+	
+	/**
+	 * Obtenir la norme.
+	 *
+	 * @param vecteur
+	 * @return normes
+	 */
 	public static double getNormes(double[] vecteur)
 	{
 		double[][] levecteur = {vecteur};
@@ -157,10 +185,11 @@ public class CalculVote {
 	}
 
 	/**
-	 * Cette fonction permet de récupérer un pourcentage d'électeurs au hasard
-	 * @param pourcentElecteurs
-	 * @param electeurs
-	 * @return
+	 * Cette fonction permet de récupérer un pourcentage d'électeurs au hasard.
+	 *
+	 * @param pourcentElecteurs the pourcent electeurs
+	 * @param electeurs the electeurs
+	 * @return the electeur[]
 	 */
 	public static Electeur[] recupElecteurAlea(double pourcentElecteurs, Electeur[] electeurs)
 	{
@@ -204,11 +233,11 @@ public class CalculVote {
 	
 	
 	/**
-	 * @param n
-	 * @param sondage
-	 * @return
-	 * 
-	 * Cette méthode permet de trier les candidats du plus favorable au moins faborable au sondage
+	 * Trier ncandidats.
+	 *
+	 * @param n the n
+	 * @param sondage the sondage
+	 * @return Cette méthode permet de trier les candidats du plus favorable au moins faborable au sondage
 	 */
 	public static ArrayList<Integer> trierNcandidats( int n , HashMap<Candidat,Double> sondage )
     {
@@ -241,11 +270,11 @@ public class CalculVote {
     }
 	
 	/**
-	 * @param n
-	 * @param votes
-	 * @return
-	 * 
-	 * Cette méthode permet de trier les candidats par normes et de retourner une liste de candidats triées
+	 * Trier ncandidats par norme.
+	 *
+	 * @param n the n
+	 * @param votes the votes
+	 * @return Cette méthode permet de trier les candidats par normes et de retourner une liste de candidats triées
 	 */
 	public static ArrayList<Candidat> trierNcandidatsParNorme( int n , HashMap<Candidat,Double> votes )
     {
@@ -280,12 +309,12 @@ public class CalculVote {
     }
 	
 	/**
-	 * @param n
-	 * @param votes
-	 * @param nbTotalVoix
-	 * @return
-	 * 
-	 * Retourne un LinkedHashMap trié selon le nombre de votes 
+	 * Trier par votes.
+	 *
+	 * @param n the n
+	 * @param votes the votes
+	 * @param nbTotalVoix the nb total voix
+	 * @return Retourne un LinkedHashMap trié selon le nombre de votes
 	 */
 	public static LinkedHashMap<Candidat, Double> trier_par_votes( int n , LinkedHashMap<Candidat, Double> votes, int nbTotalVoix)
 	{
@@ -317,6 +346,14 @@ public class CalculVote {
 		return voteTrie;
 	}
 	
+	/**
+	 * Chercher noabstentionniste.
+	 *
+	 * @param electeurs the electeurs
+	 * @param candidats the candidats
+	 * @param norme_ecart the norme ecart
+	 * @return the electeur[]
+	 */
 	public static Electeur[] chercher_noabstentionniste(Electeur[] electeurs, Candidat[] candidats, double norme_ecart)
 	{
 		Electeur[] electeurs_ret = new Electeur[electeurs.length];

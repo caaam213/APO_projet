@@ -17,10 +17,20 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.microsoft.schemas.office.visio.x2012.main.CellType;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe SaveExcel
+ */
 public class SaveExcel {
+	
+	/**
+	 * Créer un ficher excel
+	 *
+	 * @param filename the filename
+	 */
 	public void createFile(String filename) 
 	{
-		//String filename = "C:\\Users\\nabil\\Desktop\\NewExceelFile.xls";
+		
 		try
 		{
 	        HSSFWorkbook workbook = new HSSFWorkbook();
@@ -50,6 +60,17 @@ public class SaveExcel {
 		}
 	}
 	
+	/**
+	 * Ajouter une ligne dans un fichier excel
+	 *
+	 * @param filename
+	 * @param c1
+	 * @param c2
+	 * @param c3
+	 * @param c4
+	 * @param c5
+	 * @param c6
+	 */
 	public void AddRowFile(String filename, String c1, String c2, String c3, String c4, String c5, String c6)
 	{
 		File f = new File(filename);
