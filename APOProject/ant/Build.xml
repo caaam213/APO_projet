@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="APO Projet" default="javadoc" basedir=".">
+
+	<target name="delete">
+		<delete dir="bin" />
+		<delete dir="src" />
+		<delete dir="lib" />
+		<delete dir="doc" />
+	</target>
+
+	<path id="classpath">
+		<pathelement location="lib/commons-codec-1.10.jar" />
+		<pathelement location="lib/commons-collections4-4.1.jar" />
+		<pathelement location="lib/commons-logging-1.2.jar" />
+		<pathelement location="lib/curvesapi-1.04.jar" />
+		<pathelement location="lib/hamcrest-core-1.3.jar" />
+		<pathelement location="lib/junit-4.13.2.jar" />
+		<pathelement location="lib/log4j-1.2.17.jar" />
+		<pathelement location="lib/poi-3.15.jar" />
+		<pathelement location="lib/poi-examples-3.15.jar" />
+		<pathelement location="lib/poi-excelant-3.15.jar" />
+		<pathelement location="lib/poi-ooxml-3.15.jar" />
+		<pathelement location="lib/poi-ooxml-schemas-3.15.jar" />
+		<pathelement location="lib/poi-scratchpad-3.15.jar" />
+		<pathelement location="lib/xmlbeans-2.6.0.jar" />
+		<pathelement location="bin" />
+	</path>
+
+
+	<target name="create" depends="delete">
+		<mkdir dir="bin" />
+		<mkdir dir="src" />
+		<mkdir dir="lib" />
+		<mkdir dir="doc" />
+	</target>
+
+	<target name="copy" depends="create">
+		<copydir dest="./src" src="../src"></copydir>
+		<copy todir="./lib" overwrite="true">
+			<fileset dir="../lib" includes="**/*.jar"></fileset>
+
+		</copy>
+	</target>
+
+	<target name="compile" depends="copy">
+		<javac classpathref="classpath" includeantruntime="true" srcdir="src"
+			destdir="bin" includes="**/*.java"></javac>
+	</target>
+
+	<target name="javadoc" depends="compile">
+		<javadoc classpathref="classpath" sourcepath="src" destdir="doc">
+			<fileset dir="src" defaultexcludes="yes">
+				<include name="**" />
+			</fileset>
+
+		</javadoc>
+	</target>
+
+</project>

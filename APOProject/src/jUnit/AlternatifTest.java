@@ -56,8 +56,6 @@ public class AlternatifTest {
 		
 		HashMap<Candidat,Double> resultats = new HashMap<Candidat,Double>();
 		resultats.put(c1, (double)1/4);
-		resultats.put(c2, (double)0/16);
-		resultats.put(c3, (double)0/16);
 		resultats.put(c4, (double)12/16);
 		//assertTrue(deuxtours.scrutinDeuxTours(cs, es, 2),resultat_deuxtours);
 		assertEquals(resultats,app.getResultatScrutin());
